@@ -6,6 +6,10 @@
 .define PATCH(x, n)		.relocate x - 4 \ .word x \ .byte n \ .byte (n ^ $ff) \ .endrelocate \ .relocate x
 .define ENDPATCH(x, n)	.ds n - ($-x) \ .if ($-x) > n \ .fail "invalid patch, too big: ",($-x)," > ",n \ .endif \ .endrelocate
 
+
+
+
+
 ; regex replacement
 ; ^(\$\w\w\w\w) (.*)
 ; with
@@ -83,8 +87,10 @@ PATCH($85b6,20)
 	ld		a,b
 ENDPATCH($85b6,20)
 
-PATCH($86ea,2)
+
+; unknown what this does so nix it
 ; ram:86ea	OUT (0x0),A		FUN_ram_86e5 ??
+PATCH($86ea,2)
    nop \ nop
 ENDPATCH($86ea,2)
 
@@ -259,3 +265,9 @@ ENDPATCH($997a,2)
 ; search
 
 #include "patch.gen.asm"
+
+
+; vram address check patch
+; PATCH($805a,3)
+;    call	$201c
+; ENDPATCH($805a,3)

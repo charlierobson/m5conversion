@@ -1,3 +1,5 @@
 wpset 6000,1000,rw,,{ printf "%04x  shadow access",pc ; g }
 
+bps 205B,D>3f
+
 g

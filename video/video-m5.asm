@@ -7,7 +7,11 @@ JKFLAG = $7409
 VBLCOUNT = $740A
 MKEY = $740B
 
-VDP_STAT = $11
+VDP_Data	=	$10			; VDP data port
+VDP_Addr	=	$11			; VDP VRAM address output port
+VDP_Reg		=	$11			; VDP VRAM address output port
+VDP_Status	=	$11			; VDP status input port
+
 
 BIOS = $e000
 
@@ -36,7 +40,7 @@ COLECO_IDENT = BIOS + $6e
 	jp		ctrlrd1		; $2013
 	jp		ctrlrd2		; $2016
 	jp		starter		; $2019
-	ret \ nop \ nop		; $201c
+	jp		vramvalid	; $201c
 
 	.org $2020
 
@@ -79,12 +83,23 @@ ipl:							; initial program loader
 	ret
 
 
+vramvalid:
+	bit		6,d
+	jr		z,{+}
+	RES 6,D
+	nop ; put breakpoint here; bps 205B,D>3f
+	SET 6,D
++:	ld		a,e
+	out 	(VDP_Reg),A
+	ret
+
+
 vblno:
 	push	af
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(VDP_Status)		; clear any existing vsync int req
 	pop		af
 	reti
 
@@ -94,7 +109,7 @@ vblgo:
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(VDP_Status)		; clear any existing vsync int req
 	pop		af
 	jp		$8021				; game interrupt vector
 
@@ -195,7 +210,7 @@ starter:
 	; ld		bc,$01E2
 	; call	$ffd9
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(VDP_Status)		; clear any existing vsync int req
 	ei
 
 	jr		$
