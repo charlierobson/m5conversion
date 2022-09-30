@@ -222,4 +222,4 @@ cart
 	.incbin	"antaradv.patched.bin.zx0"
 
 
-	.ds 16384 - ($-$2000)
+	.ds $5000 - ($-$2000)

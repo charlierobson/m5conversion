@@ -43,6 +43,7 @@ del /q *.bin 2>nul
 del /q *.zx0 2>nul
 
 copy %target%-m5.rom ..\..\mamebuild\roms\m5_cart\cheg\m5cheg.bin
+copy %target%-m5.rom ..\..\mamebuild\roms\m5_cart\cheg24\m5cheg24.bin
 
 popd
 goto:eof

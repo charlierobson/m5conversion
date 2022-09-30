@@ -109,21 +109,84 @@ palbit:
 	jp		$ffd9			; WRITE_REGISTER
 
 
+
 ctrlrd1:
 	push	bc
 	ld		a,c
 	and		1
-	jp		z,_js1
-	jp		_js2
+	ld		c,0
+	jr		z,_js1x
+
+_js2x:
+	in		a,($37)
+	bit		5,a
+	jr		z,{+}
+	set		0,c
++:	bit		4,a
+	jr		z,{+}
+	set		1,c
++:	bit		7,a
+	jr		z,{+}
+	set		2,c
++:	bit		6,a
+	jr		z,{+}
+	set		3,c
++:	in		a,($31)
+	bit		4,a
+	jr		z,_donex
+	set		6,c
+
+_donex:
+	ld		a,c
+	pop		bc
+	ret
+
+_js1x:
+	in		a,($37)
+	bit		1,a		; L UP
+	jr		z,{+}
+	set		0,c
++:	bit		0,a		; L RIGHT
+	jr		z,{+}
+	set		1,c
++:	bit		3,a		; L DOWN
+	jr		z,{+}
+	set		2,c
++:	bit		2,a		; L LEFT
+	jr		z,{+}
+	set		3,c
++:	in		a,($31)
+	bit		0,a
+	jr		z,{+}
+	set		6,c
++:	jr		_donex
+
+
 
 
 ctrlrd2:
-	push	bc
-	jp		_kp
+	ld		a,c
+	and		1
+	in		a,($31)
+	jr		z,_kp1x
+
+_kp2x:
+	;        87654321
+	and		%00100000
+	rla
+	ret
+
+_kp1x:
+	;        87654321
+	and		%00000010
+	rra
+	rra
+	rra
+	ret
+
 
 
 starter:
-
 	ld		hl,vblgo
 	ld		(VBLVEC),hl
 
