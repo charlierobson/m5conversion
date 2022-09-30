@@ -1,4 +1,5 @@
-BIOSSTART = $E000
+.exportmode assembly
+.export
 
 .define DB .byte
 .define DW .word
@@ -6,13 +7,16 @@ BIOSSTART = $E000
 .define EQU .equ
 
 .binaryfill 0
-.define ADDRFIX(x) .if ($-BIOSSTART) > x \ .fail "fixed address error: ",x \ .endif \ .org x+BIOSSTART \ FIXEDADDR{X}
+.define ADDRFIX(x) .if ($-BIOSSTART) > x \ .fail "fixed address error: ",x \ .endif \ .org x+BIOSSTART
+
+
+BIOSSTART = $E000
 
 
 ;***************************************
 ;
 ; Note: Markers like [1] indicate bytes that can be
-;	saved by obvious (or nearly so) optimizations,
+;    saved by obvious (or nearly so) optimizations,
 ;	and [0] indicates that cycles can be saved.
 ;
 ;	Some of the optimizations can't be made because
@@ -198,6 +202,18 @@ CtlStateKey	EQU	04H		; key code
 ;  Controller#1 port 0FCH (read-only)
 ;  Controller#2 port 0FFH (read-only)
 
+; 80-9F (W) = Set both controllers to keypad mode
+; 80-9F (R) = Not Connected
+
+; A0-BF (W) = Video Chip (TMS9928A), A0=0 -> Write Register 0 , A0=1 -> Write Register 1
+; A0-BF (R) = Video Chip (TMS9928A), A0=0 -> Read Register 0 , A0=1 -> Read Register 1
+
+; C0-DF (W) = Set both controllers to joystick mode
+; C0-DF (R) = Not Connected
+
+; E0-FF (W) = Sound Chip (SN76489A)
+; E0-FF (R) = Read Controller data, A1=0 -> read controller 1, A1=1 -> read controller 2
+
 IO_KP_Select	EQU	080H		; Keypad select output port
 IO_Joy_Select	EQU	0C0H		; Joystick select output port
 IO_Joy1			EQU	0FCH		; Joystick 1 input port
@@ -215,7 +231,7 @@ IO_VDP_Status	EQU	$11			; VDP status input port
 	.org	BIOSSTART
 
 	LD	SP,Stack	; Initialize stack pointer
-	JR	L006E		; Go to rest of cold-start code
+	JR	ColdStart		; Go to rest of cold-start code
 
 ;***************************************
 ; These are the RST vectors, mixed with some (formerly) wasted bytes
@@ -345,7 +361,7 @@ ADDRFIX($006C)
 ; First part of cold start code
 ;
 ;***************************************
-L006E
+ColdStart
 	LD		HL,(Cart_Sig)	; Check first word of cart for 55AAH
 	LD		A,L				;   8000=55H and 8001=AAH
 	CP		55H
@@ -357,7 +373,7 @@ L006E
 	JP		(HL)
 
 L0081
-	CALL	NoSound			; Turn off sound
+	CALL	TURN_OFF_SOUND			; Turn off sound
 D1AC0 = $+1 ; DB '3'
 	LD		HL,0033H		; Initialize random seed
 	LD		(RandSeed),HL
@@ -578,8 +594,9 @@ L1352		POP	HL		; End of list, clean up
 	LD	D,B		;   (BC=0 from ScrnMsgs)
 	LD	E,C
 	LD	IY,0012H	;   Byte count
-	CALL	_BlkWrtVRAM4	; Color table
-	LD	BC,01C0H	; Unblank the screen
+	CALL	blkWrtVRAM4	; Color table
+	;////LD	BC,01C0H	; Unblank the screen
+	LD	BC,01e0H	; Unblank the screen
 	CALL	WRITE_REGISTER
 	LD	HL,Cart_Sig	; Check first 2 bytes of cartridge
 	LD	A,(HL)		; If 8000<>AA or 8001<>55,
@@ -611,12 +628,12 @@ L13B7		JP	NZ,L13FF
 	INC	HL		; Adjust for third string
 	LD	DE,02ACH	; Screen address for copyright date
 	LD	IY,0004H	; 4 bytes
-	CALL	_BlkWrtVRAM2
+	CALL	blkWrtVRAM2
 
 	CALL	BIOSSTART+$1968		; "Respect the seven second delay we
 				;  use" - Donald Fagen, "The Nightfly"
 
-	LD	BC,0180H	; Blank screen
+	LD	BC,01a0H	; Blank screen
 	CALL	WRITE_REGISTER
 
 	LD	HL,(Cart_Start)	; Get start address
@@ -766,7 +783,7 @@ L0220		LD	(HL),0FFH
 
 
 ;***************************************
-;	1FD6	NoSound
+;	1FD6	TURN_OFF_SOUND
 ;
 ; This routine silences the sound chip.
 ;***************************************
@@ -1302,7 +1319,7 @@ L0594		PUSH	AF
 	PUSH	IY
 	PUSH	DE
 	PUSH	HL
-	CALL	_BlkWrtVRAM3	; Pattern generator table
+	CALL	blkWrtVRAM3	; Pattern generator table
 	POP	HL
 	POP	DE
 	POP	IY
@@ -1316,7 +1333,7 @@ L0594		PUSH	AF
 	BIT	4,A
 	JR	NZ,L05BC
 	ADD	HL,BC
-	CALL	_BlkWrtVRAM4	; Color table
+	CALL	blkWrtVRAM4	; Color table
 L05B5		POP	HL
 	POP	DE
 	POP	IY
@@ -1338,7 +1355,7 @@ L0530		EX	DE,HL
 	PUSH	BC
 	PUSH	DE
 	PUSH	IY
-	CALL	_BlkWrtVRAM3	; Pattern generator table
+	CALL	blkWrtVRAM3	; Pattern generator table
 	POP	BC
 	POP	HL
 	LD	E,L
@@ -1365,7 +1382,7 @@ L0530		EX	DE,HL
 	ADD	HL,HL
 	POP	BC
 	ADD	HL,BC
-	CALL	_BlkWrtVRAM4	; Color table
+	CALL	blkWrtVRAM4	; Color table
 	POP	AF
 	RET
 
@@ -1728,7 +1745,7 @@ L1319		CALL	InitScrn
 
 ;		Initialize the character cells for "COLECOVISION"
 
-	LD	HL,BIOSSTART+$A18A3	; Point to character cell usage list
+	LD	HL,BIOSSTART+$18A3	; Point to character cell usage list
 	LD	DE,0060H	; Starting character code = 60H
 L1330		PUSH	HL
 	LD	A,(HL)		; Get block ID
@@ -1738,10 +1755,10 @@ L1330		PUSH	HL
 	RLCA
 	LD	C,A		; Load BC with block offset
 	LD	B,D		; (D-reg = 00H here)
-	LD	HL,BIOSSTART+$A14C3	; Point to block data
+	LD	HL,BIOSSTART+$14C3	; Point to block data
 L1356		ADD	HL,BC		; Point HL to block image
 	PUSH	DE
-	CALL	_BlkWrtVRAM31	; LD A,03H LD IY,0001H JP PUT_VRAM
+	CALL	blkWrtVRAM31	; LD A,03H LD IY,0001H JP PUT_VRAM
 	POP	DE
 	POP	HL
 	INC	DE
@@ -1862,7 +1879,7 @@ L0866		LD	A,D
 	PUSH	DE
 	PUSH	HL
 	PUSH	IY
-	CALL	_BlkWrtVRAM2
+	CALL	blkWrtVRAM2
 	POP	IY
 	POP	HL
 	POP	DE
@@ -2290,7 +2307,7 @@ L0D18		LD	(HL),A
 	LD	D,B
 	ADD	HL,BC
 	LD	IY,0009H
-	CALL	_BlkWrtVRAM3	; Pattern generator table
+	CALL	blkWrtVRAM3	; Pattern generator table
 	LD	IY,(VDP_Temp)
 	POP	HL
 	LD	BC,0084H
@@ -2370,13 +2387,13 @@ L0DAC		LD	IY,(VDP_Temp)
 	ADD	HL,BC
 	PUSH	HL
 	LD	IY,0003H
-	CALL	_BlkWrtVRAM3	; Pattern generator table
+	CALL	blkWrtVRAM3	; Pattern generator table
 	POP	HL
 	LD	DE,0068H
 	ADD	HL,DE
 	POP	DE
 	LD	IY,0003H
-	CALL	_BlkWrtVRAM4
+	CALL	blkWrtVRAM4
 L0DE3		POP	BC
 	INC	B
 	LD	A,B
@@ -2565,7 +2582,7 @@ L0F1C		LD	L,(IY+00H)
 
 
 
-_waiter:
+ WAITER:
 	LD		E,E8H	; load inner loop counter (about 10% less)
 -:	DEC		E		; do inner loop
 	JR		NZ,{-}
@@ -2677,13 +2694,13 @@ L1137
 readJoyPort
 	LD	A,H		; (these 3 instrs give enough delay)
 	OR	A
-	JR	NZ,_rdJP2
+	JR	NZ,readJP2
 
 	RST		28h \ .db IO_Joy1
 	CPL
 	RET
 
-_rdJP2:
+readJP2:
 	RST		28h \ .db IO_Joy2
 	CPL
 	RET
@@ -3596,7 +3613,7 @@ MODE_1
 	LD	BC,0000H	; Register 0: half-text 32x24 mode
 	CALL	$2010	; PALBIT_WRITEREG
 
-	LD	BC,0180H	; Reg 1, 32x24 mode, 16K DRAM, blank
+	LD	BC,01a0H	; Reg 1, 32x24 mode, 16K DRAM, blank
 	CALL	WRITE_REGISTER
 
 ADDRFIX($18F7)			; (called by Tomarc the Barbarian)
@@ -3630,14 +3647,14 @@ D1AC5		EQU	$+2		; DB '8'
 ;
 ; Initialize pattern generator (font) table
 ;***************************************
-LOAD_ASCII	LD	HL,BIOSSTART+$A158B	; Point to main ASCII bitmaps
+LOAD_ASCII	LD	HL,BIOSSTART+$158B	; Point to main ASCII bitmaps
 	LD	DE,001DH	;   First character code = 1DH
 	LD	IY,0063H	;   bug fixed (was 0060)
-	CALL	_BlkWrtVRAM3	; Pattern generator table
+	CALL	blkWrtVRAM3	; Pattern generator table
 
-	LD	HL,BIOSSTART+$A15A3	; Point to blank bitmap
+	LD	HL,BIOSSTART+$15A3	; Point to blank bitmap
 	LD	DE,0000H	;   First character code = 00H
-_BlkWrtVRAM31	LD	A,03H		;   Pattern generator table
+blkWrtVRAM31	LD	A,03H		;   Pattern generator table
 	JP	L1EA7		; LD IY,0001H / JP PUT_VRAM
 
 ;***************************************
@@ -3676,7 +3693,7 @@ L1951		PUSH	BC		; Move BC to IY (count)
 	LD	C,A
 	ADD	HL,BC		; HL = HL + BC
 	EX	DE,HL		; HL = text ptr, DE = scrn position
-	JP	_BlkWrtVRAM2	; LD A,02H / JP PUT_VRAM
+	JP	blkWrtVRAM2	; LD A,02H / JP PUT_VRAM
 
 ;***************************************
 ;
@@ -3694,7 +3711,7 @@ L1951		PUSH	BC		; Move BC to IY (count)
 ;
 ;***************************************
 ;A1968		LD	HL,1700H	; Too long
-;BIOSSTART+$A196B		LD	DE,00FFH	; Load inner loop count
+;BIOSSTART+$196B		LD	DE,00FFH	; Load inner loop count
 ;L196E		DEC	DE
 ;		LD	A,D
 ;		OR	E
@@ -3702,7 +3719,7 @@ L1951		PUSH	BC		; Move BC to IY (count)
 ;		DEC	HL
 ;		LD	A,H
 ;		OR	L
-;		JR	NZ,BIOSSTART+$A196B
+;		JR	NZ,BIOSSTART+$196B
 ;		RET
 
 ; This replacement is based on Kev's patch.  Every outer loop it checks
@@ -3716,21 +3733,22 @@ L1951		PUSH	BC		; Move BC to IY (count)
 ; The other side-effect of this replacement delay routine is that the
 ; joystick ports are left in stick mode, but this is probably okay.
 
+
 L196C
-	call	_waiter
+	call	 WAITER
 	JR		NZ,L196B
 
-_done
+skillScreenDone
 	POP		BC		; restore regs & return
 	POP		AF
 	RET
 
 	; wait until no button
-_waitNoButton:
+buttonWaitNone:
 	in		a,($31)
 	and		$11
-	jr		nz,_waitNoButton
-	jr		_done
+	jr		nz,buttonWaitNone
+	jr		skillScreenDone
 
 	nop \ nop
 
@@ -3747,7 +3765,7 @@ L196B
 	; check btns
 	in		a,($31)
 	and		$11
-	jr		nz,_waitNoButton
+	jr		nz,buttonWaitNone
 	jr		L196C
 
 
@@ -3771,7 +3789,7 @@ GAME_OPT	CALL	InitScrn	; Clear VRAM and initialize the VDP
 	LD	A,0F4H		;   Fill with F4H
 	CALL	FILL_VRAM	;   fill it
 
-	LD	BC,01C0H	; Unblank the screen
+	LD	BC,01e0H	; Unblank the screen
 	JP	WRITE_REGISTER
 
 D1AC9		EQU	$+3		; DB 'S'
@@ -3820,9 +3838,9 @@ L13FF		LD	HL,No_Cart_Msgs	; Put up "TURN GAME OFF" messages
 	CALL	ScrnMsgs
 
 	LD	HL,8A00H	; Wait a long time for the user to see
-	CALL	BIOSSTART+$A196B
+	CALL	BIOSSTART+$196B
 
-	LD	BC,0180H	; Then blank the screen
+	LD	BC,01a0H	; Then blank the screen
 	CALL	WRITE_REGISTER
 
 L1439		JR	L1439		;   and go to sleep
@@ -3876,7 +3894,7 @@ ScrnMsgs	LD	C,(HL)		; Get message address to BC
 	PUSH	BC
 	POP	IY
 
-	CALL	_BlkWrtVRAM2	; LD A,02H/JP PUT_VRAM
+	CALL	blkWrtVRAM2	; LD A,02H/JP PUT_VRAM
 
 	POP	HL		; Recover table pointer
 	JR	ScrnMsgs	; Loop for next message
@@ -4067,7 +4085,7 @@ D1B76		DB	 7,5	; 0 = Sprite attribute table
 	DB	11,4	; 3 = Pattern generator
 	DB	 6,3	; 4 = Color table
 
-; ReadVRAM with the bug fixed
+; READ_VRAM with the bug fixed
 
 XReadVRAM	LD	A,C		; no bug if C=00H
 	OR	A
@@ -4075,7 +4093,7 @@ XReadVRAM	LD	A,C		; no bug if C=00H
 
 	INC	B		; else account for the missing page
 
-XReadVRAM_a	JP	ReadVRAM
+XReadVRAM_a	JP	READ_VRAM
 
 ;***************************************
 ;	1F8E	PBlkReadVRAM
@@ -4211,7 +4229,7 @@ PUT_VRAMP	LD	BC,P_BlkWrtVRAM
 	LD	HL,(ParmArea+3)
 
 	DB	01H		; LD BC,nnnn
-_BlkWrtVRAM2	LD	A,02H		; name table (character cells)
+blkWrtVRAM2	LD	A,02H		; name table (character cells)
 
 ;***************************************
 ;	1FBE	BlkWrtVRAM
@@ -4245,9 +4263,9 @@ PUT_VRAM	PUSH	AF  		; Save VDP table number
 	LDIR			; Copy it
 	RET
 
-_BlkWrtVRAM3	LD	A,03H		; Pattern generator table
+blkWrtVRAM3	LD	A,03H		; Pattern generator table
 	DB	01H		; LD BC,nnnn
-_BlkWrtVRAM4	LD	A,04H		; Color table
+blkWrtVRAM4	LD	A,04H		; Color table
 	JR	PUT_VRAM
 
 ADDRFIX($1C4E)
@@ -4490,7 +4508,7 @@ READ_VRAMP	LD	BC,$c05e ;P_ReadVRam
 	LD	BC,(ParmArea+4)
 
 ;***************************************
-;	1FE2	ReadVRAM
+;	1FE2	READ_VRAM
 ;
 ; ENTRY	HL points to data buffer
 ;	DE = VRAM address
@@ -4551,7 +4569,7 @@ READ_REGISTER	IN	A,(IO_VDP_Status) ; Get VDP status
 ;***************************************
 ADDRFIX($1D5A)
 
-REFLECT_VERTICAL		LD	IX,__FlipRL
+REFLECT_VERTICAL		LD	IX,doFlipRL
 	JR	L1D70
 
 ;***************************************
@@ -4566,7 +4584,7 @@ REFLECT_VERTICAL		LD	IX,__FlipRL
 ;***************************************
 ADDRFIX($1D60)
 
-REFLECT_HORIZONTAL		LD	IX,__FlipUD
+REFLECT_HORIZONTAL		LD	IX,fnFlipUD
 	JR	L1D70
 
 ;***************************************
@@ -4581,7 +4599,7 @@ REFLECT_HORIZONTAL		LD	IX,__FlipUD
 ;***************************************
 ADDRFIX($1D66)
 
-ROTATE_90		LD	IX,__Rotate
+ROTATE_90		LD	IX,fnRotate
 	JR	L1D70
 
 ;***************************************
@@ -4594,7 +4612,7 @@ ROTATE_90		LD	IX,__Rotate
 ;	DE = source VDP table index
 ;	HL = destination VDP table index
 ;***************************************
-ENLARGE		LD	IX,__Expand
+ENLARGE		LD	IX,doXpand
 L1D70		EXX			; Swap register sets
 	EX	AF,AF'		; AF' = VDP table
 	PUSH	IX		; Save routine address
@@ -4612,7 +4630,7 @@ L1D74		EX	AF,AF'		; AF = VDP table
 	PUSH	IX
 	JP	(IX)		; Jump into the routine
 
-__Rotate	LD	HL,(VDP_Temp)	; HL = temp
+fnRotate	LD	HL,(VDP_Temp)	; HL = temp
 	LD	BC,0008H	; DE = temp + 8
 	LD	E,L
 	LD	D,H
@@ -4626,7 +4644,7 @@ __Rotate	LD	HL,(VDP_Temp)	; HL = temp
 	CALL	L1E9A		; Write the dest color table entry
 L1E02		JR	L1D8CEXX	; Done with routine
 
-__FlipRL	LD	HL,(VDP_Temp)	; DE = temp
+doFlipRL	LD	HL,(VDP_Temp)	; DE = temp
 	LD	BC,0008H	; HL = temp + 8
 	LD	E,L
 	LD	D,H
@@ -4641,7 +4659,7 @@ __FlipRL	LD	HL,(VDP_Temp)	; DE = temp
 L1DB3		EXX			; Swap register set
 	JR	L1D8CHL		; Done with routine
 
-__FlipUD	LD	HL,(VDP_Temp)	; DE = temp
+fnFlipUD	LD	HL,(VDP_Temp)	; DE = temp
 	LD	BC,0008H	; HL = temp + 8
 	LD	E,L
 	LD	D,H
@@ -4671,7 +4689,7 @@ L1D8C		INC	DE		; Increment VDP table index
 	POP	IX		; Clean up stack
 	RET
 
-__Expand	LD	HL,(VDP_Temp)	; HL = temp
+doXpand	LD	HL,(VDP_Temp)	; HL = temp
 	LD	BC,0008H	; DE = temp + 8
 	LD	E,L
 	LD	D,H
@@ -4915,56 +4933,56 @@ L11BC		LD	A,D
 
 ADDRFIX($1F61)
 
-DoSound			JP	PLAY_SONGS				; $1F61
-PActivate		JP	ACTIVATEP				; $1F64
-PPutObj			JP	PUTOBJP					; $1F67
-FlipRL			JP	REFLECT_VERTICAL		; $1F6A
-FlipUD			JP	REFLECT_HORIZONTAL		; $1F6D
-Rotate			JP	ROTATE_90				; $1F70
-Expand			JP	ENLARGE					; $1F73
-ReadCtlRaw		JP	CONTROLLER_SCAN			; $1F76
-ReadCtl			JP	DECODER					; $1F79
-SkillScrn		JP	GAME_OPT				; $1F7C
-InitFont		JP	LOAD_ASCII				; $1F7F
-FillVRAM		JP	FILL_VRAM				; $1F82
-InitVDP			JP	MODE_1					; $1F85
-ReadSpinner		JP	UPDATE_SPINNER			; $1F88
-PBaseLoad		JP	INIT_TABLEP				; $1F8B
-PBlkReadVRAM	JP	GET_VRAMP				; $1F8E
-PBlkWrtVRAM		JP	PUT_VRAMP				; $1F91
-PInitRAMSprt	JP	INIT_SPR_ORDERP			; $1F94
-PCopyRAMSprt	JP	WR_SPR_NM_TBLP			; $1F97
-PInitTimers		JP	INIT_TIMERP				; $1F9A
-PStopTimer		JP	FREE_SIGNALP			; $1F9D
-PStartTimer		JP	REQUEST_SIGNALP			; $1FA0
-PTestTimer		JP	TEST_SIGNALP			; $1FA3
-PWriteReg		JP	WRITE_REGISTERP			; $1FA6
-PWrtVRAM		JP	WRITE_VRAMP				; $1FA9
-PReadVRAM		JP	READ_VRAMP				; $1FAC
-PInitWriter		JP	INIT_WRITERP			; $1FAF
-PInitSound		JP	SOUND_INITP				; $1FB2
-PAddSound		JP	PLAY_ITP				; $1FB5
-BaseLoad		JP	INIT_TABLE				; $1FB8
-BlkReadVRAM		JP	GET_VRAM				; $1FBB
-BlkWrtVRAM		JP	PUT_VRAM				; $1FBE
-InitRAMSprt		JP	INIT_SPR_ORDER			; $1FC1
-CopyRAMSprt		JP	WR_SPR_NM_TBL			; $1FC4
-InitTimers		JP	INIT_TIMER				; $1FC7
-StopTimer		JP	FREE_SIGNAL				; $1FCA
-StartTimer		JP	REQUEST_SIGNAL			; $1FCD
-TestTimer		JP	TEST_SIGNAL				; $1FD0
-RunTimers		JP	TIME_MGR				; $1FD3
-NoSound			JP	TURN_OFF_SOUND			; $1FD6
-WriteReg		JP	WRITE_REGISTER			; $1FD9
-VDP_Status		JP	READ_REGISTER			; $1FDC
-WrtVRAM			JP	WRITE_VRAM				; $1FDF
-ReadVRAM		JP	READ_VRAM				; $1FE2
-InitWiter		JP	INIT_WRITER				; $1FE5
-Writer			JP	WRITER					; $1FE8
-ReadCtlState	JP	POLLER					; $1FEB
-InitSound		JP	SOUND_INIT				; $1FEE
-AddSound		JP	PLAY_IT					; $1FF1
-UpdateSound		JP	SOUND_MAN				; $1FF4
-Activate		JP	ACTIVATE				; $1FF7
-PutObj			JP	PUTOBJ					; $1FFA
-Random			JP	RAND_GEN				; $1FFD
+V_PLAY_SONGS         JP PLAY_SONGS              ; $1F61
+V_ACTIVATEP          JP ACTIVATEP               ; $1F64
+V_PUTOBJP            JP PUTOBJP                 ; $1F67
+V_REFLECT_VERTICAL   JP REFLECT_VERTICAL        ; $1F6A
+V_REFLECT_HORIZONTAL JP REFLECT_HORIZONTAL      ; $1F6D
+V_ROTATE_90          JP ROTATE_90               ; $1F70
+V_ENLARGE            JP ENLARGE                 ; $1F73
+V_CONTROLLER_SCAN    JP CONTROLLER_SCAN         ; $1F76
+V_DECODER            JP DECODER                 ; $1F79
+V_GAME_OPT           JP GAME_OPT                ; $1F7C
+V_LOAD_ASCII         JP LOAD_ASCII              ; $1F7F
+V_FILL_VRAM          JP FILL_VRAM               ; $1F82
+V_MODE_1             JP MODE_1                  ; $1F85
+V_UPDATE_SPINNER     JP UPDATE_SPINNER          ; $1F88
+V_INIT_TABLEP        JP INIT_TABLEP             ; $1F8B
+V_GET_VRAMP          JP GET_VRAMP               ; $1F8E
+V_PUT_VRAMP          JP PUT_VRAMP               ; $1F91
+V_INIT_SPR_ORDERP    JP INIT_SPR_ORDERP         ; $1F94
+V_WR_SPR_NM_TBLP     JP WR_SPR_NM_TBLP          ; $1F97
+V_INIT_TIMERP        JP INIT_TIMERP             ; $1F9A
+V_FREE_SIGNALP       JP FREE_SIGNALP            ; $1F9D
+V_REQUEST_SIGNALP    JP REQUEST_SIGNALP         ; $1FA0
+V_TEST_SIGNALP       JP TEST_SIGNALP            ; $1FA3
+V_WRITE_REGISTERP    JP WRITE_REGISTERP         ; $1FA6
+V_WRITE_VRAMP        JP WRITE_VRAMP             ; $1FA9
+V_READ_VRAMP         JP READ_VRAMP              ; $1FAC
+V_INIT_WRITERP       JP INIT_WRITERP            ; $1FAF
+V_SOUND_INITP        JP SOUND_INITP             ; $1FB2
+V_PLAY_ITP           JP PLAY_ITP                ; $1FB5
+V_INIT_TABLE         JP INIT_TABLE              ; $1FB8
+V_GET_VRAM           JP GET_VRAM                ; $1FBB
+V_PUT_VRAM           JP PUT_VRAM                ; $1FBE
+V_INIT_SPR_ORDER     JP INIT_SPR_ORDER          ; $1FC1
+V_WR_SPR_NM_TBL      JP WR_SPR_NM_TBL           ; $1FC4
+V_INIT_TIMER         JP INIT_TIMER              ; $1FC7
+V_FREE_SIGNAL        JP FREE_SIGNAL             ; $1FCA
+V_REQUEST_SIGNAL     JP REQUEST_SIGNAL          ; $1FCD
+V_TEST_SIGNAL        JP TEST_SIGNAL             ; $1FD0
+V_TIME_MGR           JP TIME_MGR                ; $1FD3
+V_TURN_OFF_SOUND     JP TURN_OFF_SOUND          ; $1FD6
+V_WRITE_REGISTER     JP WRITE_REGISTER          ; $1FD9
+V_READ_REGISTER      JP READ_REGISTER           ; $1FDC
+V_WRITE_VRAM         JP WRITE_VRAM              ; $1FDF
+V_READ_VRAM          JP READ_VRAM               ; $1FE2
+V_INIT_WRITER        JP INIT_WRITER             ; $1FE5
+V_WRITER             JP WRITER                  ; $1FE8
+V_POLLER             JP POLLER                  ; $1FEB
+V_SOUND_INIT         JP SOUND_INIT              ; $1FEE
+V_PLAY_IT            JP PLAY_IT                 ; $1FF1
+V_SOUND_MAN          JP SOUND_MAN               ; $1FF4
+V_ACTIVATE           JP ACTIVATE                ; $1FF7
+V_PUTOBJ             JP PUTOBJ                  ; $1FFA
+V_RAND_GEN           JP RAND_GEN                ; $1FFD

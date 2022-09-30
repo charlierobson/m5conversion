@@ -1,6 +1,4 @@
-rem wpset 8000,4000,w,,{ printf "write to rom at %04x",pc ; g }
-
-bps 9a31
-bps 9a96
+wpset 6000,1000,rw,,{ printf "%04x  shadow access",pc ; g }
 
 g
+
