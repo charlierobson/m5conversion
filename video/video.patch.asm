@@ -8,8 +8,6 @@
 
 
 
-
-
 ; regex replacement
 ; ^(\$\w\w\w\w) (.*)
 ; with
@@ -23,6 +21,8 @@ IO_VDP_Data = $10
 ; coleco register port 0BFH
 IO_VDP_Addr = $11
 
+
+
 ; remove DIs - necessary??
 PATCH($803d,1)
    nop 
@@ -33,6 +33,9 @@ ENDPATCH($8047,1)
 PATCH($80ba,1)
    nop 
 ENDPATCH($80ba,1)
+PATCH($856f,1)
+   nop 
+ENDPATCH($856f,1)
 PATCH($86b0,1)
    nop 
 ENDPATCH($86b0,1)
@@ -271,3 +274,8 @@ ENDPATCH($997a,2)
 ; PATCH($805a,3)
 ;    call	$201c
 ; ENDPATCH($805a,3)
+
+
+PATCH($855a,3)
+	jp	$201f
+ENDPATCH($855a,3)

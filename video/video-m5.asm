@@ -6,6 +6,7 @@ TEMP = $7408
 JKFLAG = $7409
 VBLCOUNT = $740A
 MKEY = $740B
+SETTERF = $740C
 
 VDP_Data	=	$10			; VDP data port
 VDP_Addr	=	$11			; VDP VRAM address output port
@@ -41,8 +42,9 @@ COLECO_IDENT = BIOS + $6e
 	jp		ctrlrd2		; $2016
 	jp		starter		; $2019
 	jp		vramvalid	; $201c
+	jp		setter		; $201f
 
-	.org $2020
+	.org $2030
 
 start:
 
@@ -80,6 +82,12 @@ ipl:							; initial program loader
 
 	ei
 
+	ret
+
+
+setter:
+	ld		a,$ff
+	ld		(SETTERF),a
 	ret
 
 
@@ -188,15 +196,15 @@ ctrlrd2:
 _kp2x:
 	;        87654321
 	and		%00100000
-	rla
+	rlca
 	ret
 
 _kp1x:
 	;        87654321
 	and		%00000010
-	rra
-	rra
-	rra
+	rrca
+	rrca
+	rrca
 	ret
 
 
@@ -205,7 +213,8 @@ starter:
 	ld		hl,vblgo
 	ld		(VBLVEC),hl
 
-	; call	palbit
+	ld		c,2
+	call	palbit
 
 	; ld		bc,$01E2
 	; call	$ffd9
@@ -213,7 +222,19 @@ starter:
 	in		a,(VDP_Status)		; clear any existing vsync int req
 	ei
 
-	jr		$
+	xor		a
+	ld		(SETTERF),a
+
+	; wait until game over
+-:	ld		a,(SETTERF)
+	inc		a
+	jr		nz,{-}
+
+	di
+
+	; rejoin the restart train
+	LD		A,($7080)
+	jp		$855d
 
 
 SetJSKB:
