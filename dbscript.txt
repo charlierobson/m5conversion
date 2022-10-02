@@ -1,6 +1,7 @@
 wpset 6000,1000,rw,,{ printf "%04x  shadow access",pc ; g }
-
-bpset 855a
-bpset 201f
-
+bps 2010
+bps 2013
+bps 2016
+bps 2019
+bps 201c
 g

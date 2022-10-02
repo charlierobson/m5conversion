@@ -37,7 +37,7 @@ COLECO_IDENT = BIOS + $6e
 
 	.org $2010
 
-	jp		palbit		; $2010
+	jp		writereg	; $2010
 	jp		ctrlrd1		; $2013
 	jp		ctrlrd2		; $2016
 	jp		starter		; $2019
@@ -85,6 +85,25 @@ ipl:							; initial program loader
 	ret
 
 
+
+
+writereg:
+	ld		a,$80
+	cp		d
+	jr		nz,{+}
+
+	ld		a,($1518)
+	and		1
+	or		e
+	ld		e,a
+
++:	LD		A,E
+	OUT		(VDP_Reg),A
+	LD		A,D
+	OUT		(VDP_Reg),A
+	RET
+
+
 setter:
 	ld		a,$ff
 	ld		(SETTERF),a
@@ -122,14 +141,6 @@ vblgo:
 	jp		$8021				; game interrupt vector
 
 
-
-
-palbit:
-	ld		a,($1518)		; use a difference in ROM to determine if JP or EU machine
-	and		1				; PAL has E1 here, NTSC E0
-	or		c
-	ld		c,a
-	jp		$ffd9			; WRITE_REGISTER
 
 
 
@@ -213,8 +224,8 @@ starter:
 	ld		hl,vblgo
 	ld		(VBLVEC),hl
 
-	ld		c,2
-	call	palbit
+	; ld		c,2
+	; call	palbit
 
 	; ld		bc,$01E2
 	; call	$ffd9

@@ -18,10 +18,6 @@ PATCH($9064, 3)
 	call	$2013		; STARTER enable interrupts after difficulty select screen was shown
 ENDPATCH($9064, 3)
 
-PATCH($85b8, 3)
-	call	$2010		; palbit needs setting
-ENDPATCH($85b8, 3)
-
 PATCH($8478, 3)
 	ld		hl,$f5a3	; pointer to charset data in BIOS
 ENDPATCH($8478, 3)

@@ -270,11 +270,9 @@ ENDPATCH($997a,2)
 #include "patch.gen.asm"
 
 
-; vram address check patch
-; PATCH($805a,3)
-;    call	$201c
-; ENDPATCH($805a,3)
-
+PATCH($805a,3)
+	jp		$2010
+ENDPATCH($805a,3)
 
 PATCH($855a,3)
 	jp	$201f

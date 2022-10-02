@@ -32,7 +32,7 @@ COLECO_IDENT = BIOS + $6e
 
 	.org $2010
 
-	jp		palbit		; $2010
+		ret \ nop \ nop		; $2010
 
 start:
 	di
@@ -90,14 +90,6 @@ vbl:
 	ei
 	reti
 
-
-
-palbit:
-	ld		a,($1518)		; use a difference in ROM to determine if JP or EU machine
-	and		1				; PAL has E1 here, NTSC E0
-	or		c
-	ld		c,a
-	jp		$ffd9			; WRITE_REGISTER
 
 
 
