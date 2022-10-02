@@ -2600,6 +2600,20 @@ L0F1C		LD	L,(IY+00H)
 
 
 
+WRITE_REG_FIX:
+	xor	a
+	cp	b
+	jr	nz,{+}
+
+	ld	a,($1518)
+	and	1
+	or	c
+	ld	c,a
+
++:	LD	A,C		; Send VDP register data
+	OUT	(IO_VDP_Addr),A
+	ret
+
 
 
 
@@ -3611,7 +3625,7 @@ ADDRFIX($18E9)
 
 MODE_1
 	LD	BC,0000H	; Register 0: half-text 32x24 mode
-	CALL	$2010	; PALBIT_WRITEREG
+	CALL	WRITE_REGISTER
 
 	LD	BC,01a0H	; Reg 1, 32x24 mode, 16K DRAM, blank
 	CALL	WRITE_REGISTER
@@ -4396,8 +4410,8 @@ WRITE_REGISTERP	LD	BC,P_WriteReg
 ;***************************************
 ADDRFIX($1CCA)
 
-WRITE_REGISTER	LD	A,C		; Send VDP register data
-	OUT	(IO_VDP_Addr),A
+WRITE_REGISTER:
+	call	WRITE_REG_FIX
 	LD	A,B
 	ADD	A,80H		; Set "write register" bit
 	OUT	(IO_VDP_Addr),A	; Send register number
