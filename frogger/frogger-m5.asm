@@ -34,6 +34,9 @@ COLECO_IDENT = BIOS + $6e
 
 		ret \ nop \ nop		; $2010
 
+
+	.org $2020
+
 start:
 	di
 
