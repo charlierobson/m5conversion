@@ -1,12 +1,4 @@
-g 2020
-
-rem wpset 6000,1000,rw,,{ printf "%04x  shadow access",pc ; g }
-
-bps 8
-bps 10
-bps 18
-
-bps 30
-bps 38
-
+bpset 205b
 g
+
+

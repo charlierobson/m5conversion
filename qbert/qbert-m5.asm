@@ -2,6 +2,8 @@
 
 VBLVEC = $7406
 
+TEMP = $7408
+JKFLAG = $7409
 VBLCOUNT = $740A
 MKEY = $740B
 SETTERF = $740C
@@ -30,9 +32,8 @@ COLECO_IDENT = BIOS + $6e
 	.db		2           ; identifier
 	.dw		start       ; start execution address	$2001
 	.dw		ipl         ; IPL address				$2003 (initial program loader, who knew)
-	jp		0			; RST 20h jump
-	jp		0			; RST 28h jump
-
+	jp		0			; RST 20h (4) jump
+	jp		0			; RST 28h (5) jump
 
 	.org $2010
 
@@ -42,7 +43,6 @@ COLECO_IDENT = BIOS + $6e
 	jp		starter		; $2019
 	jp		vramvalid	; $201c
 	jp		setter		; $201f
-
 
 	.org $2030
 
@@ -142,84 +142,6 @@ vblgo:
 
 
 
-
-
-ctrlrd1:
-	push	bc
-	ld		a,c
-	and		1
-	ld		c,0
-	jr		z,_js1x
-
-_js2x:
-	in		a,($37)
-	bit		5,a
-	jr		z,{+}
-	set		0,c
-+:	bit		4,a
-	jr		z,{+}
-	set		1,c
-+:	bit		7,a
-	jr		z,{+}
-	set		2,c
-+:	bit		6,a
-	jr		z,{+}
-	set		3,c
-+:	in		a,($31)
-	bit		4,a
-	jr		z,_donex
-	set		6,c
-
-_donex:
-	ld		a,c
-	pop		bc
-	ret
-
-_js1x:
-	in		a,($37)
-	bit		1,a		; L UP
-	jr		z,{+}
-	set		0,c
-+:	bit		0,a		; L RIGHT
-	jr		z,{+}
-	set		1,c
-+:	bit		3,a		; L DOWN
-	jr		z,{+}
-	set		2,c
-+:	bit		2,a		; L LEFT
-	jr		z,{+}
-	set		3,c
-+:	in		a,($31)
-	bit		0,a
-	jr		z,{+}
-	set		6,c
-+:	jr		_donex
-
-
-
-
-ctrlrd2:
-	ld		a,c
-	and		1
-	in		a,($31)
-	jr		z,_kp1x
-
-_kp2x:
-	;        87654321
-	and		%00100000
-	rlca
-	ret
-
-_kp1x:
-	;        87654321
-	and		%00000010
-	rrca
-	rrca
-	rrca
-	ret
-
-
-
 starter:
 	ld		hl,vblgo
 	ld		(VBLVEC),hl
@@ -256,7 +178,7 @@ bios
 	.incbin	"..\colecobios.bin.zx0"
 
 cart
-	.incbin	"video.patched.bin.zx0"
+	.incbin	"qbert.patched.bin.zx0"
 
 
 	.ds 16384 - ($-$2000)

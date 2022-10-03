@@ -2602,19 +2602,106 @@ L0F1C		LD	L,(IY+00H)
 
 
 WRITE_REG_FIX:
-	xor	a
-	cp	b
-	jr	nz,{+}
+	xor		a
+	cp		b
+	jr		nz,{+}
 
-	ld	a,($1518)
-	and	1
-	or	c
-	ld	c,a
+	ld		a,($1518)
+	and		1
+	or		c
+	ld		c,a
 
-+:	LD	A,C		; Send VDP register data
-	OUT	(IO_VDP_Addr),A
++:	LD		A,C
+	OUT		(IO_VDP_Addr),A
 	ret
 
+
+
+
+; R.JOY | R.JOY | R.JOY | R.JOY | L.JOY | L.JOY | L.JOY | L.JOY | 37
+;   |   |  <--  |   ^   |  -->  |   |   |  <--  |   ^   |  -->  |
+;   v   |       |   |   |       |   v   |       |   |   |       |
+
+;   8   |   7   |   6   |   5   |   4   |   3   |   2   |   1   | 31
+
+; coleco: -F--LDRU
+
+_js1:
+	push	bc
+	ld		c,0
+	in		a,($37)
+	bit		1,a		; L UP
+	jr		z,{+}
+	set		0,c
++:	bit		0,a		; L RIGHT
+	jr		z,{+}
+	set		1,c
++:	bit		3,a		; L DOWN
+	jr		z,{+}
+	set		2,c
++:	bit		2,a		; L LEFT
+	jr		z,{+}
+	set		3,c
++:	in		a,($31)	; 1 key
+	bit		0,a
+	jr		z,{+}
+	set		6,c
++:	ld		a,c
+	cpl
+	pop		bc
+	ret
+
+
+_js2:
+	push	bc
+	ld		c,0
+	in		a,($37)
+	bit		5,a
+	jr		z,{+}
+	set		0,c
++:	bit		4,a
+	jr		z,{+}
+	set		1,c
++:	bit		7,a
+	jr		z,{+}
+	set		2,c
++:	bit		6,a
+	jr		z,{+}
+	set		3,c
++:	in		a,($31)
+	bit		4,a
+	jr		z,{+}
+	set		6,c
++:	ld		a,c
+	cpl
+	pop		bc
+	ret
+
+
+_kp:
+	push	bc
+	ld		c,0
+
+	in		a,($31)			; lower 0 - 1..8
+	and		a
+	jr		nz,_findBit		; there's a bit so we don't need to check uppers
+
+	in		a,($35)			; try the upper 2 - 9..0
+	and		3
+	jr		z,{+}			; no bit, quit
+
+	ld		c,8				; start count from 9
+
+_findBit:
+	inc		c
+	srl		a
+	jr		nc,_findBit
+
+	ld		a,c
+
++:	cpl
+	pop		bc
+	ret
 
 
 
@@ -2634,15 +2721,14 @@ WRITE_REG_FIX:
 ADDRFIX($1105)
 
 InitCtlState
-	;OUT	(IO_Joy_Select),A ; Select joysticks
-	nop \ nop
-	XOR	A		; Prepare to clear some memory
+	XOR	A
 	LD	IX,(CtlState)	; Clearing (8008H)+2 to (8008H)+11
 	INC	IX
 	INC	IX
 	LD	IY,RawCtlState	; Clearing 73D7H to 73EAH
 	LD	B,0AH		; Clearing 10 words/bytes
-L1116		LD	(IX+00H),A	; Clear byte at (IX)
+L1116
+	LD	(IX+00H),A	; Clear byte at (IX)
 	INC	IX
 	LD	(IY+00H),A	; Clear word at (IY)
 	INC	IY
@@ -2650,12 +2736,14 @@ L1116		LD	(IX+00H),A	; Clear byte at (IX)
 	INC	IY
 	DEC	B		; Loop ten times
 	JR	NZ,L1116
+
 	LD	(PulseCnt1),A	; Clear out controller counters
 	LD	(PulseCnt2),A	;   and shadows
 	LD	(Joy1Shad),A
 	LD	(Joy2Shad),A
 	LD	(Key1Shad),A
-	JR	L1137
+	LD	(Key2Shad),A
+	RET
 
 ; keypad translation table
 
@@ -2674,30 +2762,20 @@ Keypad_Table
 ADDRFIX($114A)
 
 CONTROLLER_SCAN
-	RST		28h	\ .db IO_Joy1
+	call	_js1
 	CPL
 	LD		(Joy1Shad),A
 
-	RST		28h	\ .db IO_Joy2
+	call	_js2
 	CPL
-	LD		(Joy2Shad),A	; 13 T-states (wait for mode change)
+	LD		(Joy2Shad),A
 
-	RST		20h \ .db IO_KP_Select
-
-	RST		28h \ .db IO_Joy1
+	call	_kp
 	CPL
 	LD		(Key1Shad),A
-
-	RST		28h \  .db IO_Joy2
-	CPL
-
-	RST		20h \ .db IO_Joy_Select ; s'ok, preserves A
-
-L1137
 	LD		(Key2Shad),A
 	RET
 
-	nop \ nop
 
 ;***************************************
 ; Read value of joystick port.
@@ -2711,14 +2789,25 @@ readJoyPort
 	OR	A
 	JR	NZ,readJP2
 
-	RST		28h \ .db IO_Joy1
+	call	_js1
 	CPL
 	RET
 
 readJP2:
-	RST		28h \ .db IO_Joy2
+	call	_js2
 	CPL
 	RET
+
+
+readKeypadPort
+	; LD	A,H		; (these 3 instrs give enough delay)
+	; OR	A
+	; JR	NZ,readKP2 (no kp2 as yet)
+
+	call	_kp
+	CPL
+	RET
+
 
 ;***************************************
 ;	1FEB	ReadCtlState
@@ -2761,7 +2850,8 @@ readJP2:
 ; The HL register is preserved by this subroutine.  (Burgertime depends on
 ; this for its screen saver timeout at the skill screen.)
 ;***************************************
-POLLER	CALL	CONTROLLER_SCAN	; Read controller state
+POLLER
+	CALL	CONTROLLER_SCAN	; Read controller state
 	LD	IY,RawCtlState	; IY = left controller raw state
 	LD	IX,(CtlState)	; IX = left controller state
 	PUSH	IX		; Save IX
@@ -4919,24 +5009,16 @@ L1199		LD	A,(BC)		; E = old pulse counter value
 ;	Read the keypad
 
 L11AA
-	;OUT	(IO_KP_Select),A ; Select keypad mode
-	RST		20h
-	.db		IO_KP_Select
-
-	CALL	readJoyPort		; Read joystick port
+	CALL	readKeypadPort
 	LD	D,A		; Save port bits in D
-
-	;OUT	(IO_Joy_Select),A ; Select keypad mode
-	RST		20h
-	.db		IO_Joy_Select
-
 	AND	0FH		; Mask off keypad bits
 	LD	HL,Keypad_Table	; Index into keypad table
 	LD	B,00H
 	LD	C,A
 	ADD	HL,BC
 	LD	L,(HL)		; L = key code (or 0FH if none)
-L11BC		LD	A,D
+L11BC
+	LD	A,D
 	AND	40H
 	LD	H,A		; H = right fire button bit
 	RET
