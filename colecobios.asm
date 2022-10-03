@@ -12,6 +12,8 @@
 
 BIOSSTART = $E000
 
+BLANK_SCREEN = $0180 \ UNBLANK_SCREEN = $01C0
+
 
 ;***************************************
 ;
@@ -595,8 +597,7 @@ L1352		POP	HL		; End of list, clean up
 	LD	E,C
 	LD	IY,0012H	;   Byte count
 	CALL	blkWrtVRAM4	; Color table
-	;////LD	BC,01C0H	; Unblank the screen
-	LD	BC,01e0H	; Unblank the screen
+	LD	BC,UNBLANK_SCREEN
 	CALL	WRITE_REGISTER
 	LD	HL,Cart_Sig	; Check first 2 bytes of cartridge
 	LD	A,(HL)		; If 8000<>AA or 8001<>55,
@@ -633,7 +634,7 @@ L13B7		JP	NZ,L13FF
 	CALL	BIOSSTART+$1968		; "Respect the seven second delay we
 				;  use" - Donald Fagen, "The Nightfly"
 
-	LD	BC,01a0H	; Blank screen
+	LD	BC,BLANK_SCREEN
 	CALL	WRITE_REGISTER
 
 	LD	HL,(Cart_Start)	; Get start address
@@ -3627,7 +3628,7 @@ MODE_1
 	LD	BC,0000H	; Register 0: half-text 32x24 mode
 	CALL	WRITE_REGISTER
 
-	LD	BC,01a0H	; Reg 1, 32x24 mode, 16K DRAM, blank
+	LD	BC,BLANK_SCREEN
 	CALL	WRITE_REGISTER
 
 ADDRFIX($18F7)			; (called by Tomarc the Barbarian)
@@ -3803,7 +3804,7 @@ GAME_OPT	CALL	InitScrn	; Clear VRAM and initialize the VDP
 	LD	A,0F4H		;   Fill with F4H
 	CALL	FILL_VRAM	;   fill it
 
-	LD	BC,01e0H	; Unblank the screen
+	LD	BC,UNBLANK_SCREEN
 	JP	WRITE_REGISTER
 
 D1AC9		EQU	$+3		; DB 'S'
@@ -3854,7 +3855,7 @@ L13FF		LD	HL,No_Cart_Msgs	; Put up "TURN GAME OFF" messages
 	LD	HL,8A00H	; Wait a long time for the user to see
 	CALL	BIOSSTART+$196B
 
-	LD	BC,01a0H	; Then blank the screen
+	LD	BC,BLANK_SCREEN
 	CALL	WRITE_REGISTER
 
 L1439		JR	L1439		;   and go to sleep

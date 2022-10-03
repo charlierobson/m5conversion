@@ -27,10 +27,11 @@ BIOS_BASE = $e000
 	jp		SetJSKB     ; RST 20h jump
 	jp		ReadJSKB    ; RST 28h jump
 
+
 	.org $2010
 
-	ret \ nop \ nop		; $2010
-	jp		starter		; $2013
+	jp		starter		; $2010
+
 
 	.org $2020
 

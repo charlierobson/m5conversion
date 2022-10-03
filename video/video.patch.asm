@@ -23,38 +23,6 @@ IO_VDP_Addr = $11
 
 
 
-; remove DIs - necessary??
-PATCH($803d,1)
-   nop 
-ENDPATCH($803d,1)
-PATCH($8047,1)
-   nop 
-ENDPATCH($8047,1)
-PATCH($80ba,1)
-   nop 
-ENDPATCH($80ba,1)
-PATCH($856f,1)
-   nop 
-ENDPATCH($856f,1)
-PATCH($86b0,1)
-   nop 
-ENDPATCH($86b0,1)
-PATCH($8972,1)
-   nop 
-ENDPATCH($8972,1)
-PATCH($89a5,1)
-   nop 
-ENDPATCH($89a5,1)
-PATCH($9918,1)
-   nop 
-ENDPATCH($9918,1)
-PATCH($9957,1)
-   nop 
-ENDPATCH($9957,1)
-
-
-
-
 ; remove IM setting
 PATCH($80BB,2)
    nop \ nop

@@ -15,7 +15,7 @@ PATCH($86d7, 2)
 ENDPATCH($86d7, 2)
 
 PATCH($9064, 3)
-	call	$2013		; STARTER enable interrupts after difficulty select screen was shown
+	call	$2010		; STARTER enable interrupts after difficulty select screen was shown
 ENDPATCH($9064, 3)
 
 PATCH($8478, 3)
