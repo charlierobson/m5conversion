@@ -1,5 +1,7 @@
-@echo off
+rem @echo off
 setlocal
+
+set m5m=..\m5multi\cart-binaries\sirmorris
 
 del /q *.bin 2>nul
 del /q *.zx0 2>nul
@@ -11,10 +13,25 @@ call :build btime
 call :build carnival
 call :build frogger
 call :build video
+
+call :renrom btime "Burger Time"
+call :renrom carnival Carnival
+call :renrom frogger Frogger
+call :renrom video Hustler
+
 goto :eof
 
 
 NOTHING TO SEE HERE
+
+
+:renrom
+set "src=%~1"
+set "dst=%~2"
+
+del /q "%m5m%\%dst%.rom"
+ren  "%m5m%\%src%-m5.rom" "%dst%.rom"
+goto :eof
 
 
 :build
