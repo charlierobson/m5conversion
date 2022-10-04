@@ -1,4 +1,12 @@
-bpset 205b
+g 2030
+
+bpset 8
+bpset 10
+bpset 18
+
+bpset 30
+bpset 38
+
 g
 
 

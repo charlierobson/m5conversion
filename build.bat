@@ -31,7 +31,7 @@ copy /y ..\xbins\%target%.bin .
 
 brass -s %target%.patch.asm
 
-patcher  %target%.bin %target%.patch.bin %target%.patched.bin
+patcher %target%.bin %target%.patch.bin %target%.patched.bin
 if errorlevel 1 exit /b
 
 zx0 -f %target%.patched.bin
