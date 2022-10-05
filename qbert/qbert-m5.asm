@@ -1,7 +1,9 @@
 	.asciimap ' ',' ',0
 
-VBLVEC = $7406
 
+IRQFIX = $7400
+VBLDLY = $7403
+VBLVEC = $7406
 TEMP = $7408
 JKFLAG = $7409
 VBLCOUNT = $740A
@@ -49,12 +51,15 @@ COLECO_IDENT = BIOS + $6e
 	.org $2030
 
 start:
-
 	ld		sp,$73b9			; BIOS stack
 
 	ld		hl,vblgo
 	ld		(VBLVEC),hl
 
+	xor		a
+	ld		(VBLDLY),a
+
+	in		a,(VDP_Status)		; clear any existing vsync int req
 	ei
 
 	jp		$8024
@@ -95,35 +100,46 @@ vblgo:
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
+	ld		a,(VBLDLY)
+	and		a
+	jr		nz,{+}
+
 	pop		af
 	call	$8021				; game interrupt vector
 	in		a,(VDP_Status)		; clear any existing vsync int req
 	ei
 	reti
 
-
-
-
-starter:
-	ld		hl,vblgo
-	ld		(VBLVEC),hl
-
++:	dec		a
+	ld		(VBLDLY),a
+	pop		af
 	in		a,(VDP_Status)		; clear any existing vsync int req
 	ei
+	reti
 
-	ret
+
+
 
 
 irqFixup:
-	ld		hl,{+}
-	push	hl
+	ld		hl,{+}			; address of instruction after reti
+	ex		(sp),hl			; swap old return address for new one
 	reti
-+:	pop		hl
++:	ld		(IRQFIX+1),hl	; returns here with old ret address in hl, stash it
+	ld		a,$c3			; form jp instruction
+	ld		(IRQFIX),a
+
+	ld		a,50			; delay vbl restart by a second(ish)
+	ld		(VBLDLY),a
+
 	pop		hl
 	pop		hl
-	in		a,(VDP_Status)		; clear any existing vsync int req
+	pop		hl
+
+	in		a,(VDP_Status)	; clear any existing vsync int req
 	ei
-	JP		$8ea3
+
+	JP		$7400		; back from whence we came
 
 
 	.include "..\dzx0_standard.asm"

@@ -1,6 +1,7 @@
 @echo off
 setlocal
 
+
 del /q *.bin 2>nul
 del /q *.zx0 2>nul
 brass -s colecobios.asm -l colecobios.html
@@ -42,7 +43,14 @@ brass -s %target%-m5.asm  %target%-m5.rom -l %target%-m5.html
 del /q *.bin 2>nul
 del /q *.zx0 2>nul
 
-copy /y %target%-m5.rom ..\..\m5multi\cart-binaries\sirmorris\
+copy /y %target%-m5.rom ..\..\m5multi\cart-binaries\sirmorris\ >nul
+if errorlevel 1 exit /b
+
+copy /y %target%-m5.rom ..\..\mamebuild\roms\m5_cart\cheg\m5cheg.bin >nul
+if errorlevel 1 exit /b
+
+copy /y %target%-m5.rom ..\..\mamebuild\roms\m5_cart\cheg24\m5cheg24.bin >nul
+if errorlevel 1 exit /b
 
 popd
 goto:eof

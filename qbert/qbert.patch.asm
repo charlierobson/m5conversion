@@ -23,9 +23,20 @@ IO_VDP_Addr = $11
 
 IO_PSG = $20
 
+; irq fixups
+
 PATCH($8ea0,3)
-    jp	$2010
+    call $2010
 ENDPATCH($8ea0,3)
+
+PATCH($8818,3)
+    call $2010
+ENDPATCH($8818,3)
+
+
+PATCH($866b,3)
+    call $ff76
+ENDPATCH($866b,3)
 
 PATCH($91bc,3)
     call $ffd6
