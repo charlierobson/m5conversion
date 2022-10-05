@@ -2647,6 +2647,7 @@ _js1:
 	jr		z,{+}
 	set		6,c
 +:	ld		a,c
+	or		$80
 	cpl
 	pop		bc
 	ret
@@ -2673,6 +2674,7 @@ _js2:
 	jr		z,{+}
 	set		6,c
 +:	ld		a,c
+	or		$80
 	cpl
 	pop		bc
 	ret
@@ -2699,7 +2701,8 @@ _findBit:
 
 	ld		a,c
 
-+:	cpl
++:	or		$80
+	cpl
 	pop		bc
 	ret
 
