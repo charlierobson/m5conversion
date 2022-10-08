@@ -41,9 +41,9 @@ COLECO_IDENT = BIOS + $6e
 	.org $2010
 
 	jp		irqFixup	; $2010
-	ret \ nop \ nop		; $2013
-	ret \ nop \ nop		; $2016
-	ret \ nop \ nop		; $2019
+	jp		wrvramfix	; $2013
+	jp		fvramfix	; $2016
+	jp		rdvramfix	; $2019
 	ret \ nop \ nop		; $201c
 	ret \ nop \ nop		; $201f
 
@@ -120,7 +120,6 @@ vblgo:
 
 
 
-
 irqFixup:
 	ld		hl,{+}			; address of instruction after reti
 	ex		(sp),hl			; swap old return address for new one
@@ -128,9 +127,6 @@ irqFixup:
 +:	ld		(IRQFIX+1),hl	; returns here with old ret address in hl, stash it
 	ld		a,$c3			; form jp instruction
 	ld		(IRQFIX),a
-
-	ld		a,50			; delay vbl restart by a second(ish)
-	ld		(VBLDLY),a
 
 	pop		hl
 	pop		hl
@@ -140,6 +136,8 @@ irqFixup:
 	ei
 
 	JP		$7400		; back from whence we came
+
+
 
 
 	.include "..\dzx0_standard.asm"
@@ -152,6 +150,7 @@ rst4 = $962b
 rst5 = $ffd9
 rst6 = $9164
 rst7 = $8ed3
+
 
 .define PATCHFN(x) .if $ != x \ .fail "patchfn fail " \ .endif \ .org x \ pfn{x}
 
@@ -345,6 +344,59 @@ PATCHFN($21ea)
 	call	rst7
 	dec		b
 	ret
+
+
+
+; todo - remove these 3 when glitch found
+
+wrvramfix:
+	di
+	PUSH       AF
+	LD         A,L
+	OUT        (VDP_Addr),A
+	LD         A,H
+	OR         $40
+	OUT        (VDP_Addr),A
+	POP        AF
+	OUT        (VDP_Data),A
+	ei
+	RET
+
+
+fvramfix:
+	di
+	PUSH       BC
+	LD         C,A
+	LD         A,L
+	OUT        (VDP_Addr),A
+	LD         A,H
+	OR         $40
+	OUT        (VDP_Addr),A
+
+-:	LD         A,C
+	OUT        (VDP_Data),A
+	DEC        DE
+	LD         A,E
+	OR         D
+	JR         NZ,{-}
+	POP        BC
+	ei
+	RET
+
+
+rdvramfix:
+	di
+	LD         A,L
+	OUT        (VDP_Addr),A
+	LD         A,H
+	OUT        (VDP_Addr),A
+	PUSH       DE
+	POP        DE
+	PUSH       DE
+	POP        DE
+	IN         A,(VDP_Data)
+	ei
+	RET
 
 
 bios

@@ -23,6 +23,12 @@ IO_VDP_Addr = $11
 
 IO_PSG = $20
 
+
+; hmmmm
+;PATCH($822f,3)
+;ENDPATCH($822f,3)
+
+
 ; irq fixups
 
 PATCH($8ea0,3)
@@ -113,6 +119,7 @@ ENDPATCH($80fc,3)
 PATCH($8d26,3)
     call $ff79
 ENDPATCH($8d26,3)
+
 
 PATCH($96b9,2)
    OUT (IO_PSG),A
@@ -218,10 +225,6 @@ ENDPATCH($86dc,3)
 PATCH($8755,3)
 	call	$2100
 ENDPATCH($8755,3)
-
-PATCH($86dc,3)
-	call	$2100
-ENDPATCH($86dc,3)
 
 PATCH($8abe,4)
 	call	$2106
@@ -528,3 +531,17 @@ ENDPATCH($8d6c,3)
 PATCH($8ecf,4)
 	jp		$21ea
 ENDPATCH($8ecf,4)
+
+
+; todo - remove these when glitch found
+PATCH($9157,3)
+    jp	$2013
+ENDPATCH($9157,3)
+
+PATCH($9164,3)
+    jp	$2016
+ENDPATCH($9164,3)
+
+PATCH($9118,3)
+    jp	$2019
+ENDPATCH($9118,3)

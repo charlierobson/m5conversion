@@ -1,2 +1,5 @@
-g
+g 2020
 
+wpset 6000,1000,w,,{ printf "Write to memory page 6 @%04x",pc ; g }
+
+g 
