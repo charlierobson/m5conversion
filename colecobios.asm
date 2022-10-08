@@ -3504,14 +3504,14 @@ ADDRFIX($143B)
 ;		First row of COLECOVISION
 
 ADDRFIX($144D)
-
+tsCVTextLine1
 	.byte	$60, $61, $68, $69, $70, $71, $78, $79, $80, $81, $88, $89
 	.byte	$64, $65, $6C, $74, $75, $7C, $84, $85, $8C, $8D
 
 ;		Second row of COLECOVISION
 
 ADDRFIX($1463)
-
+tsCVTextLine2
 	.byte	$62, $63, $6A, $6B, $72, $73, $7A, $7B, $82, $83, $8A, $8B
 	.byte	$66, $67, $6D, $76, $77, $7D, $86, $87, $8E, $8F
 
@@ -3973,7 +3973,8 @@ No_Cart_Msgs	DW	D1479,13*1024+01AAH	; 'TURN GAME OFF'
 ;		message text length in high 6 bits
 ;***************************************
 
-ScrnMsgs	LD	C,(HL)		; Get message address to BC
+ScrnMsgs
+	LD	C,(HL)		; Get message address to BC
 	INC	HL
 	LD	B,(HL)
 	INC	HL
@@ -4592,10 +4593,11 @@ L1D14		OUTI			; Output a byte of data
 	RET
 
 ;			HL=msg,IY=len,DE=scrn
-Title_Msgs	DW	BIOSSTART+$144D,22*1024+0085H	; first row of COLECOVISION
-	DW	BIOSSTART+$1463,22*1024+00A5H	; second row of COLECOVISION
-	DW	BIOSSTART+$14C1,02*1024+009BH	; TM
-	DW	BIOSSTART+$14B4,13*1024+02AAH	; 'c 1982 COLECO'
+Title_Msgs
+	DW	tsCVTextLine1,   (22 << 10) + 0085H	; first row of COLECOVISION
+	DW	tsCVTextLine2,   (22 << 10) + 00A5H	; second row of COLECOVISION
+	DW	BIOSSTART+$14C1, ( 2 << 10) + 009BH	; TM
+	DW	BIOSSTART+$14B4, (13 << 10) + 02AAH	; 'c 1982 COLECO'
 	DW	0			; End of table
 
 ;***************************************
@@ -4630,20 +4632,22 @@ READ_VRAMP	LD	BC,$c05e ;P_ReadVRam
 ;	BlkReadVRAM is also affected by this, but is
 ;	probably never called with enough bytes to matter.
 ;***************************************
-ADDRFIX($1D3E)
 
+ADDRFIX($1D3E)
 
 ; other addresses used (by many Coleco carts) are
 ; A1D43 and A1D47, but these land in the middle of instructions
 ; so this routine must not change
-READ_VRAM	LD	A,E		; Send LSB of address
+READ_VRAM
+	LD	A,E		; Send LSB of address
 	OUT	(IO_VDP_Addr),A
 	LD	A,D		; Send MSB of address
 	OUT	(IO_VDP_Addr),A
 	LD	D,B		; D = MSB of byte count
 	LD	B,C		; B = LSB of byte count
 	LD	C,IO_VDP_Data	; C = port address
-L1D49		INI			; Input a byte of data
+L1D49
+	INI			; Input a byte of data
 	NOP			; Wait for the VDP to catch up
 	NOP
 	JR	NZ,L1D49	; LSB loop
@@ -4662,7 +4666,8 @@ L1D49		INI			; Input a byte of data
 ;***************************************
 ADDRFIX($1D57)
 
-READ_REGISTER	IN	A,(IO_VDP_Status) ; Get VDP status
+READ_REGISTER
+	IN	A,(IO_VDP_Status) ; Get VDP status
 	RET			;     and return
 
 ;***************************************
