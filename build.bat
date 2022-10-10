@@ -1,10 +1,10 @@
 @echo off
 setlocal
 
-
 del /q *.bin 2>nul
 del /q *.zx0 2>nul
 brass -s colecobios.asm -l colecobios.html
+
 zx0 -f colecobios.bin
 if errorlevel 1 exit /b
 

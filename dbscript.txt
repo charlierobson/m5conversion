@@ -1,5 +1,7 @@
-g 2020
+rem wpset 6000,1000,w,,{ printf "Write to memory page 6 @%04x",pc ; g }
+rem wpset 7008,3,w,,{ printf "Write to 7008/rst6 @%04x",pc ; g }
+rem wpset 700b,3,w,,{ printf "Write to 700b/rst7 @%04x",pc ; g }
 
-wpset 6000,1000,w,,{ printf "Write to memory page 6 @%04x",pc ; g }
+wpset 0000,7000,w
 
-g 
+g 203a

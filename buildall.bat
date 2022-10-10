@@ -10,19 +10,28 @@ zx0 -f colecobios.bin
 if errorlevel 1 exit /b
 
 call :build btime
-call :build carnival
-call :build frogger
-call :build video
-
 call :renrom btime "Burger Time"
+
+call :build carnival
 call :renrom carnival Carnival
+
+call :build centiped
+call :renrom centiped Centipede
+
+call :build frogger
 call :renrom frogger Frogger
+
+call :build qbert
+call :renrom qbert "Q Bert"
+
+call :build video
 call :renrom video Hustler
 
 goto :eof
 
 
 NOTHING TO SEE HERE
+
 
 
 :renrom
@@ -32,6 +41,7 @@ set "dst=%~2"
 del /q "%m5m%\%dst%.rom"
 ren  "%m5m%\%src%-m5.rom" "%dst%.rom"
 goto :eof
+
 
 
 :build
@@ -51,7 +61,7 @@ copy /y ..\xbins\%target%.bin .
 
 brass -s %target%.patch.asm
 
-patcher  %target%.bin %target%.patch.bin %target%.patched.bin
+patcher %target%.bin %target%.patch.bin %target%.patched.bin
 if errorlevel 1 exit /b
 
 zx0 -f %target%.patched.bin
@@ -62,7 +72,8 @@ brass -s %target%-m5.asm  %target%-m5.rom -l %target%-m5.html
 del /q *.bin 2>nul
 del /q *.zx0 2>nul
 
-copy /y %target%-m5.rom ..\..\m5multi\cart-binaries\sirmorris\
+copy /y %target%-m5.rom ..\..\m5multi\cart-binaries\sirmorris\ >nul
+if errorlevel 1 exit /b
 
 popd
 goto:eof
