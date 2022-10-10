@@ -12,11 +12,15 @@ IO_VDP_Data	= $10		; VDP data port
 IO_VDP_Addr	= $11		; VDP VRAM address output port
 
 
+PATCH($8145, 2)
+	ld		c,$11		; black is black
+ENDPATCH($8145, 2)
+
 PATCH($84d7, 2)
 	cp		$01			; game restart
 ENDPATCH($84d7, 2)
 
-PATCH($84db, 2)
+PATCH($84db, 2)g
 	cp		$02			; level select
 ENDPATCH($84db, 2)
 

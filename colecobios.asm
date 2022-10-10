@@ -2603,7 +2603,7 @@ L0F1C		LD	L,(IY+00H)
 
 WRITE_REG_FIX:
 	xor		a
-	cp		b
+	cp		b					; reg #
 	jr		nz,{+}
 
 	ld		a,($1518)
@@ -3747,7 +3747,7 @@ D1AC5		EQU	$+2		; DB '8'
 	LD	HL,3800H	;   VRAM address 3800H
 	CALL	INIT_TABLE
 
-	LD	BC,0700H	; Reg 7 (FG/BG color), set both to 0
+	LD	BC,0711H	; Reg 7 (FG/BG color), set both to black
 	JP	WRITE_REGISTER
 
 ;***************************************

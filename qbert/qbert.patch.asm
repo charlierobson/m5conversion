@@ -25,8 +25,16 @@ IO_PSG = $20
 
 
 ; hmmmm
-;PATCH($822f,3)
-;ENDPATCH($822f,3)
+PATCH($822f,3)
+ENDPATCH($822f,3)
+
+PATCH($91eb,3)
+    ld		bc,$0711	; blackblack
+ENDPATCH($91eb,3)
+
+PATCH($8260,2)
+    ld		c,$11		; blackblack
+ENDPATCH($8260,2)
 
 
 ; irq fixups

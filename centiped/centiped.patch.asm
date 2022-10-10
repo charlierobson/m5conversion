@@ -169,3 +169,8 @@ ENDPATCH($a06f,25)
 PATCH($a08c,25)
 	call	$2010
 ENDPATCH($a08c,25)
+
+; make bg really black, not transparent
+PATCH($b572,1)
+	.db $71
+ENDPATCH($b572,1)

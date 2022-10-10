@@ -22,7 +22,7 @@ call :build frogger
 call :renrom frogger Frogger
 
 call :build qbert
-call :renrom qbert "Q Bert"
+call :renrom qbert "Q##Bert"
 
 call :build video
 call :renrom video Hustler

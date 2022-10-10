@@ -22,6 +22,10 @@ PATCH($8478, 3)
 	ld		hl,$f5a3	; pointer to charset data in BIOS
 ENDPATCH($8478, 3)
 
+PATCH($85bb, 3)
+	ld		bc,$0711	; black black
+ENDPATCH($85bb, 3)
+
 PATCH($8336, 3)
 	ld		hl,$f857	; pointer to charset data in BIOS
 ENDPATCH($8336, 3)
