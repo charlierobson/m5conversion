@@ -114,8 +114,8 @@ _js1:
 +:	bit		2,a		; L LEFT
 	jr		z,{+}
 	res		3,c
-+:	in		a,($31)	; 1 key
-	bit		0,a
++:	in		a,($31)
+	bit		0,a		; L FIRE - 1
 	jr		z,{+}
 	res		6,c
 +:	ld		a,c
@@ -127,20 +127,20 @@ _js2:
 	push	bc
 	ld		c,$7f
 	in		a,($37)
-	bit		5,a
+	bit		5,a		; R UP
 	jr		z,{+}
 	res		0,c
-+:	bit		4,a
++:	bit		4,a		; R RIGHT
 	jr		z,{+}
 	res		1,c
-+:	bit		7,a
++:	bit		7,a		; R DOWN
 	jr		z,{+}
 	res		2,c
-+:	bit		6,a
++:	bit		6,a		; R LEFT
 	jr		z,{+}
 	res		3,c
 +:	in		a,($31)
-	bit		4,a
+	bit		4,a		; R FIRE - 5
 	jr		z,{+}
 	res		6,c
 +:	ld		a,c
@@ -152,16 +152,43 @@ _js2:
 
 
 kpFix:
-;	LD		A,($70a0)
-;	BIT		1,A
-;	JP		nz,_kp2
+	push	hl
+	push	bc
+
+	in		a,($35) ; 9,0,... _ ^
+	ld		b,a
+
+	in		a,($31)	; 1,2,...8
+	ld		c,a
+
+	in		a,($30)	; bit 2 = lshift, bit 3 = rshift
+	ld		l,a
+
+	LD		A,($70a0)
+	BIT		1,A
+	ld		a,$7f
+	jr		nz,_kp2
 
 _kp1:
-	push	bc
-	in		a,($31)
-	ld		c,a
-	ld		a,$7f
+	bit		1,c		; 2
+	jr		z,{+}
 
+	res		6,a		; fire
+
++:	bit		2,l		; lshift
+	jr		z,_kpout
+	jr		_kp
+
+_kp2:
+	bit		5,c		; 6
+	jr		z,{+}
+
+	res		6,a		; fire
+
++:	bit		3,l		; rshift
+	jr		z,_kpout
+
+_kp:
 	rr		c		; 1
 	jr		nc,{+}
 	and		%11111101
@@ -194,6 +221,24 @@ _kp1:
 	jr		nc,{+}
 	and		%11110001
 +:
+	rr		b		; 9
+	jr		nc,{+}
+	and		%11111011
++:
+	rr		b		; 0
+	jr		nc,{+}
+	and		%11111010
++:
+	rr		b		; _ (*)
+	jr		nc,{+}
+	and		%11111001
++:
+	rr		b		; ^ (#)
+	jr		nc,{+}
+	and		%11110110
++:
+_kpout
+	pop		hl	
 	pop		bc
 	ret
 
