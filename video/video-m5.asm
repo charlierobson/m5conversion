@@ -85,6 +85,30 @@ ipl:							; initial program loader
 	ret
 
 
+CRV_JS1 = $f0f0
+CRV_JS2 = $f0f3
+CRV_KP1 = $f0f6
+CRV_KP2 = $f0f9
+
+ctrlrd1:
+	bit		0,c
+	jr		z,{+}
+
+	call	CRV_JS2
+	cpl
+	ret
+
++:	call	CRV_JS1
+	cpl
+	ret
+
+
+
+ctrlrd2:
+	bit		0,c
+	jp		z,CRV_KP1
+	jp		CRV_KP2
+
 
 
 writereg:
@@ -143,80 +167,6 @@ vblgo:
 
 
 
-
-ctrlrd1:
-	push	bc
-	ld		a,c
-	and		1
-	ld		c,0
-	jr		z,_js1x
-
-_js2x:
-	in		a,($37)
-	bit		5,a
-	jr		z,{+}
-	set		0,c
-+:	bit		4,a
-	jr		z,{+}
-	set		1,c
-+:	bit		7,a
-	jr		z,{+}
-	set		2,c
-+:	bit		6,a
-	jr		z,{+}
-	set		3,c
-+:	in		a,($31)
-	bit		4,a
-	jr		z,_donex
-	set		6,c
-
-_donex:
-	ld		a,c
-	pop		bc
-	ret
-
-_js1x:
-	in		a,($37)
-	bit		1,a		; L UP
-	jr		z,{+}
-	set		0,c
-+:	bit		0,a		; L RIGHT
-	jr		z,{+}
-	set		1,c
-+:	bit		3,a		; L DOWN
-	jr		z,{+}
-	set		2,c
-+:	bit		2,a		; L LEFT
-	jr		z,{+}
-	set		3,c
-+:	in		a,($31)
-	bit		0,a
-	jr		z,{+}
-	set		6,c
-+:	jr		_donex
-
-
-
-
-ctrlrd2:
-	ld		a,c
-	and		1
-	in		a,($31)
-	jr		z,_kp1x
-
-_kp2x:
-	;        87654321
-	and		%00100000
-	rlca
-	ret
-
-_kp1x:
-	;        87654321
-	and		%00000010
-	rrca
-	rrca
-	rrca
-	ret
 
 
 

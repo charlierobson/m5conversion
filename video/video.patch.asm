@@ -41,22 +41,21 @@ PATCH($812c,3)
    call    $2013
 ENDPATCH($812c,3)
 
-PATCH($8149,8)
+PATCH($8149,7)
    call    $2016
-ENDPATCH($8149,8)
+ENDPATCH($8149,7)
 
-PATCH($85b6,20)
-	ld		b,0
-	in		a,($31)
-	and		a
-	jr		z,{+}
 
--:	inc		b
-	srl		a
-	jr		nc,{-}
-+:
-	ld		a,b
-ENDPATCH($85b6,20)
+CRV_JS1 = $f0f0
+CRV_JS2 = $f0f3
+CRV_KP1 = $f0f6
+CRV_KP2 = $f0f9
+
+PATCH($85b6,10)
+	call	CRV_KP1
+	ld		b,a
+	call	CRV_KP2
+ENDPATCH($85b6,10)
 
 
 ; unknown what this does so nix it

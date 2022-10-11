@@ -93,154 +93,24 @@ vbl:
 
 
 
+
+CRV_JS1 = $f0f0
+CRV_JS2 = $f0f3
+CRV_KP1 = $f0f6
+CRV_KP2 = $f0f9
+
 jsFix:
 	LD		A,($70a0)
 	BIT		1,A
-	JP		nz,_js2
-
-_js1:
-	push	bc
-	ld		c,$7f
-	in		a,($37)
-	bit		1,a		; L UP
-	jr		z,{+}
-	res		0,c
-+:	bit		0,a		; L RIGHT
-	jr		z,{+}
-	res		1,c
-+:	bit		3,a		; L DOWN
-	jr		z,{+}
-	res		2,c
-+:	bit		2,a		; L LEFT
-	jr		z,{+}
-	res		3,c
-+:	in		a,($31)
-	bit		0,a		; L FIRE - 1
-	jr		z,{+}
-	res		6,c
-+:	ld		a,c
-	pop		bc
-	ret
-
-
-_js2:
-	push	bc
-	ld		c,$7f
-	in		a,($37)
-	bit		5,a		; R UP
-	jr		z,{+}
-	res		0,c
-+:	bit		4,a		; R RIGHT
-	jr		z,{+}
-	res		1,c
-+:	bit		7,a		; R DOWN
-	jr		z,{+}
-	res		2,c
-+:	bit		6,a		; R LEFT
-	jr		z,{+}
-	res		3,c
-+:	in		a,($31)
-	bit		4,a		; R FIRE - 5
-	jr		z,{+}
-	res		6,c
-+:	ld		a,c
-	pop		bc
-	ret
-
-
-
+	JP		nz,CRV_JS2
+	jp		CRV_JS1
 
 
 kpFix:
-	push	hl
-	push	bc
-
-	in		a,($35) ; 9,0,... _ ^
-	ld		b,a
-
-	in		a,($31)	; 1,2,...8
-	ld		c,a
-
-	in		a,($30)	; bit 2 = lshift, bit 3 = rshift
-	ld		l,a
-
 	LD		A,($70a0)
 	BIT		1,A
-	ld		a,$7f
-	jr		nz,_kp2
-
-_kp1:
-	bit		1,c		; 2
-	jr		z,{+}
-
-	res		6,a		; fire
-
-+:	bit		2,l		; lshift
-	jr		z,_kpout
-	jr		_kp
-
-_kp2:
-	bit		5,c		; 6
-	jr		z,{+}
-
-	res		6,a		; fire
-
-+:	bit		3,l		; rshift
-	jr		z,_kpout
-
-_kp:
-	rr		c		; 1
-	jr		nc,{+}
-	and		%11111101
-+:
-	rr		c		; 2
-	jr		nc,{+}
-	and		%11110111
-+:
-	rr		c		; 3
-	jr		nc,{+}
-	and		%11111100
-+:
-	rr		c		; 4
-	jr		nc,{+}
-	and		%11110010
-+:
-	rr		c		; 5
-	jr		nc,{+}
-	and		%11110011
-+:
-	rr		c		; 6
-	jr		nc,{+}
-	and		%11111110
-+:
-	rr		c		; 7
-	jr		nc,{+}
-	and		%11110101
-+:
-	rr		c		; 8
-	jr		nc,{+}
-	and		%11110001
-+:
-	rr		b		; 9
-	jr		nc,{+}
-	and		%11111011
-+:
-	rr		b		; 0
-	jr		nc,{+}
-	and		%11111010
-+:
-	rr		b		; _ (*)
-	jr		nc,{+}
-	and		%11111001
-+:
-	rr		b		; ^ (#)
-	jr		nc,{+}
-	and		%11110110
-+:
-_kpout
-	pop		hl	
-	pop		bc
-	ret
+	JP		nz,CRV_KP2
+	jp		CRV_KP1
 
 
 

@@ -2795,6 +2795,19 @@ CONTROLLER_SCAN_FIX:
 	RET
 
 
+ADDRFIX($10f0)
+; my own attempt at some vectors
+
+js1vec:
+	jp		_js1
+js2vec:
+	jp		_js2
+kp1vec:
+	jp		_kp1
+kp2vec:
+	jp		_kp2
+
+
 ;***************************************
 ;
 ; CONTROLLER HANDLING ROUTINES BEGIN HERE
