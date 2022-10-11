@@ -20,7 +20,7 @@ PATCH($84d7, 2)
 	cp		$01			; game restart
 ENDPATCH($84d7, 2)
 
-PATCH($84db, 2)g
+PATCH($84db, 2)
 	cp		$02			; level select
 ENDPATCH($84db, 2)
 

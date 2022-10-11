@@ -2618,95 +2618,181 @@ WRITE_REG_FIX:
 
 
 
-; R.JOY | R.JOY | R.JOY | R.JOY | L.JOY | L.JOY | L.JOY | L.JOY | 37
-;   |   |  <--  |   ^   |  -->  |   |   |  <--  |   ^   |  -->  |
-;   v   |       |   |   |       |   v   |       |   |   |       |
-
-;   8   |   7   |   6   |   5   |   4   |   3   |   2   |   1   | 31
-
-; coleco: -F--LDRU
+_jsRead:
+	bit		1,a
+	jr		nz,_js2
 
 _js1:
 	push	bc
-	ld		c,0
+	ld		c,$7f
 	in		a,($37)
 	bit		1,a		; L UP
 	jr		z,{+}
-	set		0,c
+	res		0,c
 +:	bit		0,a		; L RIGHT
 	jr		z,{+}
-	set		1,c
+	res		1,c
 +:	bit		3,a		; L DOWN
 	jr		z,{+}
-	set		2,c
+	res		2,c
 +:	bit		2,a		; L LEFT
 	jr		z,{+}
-	set		3,c
-+:	in		a,($31)	; 1 key
-	bit		0,a
+	res		3,c
++:	in		a,($31)
+	bit		0,a		; L FIRE - 1
 	jr		z,{+}
-	set		6,c
+	res		6,c
 +:	ld		a,c
-	or		$80
-	cpl
 	pop		bc
 	ret
 
 
 _js2:
 	push	bc
-	ld		c,0
+	ld		c,$7f
 	in		a,($37)
-	bit		5,a
+	bit		5,a		; R UP
 	jr		z,{+}
-	set		0,c
-+:	bit		4,a
+	res		0,c
++:	bit		4,a		; R RIGHT
 	jr		z,{+}
-	set		1,c
-+:	bit		7,a
+	res		1,c
++:	bit		7,a		; R DOWN
 	jr		z,{+}
-	set		2,c
-+:	bit		6,a
+	res		2,c
++:	bit		6,a		; R LEFT
 	jr		z,{+}
-	set		3,c
+	res		3,c
 +:	in		a,($31)
-	bit		4,a
+	bit		4,a		; R FIRE - 5
 	jr		z,{+}
-	set		6,c
+	res		6,c
 +:	ld		a,c
-	or		$80
-	cpl
 	pop		bc
 	ret
 
 
-_kp:
+
+
+
+
+_kpSetup:
+	in		a,($35) ; 9,0,... _ ^
+	ld		b,a
+
+	in		a,($31)	; 1,2,...8
+	ld		c,a
+
+	in		a,($30)	; bit 2 = lshift, bit 3 = rshift
+	ld		l,a
+
+	ld		a,$7f
+	ret
+
+
+_kpRead:
+	bit		1,a
+	jr		nz,_kp2
+
+
+_kp1:
+	push	hl
 	push	bc
-	ld		c,0
+	call	_kpSetup
 
-	in		a,($31)			; lower 0 - 1..8
-	and		a
-	jr		nz,_findBit		; there's a bit so we don't need to check uppers
+	bit		1,c		; 2
+	jr		z,{+}
 
-	in		a,($35)			; try the upper 2 - 9..0
-	and		3
-	jr		z,{+}			; no bit, quit
+	res		6,a		; fire
 
-	ld		c,8				; start count from 9
++:	bit		2,l		; lshift
+	jr		z,_kpout
+	jr		_kp
 
-_findBit:
-	inc		c
-	srl		a
-	jr		nc,_findBit
 
-	ld		a,c
+_kp2:
+	push	hl
+	push	bc
+	call	_kpSetup
 
-+:	or		$80
-	cpl
+	bit		5,c		; 6
+	jr		z,{+}
+
+	res		6,a		; fire
+
++:	bit		3,l		; rshift
+	jr		z,_kpout
+
+
+_kp:	; do the reading
+	rr		c		; 1
+	jr		nc,{+}
+	and		%11111101
++:
+	rr		c		; 2
+	jr		nc,{+}
+	and		%11110111
++:
+	rr		c		; 3
+	jr		nc,{+}
+	and		%11111100
++:
+	rr		c		; 4
+	jr		nc,{+}
+	and		%11110010
++:
+	rr		c		; 5
+	jr		nc,{+}
+	and		%11110011
++:
+	rr		c		; 6
+	jr		nc,{+}
+	and		%11111110
++:
+	rr		c		; 7
+	jr		nc,{+}
+	and		%11110101
++:
+	rr		c		; 8
+	jr		nc,{+}
+	and		%11110001
++:
+	rr		b		; 9
+	jr		nc,{+}
+	and		%11111011
++:
+	rr		b		; 0
+	jr		nc,{+}
+	and		%11111010
++:
+	rr		b		; _ (*)
+	jr		nc,{+}
+	and		%11111001
++:
+	rr		b		; ^ (#)
+	jr		nc,{+}
+	and		%11110110
++:
+_kpout
 	pop		bc
+	pop		hl	
 	ret
 
 
+CONTROLLER_SCAN_FIX:
+	call	_js1
+	CPL
+	LD		(Joy1Shad),A
+	call	_js2
+	CPL
+	LD		(Joy2Shad),A
+	call	_kp1
+	CPL
+	LD		(Key1Shad),A
+	call	_kp2
+	CPL
+	LD		(Key2Shad),A
+	RET
 
 
 ;***************************************
@@ -2751,10 +2837,10 @@ L1116
 ; keypad translation table
 
 Keypad_Table
-	DB	$0f,$01,$02,$03
-	DB	$04,$05,$06,$07
-	DB	$08,$09,$0a,$0f
-	DB	$0f,$0f,$0f,$0f
+	DB	0FH,06H,01H,03H
+	DB	09H,00H,0AH,0FH
+	DB	02H,0BH,07H,0FH
+	DB	05H,04H,08H,0FH
 
 
 ;***************************************
@@ -2765,19 +2851,7 @@ Keypad_Table
 ADDRFIX($114A)
 
 CONTROLLER_SCAN
-	call	_js1
-	CPL
-	LD		(Joy1Shad),A
-
-	call	_js2
-	CPL
-	LD		(Joy2Shad),A
-
-	call	_kp
-	CPL
-	LD		(Key1Shad),A
-	LD		(Key2Shad),A
-	RET
+	jp		CONTROLLER_SCAN_FIX
 
 
 ;***************************************
@@ -2788,26 +2862,15 @@ CONTROLLER_SCAN
 ; EXIT:	A = input data
 ;***************************************
 readJoyPort
-	LD	A,H		; (these 3 instrs give enough delay)
-	OR	A
-	JR	NZ,readJP2
-
-	call	_js1
-	CPL
-	RET
-
-readJP2:
-	call	_js2
+	LD		A,H
+	call	_jsRead
 	CPL
 	RET
 
 
 readKeypadPort
-	; LD	A,H		; (these 3 instrs give enough delay)
-	; OR	A
-	; JR	NZ,readKP2 (no kp2 as yet)
-
-	call	_kp
+	LD		A,H
+	call	_kpRead
 	CPL
 	RET
 
