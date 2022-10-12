@@ -53,4 +53,4 @@ copy /y %target%-m5.rom ..\..\mamebuild\roms\m5_cart\cheg24\m5cheg24.bin >nul
 if errorlevel 1 exit /b
 
 popd
-goto:eof
+goto :eof
