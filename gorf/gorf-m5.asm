@@ -4,8 +4,6 @@ VBLVEC = $7406
 
 VBLCOUNT = $740A
 
-;RAMDECRUNCH = $7410
-
 VDP_STAT = $11
 
 BIOS = $e000
@@ -13,13 +11,6 @@ BIOS = $e000
 WRITE_REGISTER = BIOS + $1fd9
 COLECO_IDENT = BIOS + $6e
 
-; colour table			= 0000 (+1800)
-; name table			= 1800 (+400)
-; sprite attrib table	= 1c00 (+400)
-; pattern table			= 2000 (+1800)
-; sprite pattern table	= 3800
-
-; mode (graphic) 2 - 
 
 	.org $2000
 
@@ -47,17 +38,12 @@ ipl:							; initial program loader
 	ld		bc,$10
 	ldir
 
-;	ld		hl,decruncher
-;	ld		de,RAMDECRUNCH
-;	ld		bc,decrunchend-decruncher
-;	ldir
-
 	ld		a,$74				; relocate IM2 vector base
 	ld		i,a
 
-	ld		hl,bios				; unpack bios
-	ld		de,$e000
-	call	decruncher
+	; ld		hl,bios				; unpack bios
+	; ld		de,$e000
+	; call	decruncher
 
 	ld		hl,cart				; unpack game
 	ld		de,$8000
@@ -233,16 +219,66 @@ _6:
 .endmodule
 
 
+.module rst6
+
+RST6 = $ff82
+
+_1:
+	LD		DE,$800
+	JP		RST6
+
+_2:
+	CALL	RST6
+	LD 		A,$f0
+	LD 		DE,$a
+	LD 		HL,$360d
+	JP		RST6
+
+_3:
+	LD 		DE,$20
+	JP		RST6
+
+_4:
+	CALL	RST6
+	LD 		A,$d0
+	LD 		HL,$1800
+	LD 		DE,$1
+	JP		RST6
+
+_5:
+	CALL	RST6
+	LD 		DE,$1
+	LD 		HL,$361f
+	LD 		A,$70
+	JP		RST6
+
+_6:
+	LD		HL,$ee3
+	JP		RST6
+
+_7:
+	LD 		DE,$20
+	XOR		A
+	JP		RST6
+
+_8:
+	LD		A,$90
+	JP		RST6
+
+.endmodule
+
+
+
 decruncher:
-	.include "..\de-lzee.asm"
+	.include "..\dzx0_standard.asm"
 decrunchend:
 
 
-bios
-	.incbin	"..\colecobios.bin.lzee"
+;bios
+;	.incbin	"..\colecobios.bin.pck"
 
 cart
-	.incbin	"gorf.patched.bin.lzee"
+	.incbin	"gorf.patched.bin.zx0"
 
 
 .if $-$2000 > 16384

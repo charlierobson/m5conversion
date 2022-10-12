@@ -15,6 +15,71 @@ IO_VDP_Addr	= $11		; VDP VRAM address output port
 PATCH($805b,2)
 ENDPATCH($805b,2)
 
+; mame
+
+PATCH($bad4,3)
+    jp $ffee
+ENDPATCH($bad4,3)
+
+PATCH($8067,3)
+    call $ff7c
+ENDPATCH($8067,3)
+
+PATCH($8077,3)
+    call $ffd9
+ENDPATCH($8077,3)
+
+PATCH($8962,3)
+    call $ffeb
+ENDPATCH($8962,3)
+
+PATCH($bac9,3)
+    call $ff61
+ENDPATCH($bac9,3)
+
+PATCH($bacc,3)
+    jp $fff4
+ENDPATCH($bacc,3)
+
+PATCH($ac8c,3)
+    call $ffdf
+ENDPATCH($ac8c,3)
+
+PATCH($ac7f,3)
+    call $ffdf
+ENDPATCH($ac7f,3)
+
+PATCH($88f1,3)
+    call $ffb8
+ENDPATCH($88f1,3)
+
+PATCH($88f9,3)
+    call $ffb8
+ENDPATCH($88f9,3)
+
+PATCH($8901,3)
+    call $ffb8
+ENDPATCH($8901,3)
+
+PATCH($8909,3)
+    call $ffb8
+ENDPATCH($8909,3)
+
+PATCH($8911,3)
+    jp $ffb8
+ENDPATCH($8911,3)
+
+PATCH($894c,3)
+    call $ffd9
+ENDPATCH($894c,3)
+
+PATCH($8952,3)
+    jp $ffd9
+ENDPATCH($8952,3)
+
+
+
+
 ; rst 1
 PATCH($815e,1)
    RST 20h
@@ -607,7 +672,7 @@ PATCH($80c0,4)
 ENDPATCH($80c0,4)
 
 PATCH($81d8,3)
-	call	rst5base+$fa	1;rst5._3
+	call	rst5base+$fa	;rst5._3
 ENDPATCH($81d8,3)
 
 PATCH($84a8,4)
@@ -629,3 +694,40 @@ ENDPATCH($a6b3,4)
 PATCH($a6b3,4)
 	call	rst5base+$10c	;rst5._6
 ENDPATCH($a6b3,4)
+
+
+; rst 6
+
+rst6base = $2200
+
+PATCH($8145,4)
+	call	rst6base+$12		;rst6._1
+ENDPATCH($8145,4)
+
+PATCH($82d6,10)
+	call	rst6base+$18		;rst6._2
+ENDPATCH($82d6,10)
+
+PATCH($86c1,4)
+	call	rst6base+$26		;rst6._3
+ENDPATCH($86c1,4)
+
+PATCH($8754,11)
+	call	rst6base+$2c		;rst6._4
+ENDPATCH($8754,11)
+
+PATCH($88c4,10)
+	call	rst6base+$3a		;rst6._5
+ENDPATCH($88c4,10)
+
+PATCH($8b76,5)
+	call	rst6base+$48		;rst6._6
+ENDPATCH($8b76,5)
+
+PATCH($a938,5)
+	call	rst6base+$4e		;rst6._7
+ENDPATCH($a938,5)
+
+PATCH($b175,3)
+	call	rst6base+$55		;rst6._8
+ENDPATCH($b175,3)
