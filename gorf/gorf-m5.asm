@@ -8,67 +8,53 @@ VDP_STAT = $11
 
 BIOS = $e000
 
-WRITE_REGISTER = BIOS + $1fd9
-COLECO_IDENT = BIOS + $6e
+COLECO_IDENT = $e06e
+SKILL_SCREEN = $ff7c
 
 
 	.org $2000
 
 	.db		2           ; identifier
-	.dw		start       ; start execution address	$2001
+	.dw		0			; start execution address	$2001 (not used here)
 	.dw		ipl         ; IPL address				$2003 (initial program loader, who knew)
 	jp		$ac6c		; RST 20h jump
 	jp		$8733		; RST 28h jump
 
 	.org $2010
 
-	ret \ nop \ nop		; $2010
+	jp		starter		; $2010
 
 
 	.org $2020
-
+g
 ipl:							; initial program loader
 	di
 
 	ld		a,$01               ; disable timer interrupts
 	out		($01),a
 
-	ld		hl,$7000			; copy interrupt vectors
-	ld		de,$7400
-	ld		bc,$10
-	ldir
-
 	ld		a,$74				; relocate IM2 vector base
 	ld		i,a
 
-	; ld		hl,bios				; unpack bios
-	; ld		de,$e000
-	; call	decruncher
-
-	ld		hl,cart				; unpack game
+	ld		hl,cart				; unpack game and get ready to go
 	ld		de,$8000
 	call	decruncher
 
-	ret
+	ld		hl,$7000			; clear ram
+	ld		(hl),0
+	ld		de,$7001
+	ld		bc,$$7ff
+	ldir
 
+	ld		sp,$73b9			; coleco bios sez so
 
-
-start:
-	di
-
-	ld		sp,$73b9			; BIOS stack
-
-	ld		hl,vbl
+	ld		hl,vbl				; vbl isr
 	ld		(VBLVEC),hl
 
 	in		a,(VDP_STAT)		; clear any existing vsync int req
-
 	ei
 
 	jp		COLECO_IDENT
-
-	ld		hl,($800a)			; cart_start, bypasses colecovision screen
-	jp		(hl)
 
 
 
@@ -77,13 +63,25 @@ vbl:
 	ld		a,($702c)
 	or		1
 	ld		($702c),a
+	ld		a,(VBLCOUNT)
+	inc		a
+	ld		(VBLCOUNT),a
 	in		a,(VDP_STAT)
 	pop		af
 	ei
 	reti
 
-.module rst3
+
+starter:
+	in		a,(VDP_STAT)
+	ei
+	jp		SKILL_SCREEN
+
+
+
 	.org	$2100
+
+.module rst3
 
 RST3 = $fff1
 
@@ -126,61 +124,61 @@ RST3 = $fff1
 
 .module rst4
 
-RST4 = $Fffd
+rst4 = $fffd
 
 _1:
-	call	RST4
-	LD		A,($702c)
+	call	rst4
+	ld		a,($702c)
 	ret
 
 _2:
-	call	RST4
-	JP		$ffdc	; careful! patcher will overwrite this
+	call	rst4
+	jp		$ffdc	; careful! careless patch could overwrite this
 
 _3:
-	call	RST4
-	LD		HL,$703c
+	call	rst4
+	ld		hl,$703c
 	ret
 
 _4:
-	call	RST4
-	LD		($7268),A
-	jp		RST4
+	call	rst4
+	ld		($7268),a
+	jp		rst4
 
 _5:
-	PUSH	HL
-	call	RST4
-	POP		HL
+	push	hl
+	call	rst4
+	pop		hl
 	ret
 
 _6:
-	call	RST4
-	LD		($7268),A
-	jp		RST4
+	call	rst4
+	ld		($7268),a
+	jp		rst4
 
 _7:
-	LD		($71fd),A
-	jp		RST4
+	ld		($71fd),a
+	jp		rst4
 
 _8:
-	PUSH	AF
-	call	RST4
-	POP		AF
+	push	af
+	call	rst4
+	pop		af
 	ret
 
 _9:
-	call	RST4
-	LD		HL,$703d
+	call	rst4
+	ld		hl,$703d
 	ret
 
 _10:
-	call	RST4
-	LD		HL,$7037
+	call	rst4
+	ld		hl,$7037
 	ret
 
 _11:
-	call	RST4
-	AND		$f
+	call	rst4
+	and		$f
 	ret
 
 .endmodule
@@ -188,82 +186,83 @@ _11:
 
 .module rst5
 
-RST5 = $8955
+rst5 = $8955
 
 _1:
-	call	RST5
-	LD		IY,$7000
+	call	rst5
+	ld		iy,$7000
 	ret
 
 _2:
-	CALL	$a5db
-	jp		RST5
+	call	$a5db
+	jp		rst5
 
 _3:
-	PUSH	BC
-	call	RST5
-	POP		BC
+	push	bc
+	call	rst5
+	pop		bc
 	ret
 
 _4:
-	call	RST5
+	call	rst5
 	jp		$ffeb
 
 _5:
-	CALL	$b30d
-	jp		RST5
+	call	$b30d
+	jp		rst5
+
 _6:
-	CALL	$8fe9
-	jp		RST5
+	call	$8fe9
+	jp		rst5
 
 .endmodule
 
 
 .module rst6
 
-RST6 = $ff82
+rst6 = $ff82
 
 _1:
-	LD		DE,$800
-	JP		RST6
+	ld		de,$800
+	jp		rst6
 
 _2:
-	CALL	RST6
-	LD 		A,$f0
-	LD 		DE,$a
-	LD 		HL,$360d
-	JP		RST6
+	call	rst6
+	ld 		a,$f0
+	ld 		de,$a
+	ld 		hl,$360d
+	jp		rst6
 
 _3:
-	LD 		DE,$20
-	JP		RST6
+	ld 		de,$20
+	jp		rst6
 
 _4:
-	CALL	RST6
-	LD 		A,$d0
-	LD 		HL,$1800
-	LD 		DE,$1
-	JP		RST6
+	call	rst6
+	ld 		a,$d0
+	ld 		hl,$1800
+	ld 		de,$1
+	jp		rst6
 
 _5:
-	CALL	RST6
-	LD 		DE,$1
-	LD 		HL,$361f
-	LD 		A,$70
-	JP		RST6
+	call	rst6
+	ld 		de,$1
+	ld 		hl,$361f
+	ld 		a,$70
+	jp		rst6
 
 _6:
-	LD		HL,$ee3
-	JP		RST6
+	ld		hl,$ee3
+	jp		rst6
 
 _7:
-	LD 		DE,$20
-	XOR		A
-	JP		RST6
+	ld 		de,$20
+	xor		a
+	jp		rst6
 
 _8:
-	LD		A,$90
-	JP		RST6
+	ld		a,$90
+	jp		rst6
 
 .endmodule
 
@@ -273,9 +272,6 @@ decruncher:
 	.include "..\dzx0_standard.asm"
 decrunchend:
 
-
-;bios
-;	.incbin	"..\colecobios.bin.pck"
 
 cart
 	.incbin	"gorf.patched.bin.zx0"

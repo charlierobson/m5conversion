@@ -79,10 +79,6 @@ ipl:							; initial program loader
 	ld		a,$74				; relocate IM2 vector base
 	ld		i,a
 
-	ld		hl,bios				; unpack bios
-	ld		de,$e000
-	call	DecompressZX0
-
 	ld		hl,cart				; unpack game
 	ld		de,$8000
 	call	DecompressZX0

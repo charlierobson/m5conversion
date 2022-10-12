@@ -15,15 +15,23 @@ IO_VDP_Addr	= $11		; VDP VRAM address output port
 PATCH($805b,2)
 ENDPATCH($805b,2)
 
+PATCH($8505,3)
+	ld		hl,($e06a)	; ASCII table
+ENDPATCH($8505,3)
+
+PATCH($850f,3)
+	ld		hl,($e06c)	; number table
+ENDPATCH($850f,3)
+
+PATCH($8067,3)
+	call	$2010		; starter
+ENDPATCH($8067,3)
+
 ; mame
 
 PATCH($bad4,3)
     jp $ffee
 ENDPATCH($bad4,3)
-
-PATCH($8067,3)
-    call $ff7c
-ENDPATCH($8067,3)
 
 PATCH($8077,3)
     call $ffd9
@@ -517,9 +525,9 @@ PATCH($bb06,3)
 	rst3j($a)
 ENDPATCH($bb06,3)
 
-PATCH($bb0b,3)
+PATCH($bb0a,3)
 	rst3j($b)
-ENDPATCH($bb0b,3)
+ENDPATCH($bb0a,3)
 
 PATCH($bb0d,3)
 	rst3j($d)
@@ -619,7 +627,7 @@ PATCH($8955,4)
 ENDPATCH($8955,4)
 
 PATCH($8968,4)
-	call	rst4base+$a7	;rst4._2
+	jp		rst4base+$a7	;rst4._2
 ENDPATCH($8968,4)
 
 PATCH($89bd,4)
@@ -687,13 +695,13 @@ PATCH($a6b3,4)
 	call	rst5base+$106	;rst5._5
 ENDPATCH($a6b3,4)
 
-PATCH($a6b3,4)
+PATCH($a6c0,4)
 	call	rst5base+$106	;rst5._5
-ENDPATCH($a6b3,4)
+ENDPATCH($a6c0,4)
 
-PATCH($a6b3,4)
+PATCH($bab7,4)
 	call	rst5base+$10c	;rst5._6
-ENDPATCH($a6b3,4)
+ENDPATCH($bab7,4)
 
 
 ; rst 6
@@ -731,3 +739,4 @@ ENDPATCH($a938,5)
 PATCH($b175,3)
 	call	rst6base+$55		;rst6._8
 ENDPATCH($b175,3)
+g

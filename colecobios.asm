@@ -2606,7 +2606,7 @@ WRITE_REG_FIX:
 	cp		b					; reg #
 	jr		nz,{+}
 
-	ld		a,($1518)
+	ld		a,($1518)			; sord BIOS
 	and		1
 	or		c
 	ld		c,a
