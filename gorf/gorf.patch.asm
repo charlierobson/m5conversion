@@ -29,6 +29,30 @@ ENDPATCH($8067,3)
 
 ; mame
 
+PATCH($aa8a,3)
+    call $ffe2
+ENDPATCH($aa8a,3)
+
+PATCH($ba17,3)
+    call $ffd9
+ENDPATCH($ba17,3)
+
+PATCH($a494,3)
+    call $ffe2
+ENDPATCH($a494,3)
+
+PATCH($a494,3)
+    call $ffe2
+ENDPATCH($a494,3)
+
+PATCH($8c5b,3)
+    call $ffe2
+ENDPATCH($8c5b,3)
+
+PATCH($8bfc,3)
+    call $ffe2
+ENDPATCH($8bfc,3)
+
 PATCH($bad4,3)
     jp $ffee
 ENDPATCH($bad4,3)
@@ -491,7 +515,7 @@ ENDPATCH($ba03,1)
 
 rst3base = $2100
 
-.define rst3j(x) jp rst3base+(x*5)
+.define rst3j(x) call rst3base+(x*5)
 
 PATCH($badf,3)
 	rst3j(3)

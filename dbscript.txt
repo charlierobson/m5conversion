@@ -6,9 +6,4 @@ rem wpset 700b,3,w,,{ printf "Write to 700b/rst7 @%04x",pc ; g }
 
 rem bpset fcca,b==7, { out }
 
-
-
-rem wpset 0,2000,r,{pc>=2000},{ printf "bios read @%04x",pc }
-rem bpset 8968
 g
-
