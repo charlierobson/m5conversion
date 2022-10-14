@@ -1,8 +1,6 @@
-; regex replacement
-; PATCH($1,3)\n   $2\nENDPATCH($1,3)\n
+.include "..\m5c-defs.inc"
 
-	.word	$8000
-
+PATCHINIT($8000)
 
 ; rogues gallery
 ;
@@ -15,13 +13,166 @@
 ; ENDPATCH($9dd8,3)
 
 
+pbase = $2100
+
+PATCH($8347,3)
+	call	pbase+$00	; rst1
+ENDPATCH($8347,3)
+
+PATCH($817b,3)
+	call	pbase+$05	; rst3_1
+ENDPATCH($817b,3)
+
+PATCH($81d6,4)
+	call	pbase+$0a	; rst3_2
+ENDPATCH($81d6,4)
+
+PATCH($8115,15)
+	call	pbase+$10	;jsFix
+ENDPATCH($8115,15)
+
+PATCH($becd,3)
+	LD	HL,$f8a3
+ENDPATCH($becd,3)
+
+PATCH($bedb,3)
+	LD	HL,$f4c3
+ENDPATCH($bedb,3)
+
+PATCH($80de,3)	; remove IM change
+	di
+ENDPATCH($80de,3)
+
+PATCH($80ea,3)	; remove IM change
+	ld		bc,$3ff
+ENDPATCH($80ea,3)
+
+; mame
+
+PATCH($88f8,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($88f8,2)
+
+PATCH($85bc,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($85bc,2)
+
+PATCH($baaa,2)
+    out (IO_PSG),a
+ENDPATCH($baaa,2)
+
+PATCH($8525,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8525,2)
+
+PATCH($84de,2)
+    out (IO_PSG),a
+ENDPATCH($84de,2)
+
+PATCH($b9b2,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($b9b2,2)
+
+PATCH($853c,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($853c,2)
+
+PATCH($8102,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8102,2)
+
+PATCH($8106,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8106,2)
+
+PATCH($8087,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8087,2)
+
+PATCH($80c8,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($80c8,2)
+
+PATCH($beaa,3)
+    call $e23b
+ENDPATCH($beaa,3)
+
+PATCH($bf30,3)
+    call $e80b
+ENDPATCH($bf30,3)
+
+PATCH($8502,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8502,2)
 
 
-; patch macros.
-; any unspecified bytes at the end of the block will be filled with 0/NOP
-;
-.define PATCH(x, n)		.relocate x - 4 \ .word x \ .byte n \ .byte (n ^ $ff) \ .endrelocate \ .relocate x
-.define ENDPATCH(x, n)	.ds n - ($-x) \ .if ($-x) > n \ .fail "invalid patch, too big: ",($-x)," > ",n \ .endif \ .endrelocate
+; rst 7
+
+PATCH($8a12,1)
+	rst		20h
+ENDPATCH($8a12,1)
+
+PATCH($8a18,1)
+	rst		20h
+ENDPATCH($8a18,1)
+
+PATCH($8a23,1)
+	rst		20h
+ENDPATCH($8a23,1)
+
+PATCH($8a33,1)
+	rst		20h
+ENDPATCH($8a33,1)
+
+PATCH($8a43,1)
+	rst		20h
+ENDPATCH($8a43,1)
+
+PATCH($8a52,1)
+	rst		20h
+ENDPATCH($8a52,1)
+
+PATCH($8a61,1)
+	rst		20h
+ENDPATCH($8a61,1)
+
+PATCH($8a70,1)
+	rst		20h
+ENDPATCH($8a70,1)
+
+PATCH($8a7e,1)
+	rst		20h
+ENDPATCH($8a7e,1)
+
+PATCH($8a8c,1)
+	rst		20h
+ENDPATCH($8a8c,1)
+
+PATCH($8a99,1)
+	rst		20h
+ENDPATCH($8a99,1)
+
+PATCH($8aa1,1)
+	rst		20h
+ENDPATCH($8aa1,1)
+
+PATCH($8aa8,1)
+	rst		20h
+ENDPATCH($8aa8,1)
+
+PATCH($8aa9,1)
+	rst		20h
+ENDPATCH($8aa9,1)
+
+PATCH($8abe,1)
+	rst		20h
+ENDPATCH($8abe,1)
+
+PATCH($8abf,1)
+	rst		20h
+ENDPATCH($8abf,1)
+
+; mem
 
 PATCH($8073,3)
    LD A,($7000)
@@ -59,9 +210,9 @@ PATCH($80ff,3)
    LD ($7000),A
 ENDPATCH($80ff,3)
 
-PATCH($8117,3)
-   LD A,($7002)
-ENDPATCH($8117,3)
+; PATCH($8117,3)
+;    LD A,($7002)
+; ENDPATCH($8117,3)
 
 PATCH($8161,3)
    LD A,($7000)
