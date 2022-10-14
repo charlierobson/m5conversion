@@ -4,7 +4,7 @@ VBLVEC = $7406
 
 VBLCOUNT = $740A
 
-VDP_STAT = $11
+IO_VDP_Status = $11
 
 BIOS = $e000
 
@@ -26,7 +26,7 @@ SKILL_SCREEN = $ff7c
 
 
 	.org $2020
-g
+
 ipl:							; initial program loader
 	di
 
@@ -51,7 +51,7 @@ ipl:							; initial program loader
 	ld		hl,vbl				; vbl isr
 	ld		(VBLVEC),hl
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 	ei
 
 	jp		COLECO_IDENT
@@ -66,14 +66,14 @@ vbl:
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
-	in		a,(VDP_STAT)
+	in		a,(IO_VDP_Status)
 	pop		af
 	ei
 	reti
 
 
 starter:
-	in		a,(VDP_STAT)
+	in		a,(IO_VDP_Status)
 	ei
 	jp		SKILL_SCREEN
 

@@ -1,9 +1,5 @@
 load ..\m5conversion\colecobios.bin,e000
 
-wpset 6000,1000,w,,{ printf "Write to memory page 6 @%04x",pc ; g }
-rem wpset 7008,3,w,,{ printf "Write to 7008/rst6 @%04x",pc ; g }
-rem wpset 700b,3,w,,{ printf "Write to 700b/rst7 @%04x",pc ; g }
+wpset 6000,1000,w,{pc>2000},{ printf "Write to memory page 6 @%04x",pc ; g }
 
-rem bpset fcca,b==7, { out }
-
-g
+g bf27

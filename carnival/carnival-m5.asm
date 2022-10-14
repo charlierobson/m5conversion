@@ -1,26 +1,4 @@
-	.asciimap ' ',' ',0
-
-VBLVEC = $7406
-
-TEMP = $7408
-JKFLAG = $7409
-VBLCOUNT = $740A
-MKEY = $740B
-
-VDP_STAT = $11
-
-BIOS = $e000
-
-WRITE_REGISTER = BIOS + $1fd9
-COLECO_IDENT = BIOS + $6e
-
-; colour table			= 0000 (+1800)
-; name table			= 1800 (+400)
-; sprite attrib table	= 1c00 (+400)
-; pattern table			= 2000 (+1800)
-; sprite pattern table	= 3800
-
-; mode (graphic) 2 - 
+.include "..\m5c-defs.inc"
 
 	.org $2000
 
@@ -47,22 +25,17 @@ start:
 
 	ld		sp,$73b9			; BIOS stack
 
-	ld		bc,$0180			; turn off screen, VDP interrupt
-	call	WRITE_REGISTER		; BIOS WRITE_REGISTER
-
-	in		a,(VDP_STAT)		; clear any pending interrupt flag
+	in		a,(IO_VDP_Status)		; clear any pending interrupt flag
 
 	ld		hl,vbl
 	ld		(VBLVEC),hl
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 
 	ei
 
 	jp		COLECO_IDENT		; BIOS startup / colecovision screen
 
-;	ld		hl,($800a)			; cart_start, bypasses colecovision screen
-;	jp		(hl)
 
 
 ipl:							; initial program loader
@@ -99,7 +72,7 @@ vbl:
 
 	call	$8021				; game interrupt vector
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 	pop		af
 	ei
 	reti

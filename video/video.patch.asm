@@ -13,7 +13,7 @@
 ; with
 ;PATCH($1,3)\n   $2\nENDPATCH($1,3)\n
 
-BIOS_BASE = $E000
+BIOS = $E000
 
 ; coleco data port 0BEH
 IO_VDP_Data = $10

@@ -4,7 +4,7 @@ VBLVEC = $7406
 
 VBLCOUNT = $740A
 
-VDP_STAT = $11
+IO_VDP_Status = $11
 
 BIOS = $e000
 
@@ -42,12 +42,12 @@ start:
 	ld		bc,$0180			; turn off screen, VDP interrupt
 	call	WRITE_REGISTER		; BIOS WRITE_REGISTER
 
-	in		a,(VDP_STAT)		; clear any pending interrupt flag
+	in		a,(IO_VDP_Status)		; clear any pending interrupt flag
 
 	ld		hl,vbl
 	ld		(VBLVEC),hl
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 
 	ei
 
@@ -85,7 +85,7 @@ vbl:
 
 	call	$ffdc				; don't call game irq... all it does is this
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 	pop		af
 	ei
 	reti

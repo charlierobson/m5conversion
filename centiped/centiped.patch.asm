@@ -1,16 +1,6 @@
-	.word	$8000
+.include "..\m5c-defs.inc"
 
-; patch macros.
-; any unspecified bytes at the end of the block will be filled with 0/NOP
-;
-.define PATCH(x, n)		.relocate x - 4 \ .word x \ .byte n \ .byte (n ^ $ff) \ .endrelocate \ .relocate x
-.define ENDPATCH(x, n)	.ds n - ($-x) \ .if ($-x) > n \ .fail "invalid patch, too big: ",($-x)," > ",n \ .endif \ .endrelocate
-
-BIOS_BASE = $E000
-
-IO_VDP_Data = $10		; VDP data port
-IO_VDP_Addr = $11		; VDP VRAM address output port
-IO_PSG = $20
+PATCHINIT($8000)
 
 ; output from mm.py
 ; always do these first

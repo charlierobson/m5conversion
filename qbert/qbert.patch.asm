@@ -7,13 +7,7 @@
 .define ENDPATCH(x, n)	.ds n - ($-x) \ .if ($-x) > n \ .fail "invalid patch, too big: ",($-x)," > ",n \ .endif \ .endrelocate
 
 
-
-; regex replacement
-; ^(\$\w\w\w\w) (.*)
-; with
-;PATCH($1,3)\n   $2\nENDPATCH($1,3)\n
-
-BIOS_BASE = $E000
+BIOS = $E000
 
 ; coleco data port 0BEH
 IO_VDP_Data = $10

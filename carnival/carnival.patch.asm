@@ -1,16 +1,6 @@
-	.word	$8000
+.include "..\m5c-defs.inc"
 
-; patch macros.
-; any unspecified bytes at the end of the block will be filled with 0/NOP
-;
-.define PATCH(x, n)		.relocate x - 4 \ .word x \ .byte n \ .byte (n ^ $ff) \ .endrelocate \ .relocate x
-.define ENDPATCH(x, n)	.ds n - ($-x) \ .if ($-x) > n \ .fail "invalid patch, too big: ",($-x)," > ",n \ .endif \ .endrelocate
-
-BIOS_BASE = $E000
-
-IO_VDP_Data	= $10		; VDP data port
-IO_VDP_Addr	= $11		; VDP VRAM address output port
-
+PATCHINIT($8000)
 
 PATCH($8145, 2)
 	ld		c,$11		; black is black
@@ -38,35 +28,35 @@ ENDPATCH($84ea, 2)
 
 
 PATCH($85ac,4)
-        LD         IX,$1f82+BIOS_BASE
+        LD         IX,$1f82+BIOS
 ENDPATCH($85ac,4)
 
 PATCH($85cd,4)
-        LD         IX,$1f82+BIOS_BASE
+        LD         IX,$1f82+BIOS
 ENDPATCH($85cd,4)
 
 PATCH($85e1,4)
-        LD         IX,$1f82+BIOS_BASE
+        LD         IX,$1f82+BIOS
 ENDPATCH($85e1,4)  
 
 PATCH($85f1,4)
-        LD         IX,$1f82+BIOS_BASE
+        LD         IX,$1f82+BIOS
 ENDPATCH($85f1,4)
 
 PATCH($8607,4)
-        LD         IX,$1f82+BIOS_BASE
+        LD         IX,$1f82+BIOS
 ENDPATCH($8607,4)
 
 PATCH($861c,4)
-        LD         IX,$1f82+BIOS_BASE
+        LD         IX,$1f82+BIOS
 ENDPATCH($861c,4)
 1
 PATCH($ac5d,4)
-        LD         IX,$1f82+BIOS_BASE
+        LD         IX,$1f82+BIOS
 ENDPATCH($ac5d,4)
 
 PATCH($b1e9,4)
-        LD         IX,$1f82+BIOS_BASE
+        LD         IX,$1f82+BIOS
 ENDPATCH($b1e9,4)
 
 

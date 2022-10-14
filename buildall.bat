@@ -9,6 +9,9 @@ brass -s colecobios.asm -l colecobios.html
 zx0 -f colecobios.bin
 if errorlevel 1 exit /b
 
+call :build antaradv
+call :renrom btime "Antarctic Adventure"
+
 call :build btime
 call :renrom btime "Burger Time"
 
@@ -21,11 +24,14 @@ call :renrom centiped Centipede
 call :build frogger
 call :renrom frogger Frogger
 
+call :build gorf
+call :renrom gorf Gorf
+
 call :build qbert
 call :renrom qbert "Q##Bert"
 
 call :build video
-call :renrom video Hustler
+call :renrom video "Video Hustler"
 
 goto :eof
 

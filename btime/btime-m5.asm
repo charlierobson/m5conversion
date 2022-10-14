@@ -1,20 +1,4 @@
-	.asciimap ' ',' ',0
-
-VBLVEC = $7406
-VBLCOUNT = $740A
-
-VDP_STAT = $11
-
-BIOS_BASE = $e000
-
-
-; colour table			= 0000 (+1800)
-; name table			= 1800 (+400)
-; sprite attrib table	= 1c00 (+400)
-; pattern table			= 2000 (+1800)
-; sprite pattern table	= 3800
-
-; mode (graphic) 2 - 
+.include "..\m5c-defs.inc"
 
 	.org $2000
 
@@ -40,17 +24,14 @@ start:
 	ld		bc,$0180			; turn off screen, VDP interrupt
 	call	$ffd9				; BIOS WRITE_REGISTER
 
-	in		a,(VDP_STAT)		; clear any pending interrupt flag
+	in		a,(IO_VDP_Status)		; clear any pending interrupt flag
 
 	ld		hl,inGameVBI		; set in game irq handler vector
 	ld		(VBLVEC),hl
 
 	ei
 
-	jp		BIOS_BASE+$6e		; BIOS startup / colecovision screen
-
-	ld		hl,($800a)			; cart_start, bypasses colecovision screen
-	jp		(hl)
+	jp		COLECO_IDENT		; BIOS startup / colecovision screen
 
 
 ipl:							; initial program loader
@@ -71,14 +52,14 @@ ipl:							; initial program loader
 	ld		(VBLVEC),hl
 
 	ld		hl,bios				; unpack bios
-	ld		de,BIOS_BASE
+	ld		de,BIOS
 	call	dzx0_standard
 
 	ld		hl,cart				; unpack game
 	ld		de,$8000
 	call	dzx0_standard
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 	ei
 	ret
 
@@ -90,7 +71,7 @@ preGameVBI:
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
-	in		a,(VDP_STAT)
+	in		a,(IO_VDP_Status)
 	pop		af
 	ei
 	reti
@@ -106,7 +87,7 @@ inGameVBI:
 
 	call	$8021				; game interrupt vector
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 	pop		af
 	ei
 	reti
@@ -114,7 +95,7 @@ inGameVBI:
 
 
 starter:
-	in		a,(VDP_STAT)
+	in		a,(IO_VDP_Status)
 	call	$ffd9
 	ei
 	ret

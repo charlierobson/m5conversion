@@ -1,15 +1,4 @@
-	.asciimap ' ',' ',0
-
-VBLVEC = $7406
-
-VBLCOUNT = $740A
-
-VDP_STAT = $11
-
-BIOS = $e000
-
-WRITE_REGISTER = BIOS + $1fd9
-COLECO_IDENT = BIOS + $6e
+.include "..\m5c-defs.inc"
 
 	.org $2000
 
@@ -33,15 +22,10 @@ start:
 
 	ld		sp,$73b9			; BIOS stack
 
-	ld		bc,$0180			; turn off screen, VDP interrupt
-	call	WRITE_REGISTER		; BIOS WRITE_REGISTER
-
-	in		a,(VDP_STAT)		; clear any pending interrupt flag
-
 	ld		hl,vbl
 	ld		(VBLVEC),hl
 
-	in		a,(VDP_STAT)		; clear any existing vsync int req
+	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 
 	ld		a,($1518)			; save pal bit in reg defs
 	and		1
@@ -86,7 +70,7 @@ vbl:
 	ld		a,($7004)
 	inc		a
 	ld		($7004),a
-	in		a,(VDP_STAT)
+	in		a,(IO_VDP_Status)
 	pop		af
 	ei
 	reti
