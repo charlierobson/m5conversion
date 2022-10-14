@@ -68,29 +68,14 @@ decruncher:
 
 	.org	$2100
 
-rst1:
-	OR		D
-	ADD		A,E
-	jp		$80de
-
-rst3_1:
-	ADD		A,$82
-	jp		$88fc
-
-rst3_2:
-	CALL	$810b
-	jp		$88fc
-
-
 jsFix:
 	JP		z,CRV_JS1
 	jp		CRV_JS2
 
-
-kpFix:
-	JP		z,CRV_KP1
+kpfixup:
+	call	CRV_KP1
+	LD		B,A
 	jp		CRV_KP2
-
 
 
 cart

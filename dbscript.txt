@@ -2,4 +2,15 @@ load ..\m5conversion\colecobios.bin,e000
 
 wpset 6000,1000,w,{pc>2000},{ printf "Write to memory page 6 @%04x",pc ; g }
 
-g bf27
+bps 8351
+bps 8364
+bps 83A4
+bps 83B2
+bps 83CF
+bps 83F9
+bps 8402
+bps 8429
+
+bps 8476
+
+g

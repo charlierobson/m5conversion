@@ -12,20 +12,19 @@ PATCHINIT($8000)
 ; LD DE,$7a88
 ; ENDPATCH($9dd8,3)
 ;
-; PATCH($8117,3)	; overwrites a kp patch
-;    LD A,($7002)
+; PATCH($8117,3)
+;    LD A,($7002) ; overwrites a functional patch
 ; ENDPATCH($8117,3)
-
 
 
 pbase = $2100
 
 PATCH($8115,15)
-	call	pbase+$00	;jsFix
+	call	pbase+$10	;jsFix
 ENDPATCH($8115,15)
 
 PATCH($8467,10)
-	call	pbase+$06	;kp fixup
+	call	pbase+$1c	;kp fixup
 ENDPATCH($8467,10)
 
 PATCH($813f,7)
@@ -33,87 +32,16 @@ PATCH($813f,7)
 ENDPATCH($813f,7)
 
 PATCH($becd,3)
-	LD	HL,$f8a3
+	LD	HL,$f8a3		; colecovision char map
 ENDPATCH($becd,3)
 
 PATCH($bedb,3)
-	LD	HL,$f4c3
+	LD	HL,$f4c3		; colecovision bitmap
 ENDPATCH($bedb,3)
 
-PATCH($80de,3)	; remove IM change
+PATCH($80de,3)			; remove IM change
 	di
 ENDPATCH($80de,3)
-
-PATCH($80ea,3)	; remove IM change
-	ld		bc,$3ff
-ENDPATCH($80ea,3)
-
-; mame
-
-PATCH($bb03,2)
-    out (IO_PSG),a
-ENDPATCH($bb03,2)
-
-PATCH($bb0c,2)
-    out (IO_PSG),a
-ENDPATCH($bb0c,2)
-
-PATCH($88f8,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($88f8,2)
-
-PATCH($85bc,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($85bc,2)
-
-PATCH($baaa,2)
-    out (IO_PSG),a
-ENDPATCH($baaa,2)
-
-PATCH($8525,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8525,2)
-
-PATCH($84de,2)
-    out (IO_PSG),a
-ENDPATCH($84de,2)
-
-PATCH($b9b2,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($b9b2,2)
-
-PATCH($853c,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($853c,2)
-
-PATCH($8102,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8102,2)
-
-PATCH($8106,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8106,2)
-
-PATCH($8087,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8087,2)
-
-PATCH($80c8,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($80c8,2)
-
-PATCH($beaa,3)
-    call $e23b
-ENDPATCH($beaa,3)
-
-PATCH($bf30,3)
-    call $e80b
-ENDPATCH($bf30,3)
-
-PATCH($8502,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8502,2)
-
 
 ; rst 7
 
@@ -1273,11 +1201,16 @@ ENDPATCH($91ac,3)
 
 ; -------------------------------------------------------
 ; -------------------------------------------------------
+
+; -------------------------------------------------------
 ; -------------------------------------------------------
 
-PATCH($80e1,3)
-   LD SP,$7400
-ENDPATCH($80e1,3)
+PATCH($80e1,12)
+   LD SP,$74100
+   LD HL,$7000
+   LD DE,$7001
+   LD BC,$3ff
+ENDPATCH($80e1,12)
 
 PATCH($807c,3)
    LD HL,$7005
@@ -1286,14 +1219,6 @@ ENDPATCH($807c,3)
 PATCH($8094,3)
    LD HL,$7142
 ENDPATCH($8094,3)
-
-PATCH($80e4,3)
-   LD HL,$7000
-ENDPATCH($80e4,3)
-
-PATCH($80e7,3)
-   LD DE,$7001
-ENDPATCH($80e7,3)
 
 PATCH($814b,3)
    LD HL,$7009
@@ -1804,6 +1729,7 @@ PATCH($8a05,3)
 ENDPATCH($8a05,3)
 
 
+; mame
 
 PATCH($bec4,3)
    call $ff82
@@ -1864,3 +1790,68 @@ ENDPATCH($899c,2)
 PATCH($8588,2)
    out ($10),a
 ENDPATCH($8588,2)
+
+PATCH($bb03,2)
+    out (IO_PSG),a
+ENDPATCH($bb03,2)
+
+PATCH($bb0c,2)
+    out (IO_PSG),a
+ENDPATCH($bb0c,2)
+
+PATCH($88f8,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($88f8,2)
+
+PATCH($85bc,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($85bc,2)
+
+PATCH($baaa,2)
+    out (IO_PSG),a
+ENDPATCH($baaa,2)
+
+PATCH($8525,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8525,2)
+
+PATCH($84de,2)
+    out (IO_PSG),a
+ENDPATCH($84de,2)
+
+PATCH($b9b2,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($b9b2,2)
+
+PATCH($853c,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($853c,2)
+
+PATCH($8102,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8102,2)
+
+PATCH($8106,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8106,2)
+
+PATCH($8087,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8087,2)
+
+PATCH($80c8,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($80c8,2)
+
+PATCH($beaa,3)
+    call $e23b
+ENDPATCH($beaa,3)
+
+PATCH($bf30,3)
+    call $e80b
+ENDPATCH($bf30,3)
+
+PATCH($8502,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8502,2)
+
