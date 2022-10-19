@@ -18,6 +18,16 @@ PATCH($9a9d,2)
 	cp		$09
 ENDPATCH($9a9d,2)
 
+; check pad buttons to start
+PATCH($9a23,6)
+	jp		$2196
+ENDPATCH($9a23,6)
+
+; check pad buttons to restart
+PATCH($9a96,6)
+	jp		$21c8
+ENDPATCH($9a96,6)
+
 
 ; RST1
 PATCH($963f,4)
@@ -157,14 +167,6 @@ PATCH($aac0,3)
         call    $ff61
 ENDPATCH($aac0,3)
 
-PATCH($9a26,3)
-        call    $ff79
-ENDPATCH($9a26,3)
-
 PATCH($a6b1,3)
         call    $ff76
 ENDPATCH($a6b1,3)
-
-PATCH($9a99,3)
-        call    $ff79
-ENDPATCH($9a99,3)

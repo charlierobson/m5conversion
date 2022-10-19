@@ -1,23 +1,4 @@
-	.asciimap ' ',' ',0
-
-VBLVEC = $7406
-
-VBLCOUNT = $740A
-
-IO_VDP_Status = $11
-
-BIOS = $e000
-
-WRITE_REGISTER = BIOS + $1fd9
-COLECO_IDENT = BIOS + $6e
-
-; colour table			= 0000 (+1800)
-; name table			= 1800 (+400)
-; sprite attrib table	= 1c00 (+400)
-; pattern table			= 2000 (+1800)
-; sprite pattern table	= 3800
-
-; mode (graphic) 2 - 
+.include "..\m5c-defs.inc"
 
 	.org $2000
 
@@ -38,9 +19,6 @@ start:
 	di
 
 	ld		sp,$73b9			; BIOS stack
-
-	ld		bc,$0180			; turn off screen, VDP interrupt
-	call	WRITE_REGISTER		; BIOS WRITE_REGISTER
 
 	in		a,(IO_VDP_Status)		; clear any pending interrupt flag
 
@@ -68,10 +46,6 @@ ipl:							; initial program loader
 
 	ld		a,$74				; relocate IM2 vector base
 	ld		i,a
-
-	ld		hl,bios				; unpack bios
-	ld		de,$e000
-	call	dzx0_standard
 
 	ld		hl,cart				; unpack game
 	ld		de,$8000
@@ -216,12 +190,50 @@ L218E:
 	jp		RST4 \ nop
 
 
+startChex:
+	LD		IX,$7393
+	call	CRV_BT1
+	jr		z,{+}
+
+	; go 1p game
+	RES		0,(IX+0)
+	LD		HL,$a0c1
+_setNgo:
+	LD		DE,$72e4
+	LD		BC,3
+	LDIR
+	jp		$9a35
+
++:	call	CRV_BT2
+	jr		z,{+}
+
+	; go 2p game
+	SET		0,(IX+0)
+	LD		HL,$a0c5
+	jr		_setNgo
+
++:	ld		hl,1
+	call	$ff79	;DECODER
+	jp		$9a29
+
+
+
+endChex:
+	call	CRV_BT1
+	ld		b,a
+	call	CRV_BT2
+	or		b
+	bit		0,a
+	jp		nz,$9a35	; start
+	bit		1,a
+	jp		nz,$9a05	; options
+
+	ld		hl,1
+	call	$ff79	;DECODER
+	jp		$9a9c
+
 
 	.include "..\dzx0_standard.asm"
-
-
-bios
-	.incbin	"..\colecobios.bin.zx0"
 
 cart
 	.incbin	"frogger.patched.bin.zx0"
