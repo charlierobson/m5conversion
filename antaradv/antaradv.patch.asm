@@ -48,72 +48,9 @@ PATCH($80ea,3)	; remove IM change
 	ld		bc,$3ff
 ENDPATCH($80ea,3)
 
-; mame
-
-PATCH($bb03,2)
-    out (IO_PSG),a
-ENDPATCH($bb03,2)
-
-PATCH($bb0c,2)
-    out (IO_PSG),a
-ENDPATCH($bb0c,2)
-
-PATCH($88f8,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($88f8,2)
-
-PATCH($85bc,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($85bc,2)
-
-PATCH($baaa,2)
-    out (IO_PSG),a
-ENDPATCH($baaa,2)
-
-PATCH($8525,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8525,2)
-
-PATCH($84de,2)
-    out (IO_PSG),a
-ENDPATCH($84de,2)
-
-PATCH($b9b2,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($b9b2,2)
-
-PATCH($853c,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($853c,2)
-
-PATCH($8102,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8102,2)
-
-PATCH($8106,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8106,2)
-
-PATCH($8087,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8087,2)
-
-PATCH($80c8,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($80c8,2)
-
-PATCH($beaa,3)
-    call $e23b
-ENDPATCH($beaa,3)
-
-PATCH($bf30,3)
-    call $e80b
-ENDPATCH($bf30,3)
-
-PATCH($8502,2)
-    in a,(IO_VDP_Addr)
-ENDPATCH($8502,2)
-
+PATCH($8008,2)	; ctl area
+	.word	$7000
+ENDPATCH($8008,2)
 
 ; rst 7
 
@@ -1803,7 +1740,7 @@ PATCH($8a05,3)
    LD HL,$7004
 ENDPATCH($8a05,3)
 
-
+; mame
 
 PATCH($bec4,3)
    call $ff82
@@ -1830,37 +1767,101 @@ PATCH($beb4,3)
 ENDPATCH($beb4,3)
 
 PATCH($890b,2)
-   out ($11),a
+   out (IO_VDP_Addr),a
 ENDPATCH($890b,2)
 
 PATCH($890e,2)
-   out ($11),a
+   out (IO_VDP_Addr),a
 ENDPATCH($890e,2)
 
 PATCH($8533,2)
-   out ($10),a
+   out (IO_VDP_Data),a
 ENDPATCH($8533,2)
 
 PATCH($851b,2)
-   out ($10),a
+   out (IO_VDP_Data),a
 ENDPATCH($851b,2)
 
 PATCH($88f4,2)
-   out ($10),a
+   out (IO_VDP_Data),a
 ENDPATCH($88f4,2)
 
 PATCH($85a6,2)
-   out ($10),a
+   out (IO_VDP_Data),a
 ENDPATCH($85a6,2)
 
 PATCH($85b4,2)
-   out ($10),a
+   out (IO_VDP_Data),a
 ENDPATCH($85b4,2)
 
 PATCH($899c,2)
-   out ($10),a
+   out (IO_VDP_Data),a
 ENDPATCH($899c,2)
 
 PATCH($8588,2)
-   out ($10),a
+   out (IO_VDP_Data),a
 ENDPATCH($8588,2)
+
+PATCH($bb03,2)
+    out (IO_PSG),a
+ENDPATCH($bb03,2)
+
+PATCH($bb0c,2)
+    out (IO_PSG),a
+ENDPATCH($bb0c,2)
+
+PATCH($88f8,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($88f8,2)
+
+PATCH($85bc,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($85bc,2)
+
+PATCH($baaa,2)
+    out (IO_PSG),a
+ENDPATCH($baaa,2)
+
+PATCH($8525,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8525,2)
+
+PATCH($84de,2)
+    out (IO_PSG),a
+ENDPATCH($84de,2)
+
+PATCH($b9b2,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($b9b2,2)
+
+PATCH($853c,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($853c,2)
+
+PATCH($8102,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8102,2)
+
+PATCH($8106,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8106,2)
+
+PATCH($8087,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8087,2)
+
+PATCH($80c8,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($80c8,2)
+
+PATCH($beaa,3)
+    call $e23b
+ENDPATCH($beaa,3)
+
+PATCH($bf30,3)
+    call $e80b
+ENDPATCH($bf30,3)
+
+PATCH($8502,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8502,2)

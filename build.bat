@@ -40,7 +40,7 @@ if errorlevel 1 exit /b
 
 brass -s %target%-m5.asm  %target%-m5.rom -l %target%-m5.html
 
-del /q *.bin 2>nul
+rem del /q *.bin 2>nul
 del /q *.zx0 2>nul
 
 copy /y %target%-m5.rom ..\..\m5multi\cart-binaries\sirmorris\ >nul
