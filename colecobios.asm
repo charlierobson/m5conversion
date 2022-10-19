@@ -2795,6 +2795,19 @@ CONTROLLER_SCAN_FIX:
 	RET
 
 
+_f1:
+	in		a,($31)
+	jr		{+}
+
+_f2:
+	in		a,($31)
+	rra
+	rra
+	rra
+	rra
++:	and		3
+	ret
+
 ADDRFIX($10f0)
 ; my own attempt at some vectors
 
@@ -2806,6 +2819,10 @@ kp1vec:
 	jp		_kp1
 kp2vec:
 	jp		_kp2
+f1vec:
+	jp		_f1
+f2vec:
+	jp		_f2
 
 
 ;***************************************
