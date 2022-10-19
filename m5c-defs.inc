@@ -19,6 +19,8 @@ CRV_JS1			= $f0f0
 CRV_JS2			= $f0f3
 CRV_KP1			= $f0f6
 CRV_KP2			= $f0f9
+CRV_BT1			= $f0fc
+CRV_BT2			= $f0ff
 
 VBLVEC			= $7406
 VBLCOUNT		= $740A
