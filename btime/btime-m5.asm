@@ -51,12 +51,12 @@ ipl:							; initial program loader
 	ld		hl,preGameVBI				; set up vsync handler vector
 	ld		(VBLVEC),hl
 
-	ld		hl,bios				; unpack bios
-	ld		de,BIOS
-	call	dzx0_standard
-
 	ld		hl,cart				; unpack game
 	ld		de,$8000
+	call	dzx0_standard
+
+	ld		hl,bios				; unpack beeach
+	ld		de,$e000
 	call	dzx0_standard
 
 	in		a,(IO_VDP_Status)		; clear any existing vsync int req
@@ -104,12 +104,11 @@ starter:
 
 	.include "..\dzx0_standard.asm"
 
+cart
+	.incbin	"btime.patched.bin.zx0"
 
 bios
 	.incbin	"..\colecobios.bin.zx0"
-
-cart
-	.incbin	"btime.patched.bin.zx0"
 
 
 	.ds 16384 - ($-$2000)

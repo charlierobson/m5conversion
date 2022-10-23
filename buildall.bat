@@ -21,6 +21,9 @@ call :renrom carnival Carnival
 call :build centiped
 call :renrom centiped Centipede
 
+call :build dkong
+call :renrom dkong "Donkey Kong"
+
 call :build frogger
 call :renrom frogger Frogger
 

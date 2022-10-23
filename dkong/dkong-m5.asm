@@ -44,7 +44,14 @@ ipl:
 	ld		hl,vbl				; vbl isr
 	ld		(VBLVEC),hl
 
-	jp		$90b0
+	in		a,(IO_VDP_Status)	; clear any existing vsync int req
+
+	ld		bc,$0180			; blank screen and disable vblank
+	call	$ffd9
+
+	ei
+
+	jp		COLECO_IDENT
 
 
 
@@ -53,21 +60,19 @@ vbl:
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
-
-	call	$a9ed
-
 	in		a,(IO_VDP_Status)
-	ei
 	pop		af
+	call	$852e
+	ei
 	reti
 
 
 
 starter:
-	in		a,(IO_VDP_Status)
-	ei
-	jp		$956d
-
+	call	$ff7c
+;	in		a,(IO_VDP_Status)
+;	ei
+	ret
 
 
 
@@ -75,7 +80,7 @@ decrunch:
 	.include "..\dzx0_standard.asm"
 
 cart
-	.incbin	"bdash.patched.bin.zx0"
+	.incbin	"dkong.patched.bin.zx0"
 
 
 	.ds 16384 - ($-$2000)

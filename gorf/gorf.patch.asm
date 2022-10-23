@@ -20,6 +20,10 @@ ENDPATCH($8067,3)
 
 ; mame
 
+PATCH($a6cb,3)
+    call $ffd9
+ENDPATCH($a6cb,3)
+
 PATCH($aa8a,3)
     call $ffe2
 ENDPATCH($aa8a,3)

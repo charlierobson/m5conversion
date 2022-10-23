@@ -268,9 +268,8 @@ _8:
 
 
 
-decruncher:
+decruncher
 	.include "..\dzx0_standard.asm"
-decrunchend:
 
 
 cart

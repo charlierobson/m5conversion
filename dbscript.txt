@@ -2,6 +2,10 @@ load ..\m5conversion\colecobios.bin,e000
 
 wpset 6000,1000,rw,{pc>2000},{ printf "Write to memory page 6 @%04x",pc }
 
-g 9a23
+wpset 0,1000,r,{pc>2000},{ printf "Read from page 0 @%04x",pc }
+
+bpset 852e
+
+g
 
 

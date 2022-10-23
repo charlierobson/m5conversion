@@ -52,10 +52,6 @@ ipl:							; initial program loader
 	ld		a,$74				; relocate IM2 vector base
 	ld		i,a
 
-	ld		hl,bios				; unpack bios
-	ld		de,$e000
-	call	dzx0_standard
-
 	ld		hl,cart				; unpack game
 	ld		de,$8000
 	call	dzx0_standard
@@ -82,10 +78,6 @@ vbl:
 
 
 	.include "..\dzx0_standard.asm"
-
-
-bios
-	.incbin	"..\colecobios.bin.zx0"
 
 cart
 	.incbin	"carnival.patched.bin.zx0"
