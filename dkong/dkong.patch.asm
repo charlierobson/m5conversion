@@ -10,6 +10,11 @@ PATCH($8476,3)
 	ld		hl,($e06c)
 ENDPATCH($8476,3)
 
+PATCH($82a5,3)
+	LD	BC,$711
+ENDPATCH($82a5,3)
+
+
 
 ; mame
 

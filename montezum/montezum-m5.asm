@@ -44,6 +44,9 @@ ipl:
 	ld		hl,vbl				; vbl isr
 	ld		(VBLVEC),hl
 
+	ld		bc,$0180			; disable display, vbl
+	call	WRITE_REGISTER
+
 	in		a,(IO_VDP_Status)	; clear any existing vsync int req
 	ei							; and let rip
 
@@ -56,6 +59,9 @@ vbl:
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
+
+	call	V_NMI
+
 	in		a,(IO_VDP_Status)
 	pop		af
 	ei
@@ -63,21 +69,11 @@ vbl:
 
 
 
-starter:
-	in		a,(IO_VDP_Status)
-	ei
-	ret
-
-
-
 decrunch:
 	.include "..\dzx0_standard.asm"
 
-bios
-	.incbin	"..\colecobios.bin.zx0"
-
 cart
-	.incbin	"... .patched.bin.zx0"
+	.incbin	"montezum.patched.bin.zx0"
 
 
 	.ds 16384 - ($-$2000)

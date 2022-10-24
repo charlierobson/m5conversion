@@ -1,0 +1,1714 @@
+output from rstfinder.py
+
+alphazoo.1
+Cart_Sig   = 55AA
+RamSprtTab = 7200
+RAMSprtIdx = 7030
+VDP_Temp   = 0000
+CtlState   = 71D5
+Cart_Start = 80B0
+V_RST_08H  = jp 958B
+V_RST_10H  = jp 959D
+V_RST_18H  = jp 8DE1
+V_RST_20H  = jp 8E10
+V_RST_28H  = jp 9EEC
+V_RST_30H  = jp 5000
+V_RST_38H  = jp 9D83
+V_NMI      = jp 99A1
+
+amazing.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 8024
+V_RST_08H  = jp 8165
+V_RST_10H  = jp 8169
+V_RST_18H  = jp 816A
+V_RST_20H  = jp 816B
+V_RST_28H  = jp 816C
+V_RST_30H  = jp 816D
+V_RST_38H  = jp 816E
+V_NMI      = jp 817D
+
+antaradv.1
+Cart_Sig   = 55AA
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = 6000
+Cart_Start = BEAA
+V_RST_08H  = jp 80DE
+V_RST_10H  = jp 88EB
+V_RST_18H  = jp 88FC
+V_RST_20H  = jp 8909
+V_RST_28H  = jp 8911
+V_RST_30H  = jp 8916
+V_RST_38H  = jp 805C
+V_NMI      = jp 805C
+
+apshai.1
+Cart_Sig   = 55AA
+RamSprtTab = 70CA
+RAMSprtIdx = 70C4
+VDP_Temp   = 2700
+CtlState   = 5A48
+Cart_Start = 8488
+V_RST_08H  = jp 84A8
+V_RST_10H  = jp 85CD
+V_RST_18H  = jp 85BD
+V_RST_20H  = jp 9A7A
+V_RST_28H  = jp 1FF1
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = None
+
+aquatack.1
+Cart_Sig   = 55AA
+RamSprtTab = 4328
+RAMSprtIdx = 2950
+VDP_Temp   = 3931
+CtlState   = 3438
+Cart_Start = 8051
+V_RST_08H  = jp BB74
+V_RST_10H  = jp 1C4F
+V_RST_18H  = jp 90D3
+V_RST_20H  = jp 025E
+V_RST_28H  = jp 90CE
+V_RST_30H  = jp 8C77
+V_RST_38H  = jp ADBA
+V_NMI      = jp 71D2
+
+artduel.1
+Cart_Sig   = 55AA
+RamSprtTab = 8002
+RAMSprtIdx = 8004
+VDP_Temp   = 8006
+CtlState   = 8008
+Cart_Start = 8066
+V_RST_08H  = jp 8315
+V_RST_10H  = jp 800F
+V_RST_18H  = jp 8012
+V_RST_20H  = jp 8015
+V_RST_28H  = jp 8018
+V_RST_30H  = jp 801B
+V_RST_38H  = jp 801E
+V_NMI      = jp 8024
+
+bcquest.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 702B
+Cart_Start = 8024
+V_RST_08H  = jp AA6F
+V_RST_10H  = jp 0000
+V_RST_18H  = jp 0000
+V_RST_20H  = jp 0000
+V_RST_28H  = ret
+V_RST_30H  = jp 0000
+V_RST_38H  = jp 0000
+V_NMI      = jp 824D
+
+bdash.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7057
+Cart_Start = 90B0
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp A9ED
+
+beamridr.1
+Cart_Sig   = 55AA
+RamSprtTab = 70AC
+RAMSprtIdx = 70EC
+VDP_Temp   = 702C
+CtlState   = 7002
+Cart_Start = 80C3
+V_RST_08H  = jp 8024
+V_RST_10H  = jp 802E
+V_RST_18H  = jp 8039
+V_RST_20H  = jp 8051
+V_RST_28H  = jp 8065
+V_RST_30H  = jp 8067
+V_RST_38H  = jp 8066
+V_NMI      = jp 8068
+
+blockrun.1
+Cart_Sig   = 55AA
+RamSprtTab = 7080
+RAMSprtIdx = 7040
+VDP_Temp   = 7060
+CtlState   = 7030
+Cart_Start = A244
+V_RST_08H  = jp 800C
+V_RST_10H  = jp 800F
+V_RST_18H  = jp 8012
+V_RST_20H  = jp 8015
+V_RST_28H  = jp 8018
+V_RST_30H  = jp 801B
+V_RST_38H  = jp 801E
+V_NMI      = None
+
+brainstr.1
+Cart_Sig   = AA55
+RamSprtTab = D000
+RAMSprtIdx = D000
+VDP_Temp   = D000
+CtlState   = D000
+Cart_Start = 8055
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = ret
+
+btime.1
+Cart_Sig   = AA55
+RamSprtTab = 710C
+RAMSprtIdx = 714C
+VDP_Temp   = 7000
+CtlState   = 7047
+Cart_Start = 805B
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 85F8
+
+cabbage.1
+Cart_Sig   = 55AA
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = 6000
+Cart_Start = BD00
+V_RST_08H  = jp 8054
+V_RST_10H  = jp 8054
+V_RST_18H  = jp 805D
+V_RST_20H  = jp 8067
+V_RST_28H  = jp 806E
+V_RST_30H  = jp 8073
+V_RST_38H  = jp 8051
+V_NMI      = jp 8051
+
+campaign.1
+Cart_Sig   = 55AA
+RamSprtTab = 730C
+RAMSprtIdx = 7300
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 802D
+V_RST_08H  = jp 8026
+V_RST_10H  = jp 8027
+V_RST_18H  = jp 8028
+V_RST_20H  = jp 8029
+V_RST_28H  = jp 802A
+V_RST_30H  = jp 802B
+V_RST_38H  = jp 802C
+V_NMI      = jp 8080
+
+carnival.1
+Cart_Sig   = AA55
+RamSprtTab = 71C5
+RAMSprtIdx = 71ED
+VDP_Temp   = 71F7
+CtlState   = 7162
+Cart_Start = 8043
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 9DDC
+
+cavenger.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7000
+Cart_Start = 8043
+V_RST_08H  = jp 0000
+V_RST_10H  = jp 0000
+V_RST_18H  = jp 0000
+V_RST_20H  = jp 0000
+V_RST_28H  = jp 0000
+V_RST_30H  = jp 0000
+V_RST_38H  = None
+V_NMI      = jp A0E0
+
+ccrisis.1
+Cart_Sig   = AA55
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = FFFF
+Cart_Start = 8056
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 813B
+
+centiped.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 802E
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = jp 801E
+V_NMI      = jp A033
+
+choplift.1
+Cart_Sig   = AA55
+RamSprtTab = 7048
+RAMSprtIdx = 7000
+VDP_Temp   = 7000
+CtlState   = 7038
+Cart_Start = 8054
+V_RST_08H  = jp 2C56
+V_RST_10H  = jp 8546
+V_RST_18H  = jp 8547
+V_RST_20H  = jp ABFB
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 84AC
+
+chucknor.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 8052
+V_RST_08H  = jp 804B
+V_RST_10H  = jp 804C
+V_RST_18H  = jp 804D
+V_RST_20H  = jp 804E
+V_RST_28H  = jp 804F
+V_RST_30H  = jp 8050
+V_RST_38H  = jp 8051
+V_NMI      = jp 8072
+
+decathln.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7002
+Cart_Start = AB10
+V_RST_08H  = jp 96BD
+V_RST_10H  = jp 96C1
+V_RST_18H  = jp 96C1
+V_RST_20H  = jp 96C6
+V_RST_28H  = jp 96CB
+V_RST_30H  = jp 96D1
+V_RST_38H  = jp 96D1
+V_NMI      = jp 81CC
+
+dkong.1
+Cart_Sig   = AA55
+RamSprtTab = 7231
+RAMSprtIdx = 7221
+VDP_Temp   = 7000
+CtlState   = 7040
+Cart_Start = 8048
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 852E
+
+dkongjr.1
+Cart_Sig   = AA55
+RamSprtTab = 72FF
+RAMSprtIdx = 72EF
+VDP_Temp   = 702B
+CtlState   = 7000
+Cart_Start = 811E
+V_RST_08H  = jp 805A
+V_RST_10H  = jp 8060
+V_RST_18H  = jp 8066
+V_RST_20H  = jp 806C
+V_RST_28H  = jp 8072
+V_RST_30H  = jp 8078
+V_RST_38H  = None
+V_NMI      = jp 8099
+
+dncfntsy.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 8024
+V_RST_08H  = jp 8247
+V_RST_10H  = jp 8247
+V_RST_18H  = jp 8247
+V_RST_20H  = jp 8247
+V_RST_28H  = jp 8247
+V_RST_30H  = jp 8247
+V_RST_38H  = jp 8247
+V_NMI      = jp 822C
+
+docastle.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = F008
+CtlState   = 0004
+Cart_Start = 8025
+V_RST_08H  = jp 9FA2
+V_RST_10H  = jp 1FDF
+V_RST_18H  = jp 88AF
+V_RST_20H  = jp 93EB
+V_RST_28H  = jp 9400
+V_RST_30H  = jp 8133
+V_RST_38H  = jp 974A
+V_NMI      = jp 8460
+
+drgnfire.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7002
+Cart_Start = 8044
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 81D2
+
+drseuss.1
+Cart_Sig   = AA55
+RamSprtTab = 7400
+RAMSprtIdx = 7000
+VDP_Temp   = 7303
+CtlState   = 7073
+Cart_Start = 8057
+V_RST_08H  = jp 8057
+V_RST_10H  = jp 80FB
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 957A
+
+evolutio.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 702B
+Cart_Start = 800C
+V_RST_08H  = None
+V_RST_10H  = None
+V_RST_18H  = None
+V_RST_20H  = None
+V_RST_28H  = -
+V_RST_30H  = None
+V_RST_38H  = None
+V_NMI      = None
+
+facemakr.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 1614
+VDP_Temp   = 0200
+CtlState   = 7050
+Cart_Start = 8164
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = None
+
+fallguy.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7238
+CtlState   = 721A
+Cart_Start = 8048
+V_RST_08H  = jp BCFF
+V_RST_10H  = jp BD03
+V_RST_18H  = jp BBE1
+V_RST_20H  = jp BB86
+V_RST_28H  = jp BB8A
+V_RST_30H  = jp BD1B
+V_RST_38H  = jp BBDC
+V_NMI      = jp 802C
+
+fathom.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7002
+Cart_Start = 803F
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 827D
+
+ffreddy.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 8088
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 8680
+
+flipslip.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 8050
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 8203
+
+fracfevr.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 70E0
+Cart_Start = 913A
+V_RST_08H  = jp 802C
+V_RST_10H  = jp 80A0
+V_RST_18H  = jp 805F
+V_RST_20H  = jp 88B9
+V_RST_28H  = jp 807E
+V_RST_30H  = jp 88C0
+V_RST_38H  = jp 90B4
+V_NMI      = jp 80BE
+
+frogger.1
+Cart_Sig   = 55AA
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = FFFF
+Cart_Start = 95DE
+V_RST_08H  = jp 982E
+V_RST_10H  = jp 9834
+V_RST_18H  = jp 9628
+V_RST_20H  = jp 962F
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = None
+
+frogger2.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7130
+CtlState   = 0000
+Cart_Start = 8024
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 80FC
+
+gorf.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 709B
+CtlState   = 7000
+Cart_Start = 8056
+V_RST_08H  = jp AC6C
+V_RST_10H  = jp 8733
+V_RST_18H  = jp 1FF1
+V_RST_20H  = jp 1FFD
+V_RST_28H  = jp 8955
+V_RST_30H  = jp 1F82
+V_RST_38H  = None
+V_NMI      = jp 896C
+
+gustbust.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 8048
+V_RST_08H  = jp 8041
+V_RST_10H  = jp 8042
+V_RST_18H  = jp 8043
+V_RST_20H  = jp 8044
+V_RST_28H  = jp 8045
+V_RST_30H  = jp 8046
+V_RST_38H  = jp 8047
+V_NMI      = jp 8140
+
+gyruss.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 7183
+VDP_Temp   = 71A3
+CtlState   = 0000
+Cart_Start = 8024
+V_RST_08H  = jp 9AB3
+V_RST_10H  = jp 9AC3
+V_RST_18H  = jp 1FD9
+V_RST_20H  = jp BFAE
+V_RST_28H  = jp AD49
+V_RST_30H  = jp AD8B
+V_RST_38H  = jp 1FDF
+V_NMI      = jp 8501
+
+hero.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7031
+Cart_Start = 8052
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = jp 841E
+
+illusion.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7000
+Cart_Start = 806C
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 9AE7
+
+jbond.1
+Cart_Sig   = 55AA
+RamSprtTab = 702B
+RAMSprtIdx = 7002
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 8024
+V_RST_08H  = jp 9FEE
+V_RST_10H  = jp 9FFE
+V_RST_18H  = jp AFBA
+V_RST_20H  = jp 1FD9
+V_RST_28H  = jp 8E2B
+V_RST_30H  = jp 9926
+V_RST_38H  = jp 1FDF
+V_NMI      = jp 84B7
+
+jmpmanjr.1
+Cart_Sig   = 55AA
+RamSprtTab = 70BA
+RAMSprtIdx = 70AA
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 802A
+V_RST_08H  = jp 1FF1
+V_RST_10H  = jp 1FBE
+V_RST_18H  = jp 1F82
+V_RST_20H  = jp AE57
+V_RST_28H  = jp 9C47
+V_RST_30H  = jp AD3A
+V_RST_38H  = None
+V_NMI      = None
+
+jukebox.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7000
+CtlState   = 702B
+Cart_Start = 802C
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = jp 5000
+V_RST_38H  = None
+V_NMI      = -
+
+keystone.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 702B
+Cart_Start = 8024
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = jp 80DF
+
+kubjpok.1
+Cart_Sig   = AA55
+RamSprtTab = 7140
+RAMSprtIdx = 7168
+VDP_Temp   = 7172
+CtlState   = 710A
+Cart_Start = 804B
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 86EF
+
+ladybug.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7000
+Cart_Start = 8040
+V_RST_08H  = None
+V_RST_10H  = None
+V_RST_18H  = None
+V_RST_20H  = None
+V_RST_28H  = None
+V_RST_30H  = jp 0000
+V_RST_38H  = None
+V_NMI      = jp 8E0B
+
+lancelot.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 804E
+V_RST_08H  = jp 8047
+V_RST_10H  = jp 8048
+V_RST_18H  = jp 8049
+V_RST_20H  = jp 804A
+V_RST_28H  = jp 804B
+V_RST_30H  = jp 804C
+V_RST_38H  = jp 804D
+V_NMI      = jp 808E
+
+leeper.1
+Cart_Sig   = 55AA
+RamSprtTab = 7047
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = A3C0
+V_RST_08H  = jp BCF3
+V_RST_10H  = jp B838
+V_RST_18H  = jp BD54
+V_RST_20H  = jp BD4B
+V_RST_28H  = jp BD07
+V_RST_30H  = jp 0000
+V_RST_38H  = None
+V_NMI      = jp A3AA
+
+lnklogic.1
+Cart_Sig   = 55AA
+RamSprtTab = 70D9
+RAMSprtIdx = 70D9
+VDP_Temp   = 70D9
+CtlState   = 702C
+Cart_Start = 8024
+V_RST_08H  = jp 80C9
+V_RST_10H  = jp 815C
+V_RST_18H  = jp 1FFA
+V_RST_20H  = jp 80D0
+V_RST_28H  = jp 89A1
+V_RST_30H  = jp 898E
+V_RST_38H  = jp 8380
+V_NMI      = jp 80D7
+
+logiclvl.1
+Cart_Sig   = 55AA
+RamSprtTab = 7043
+RAMSprtIdx = 7043
+VDP_Temp   = 7000
+CtlState   = 702C
+Cart_Start = 8024
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = jp 8101
+V_NMI      = jp 80C2
+
+looping.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7006
+Cart_Start = 8049
+V_RST_08H  = jp 9C92
+V_RST_10H  = jp 9CA0
+V_RST_18H  = jp 9CAA
+V_RST_20H  = jp 9CB4
+V_RST_28H  = jp 967B
+V_RST_30H  = jp 94F0
+V_RST_38H  = jp 9A56
+V_NMI      = jp 9A64
+
+m5port.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 802E
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = jp 801E
+V_NMI      = jp A033
+
+mash.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7000
+CtlState   = 7234
+Cart_Start = 8059
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = jp 802E
+
+memmanor.1
+Cart_Sig   = 55AA
+RamSprtTab = D000
+RAMSprtIdx = D000
+VDP_Temp   = D000
+CtlState   = D000
+Cart_Start = 8050
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = jp 8F06
+
+meteosho.1
+Cart_Sig   = AA55
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = FFFF
+Cart_Start = 804F
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 830E
+
+mindmstr .1
+Cart_Sig   = 55AA
+RamSprtTab = 7274
+RAMSprtIdx = 7264
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 802A
+V_RST_08H  = jp 1FF1
+V_RST_10H  = jp 1FBE
+V_RST_18H  = jp 1F82
+V_RST_20H  = jp A7F7
+V_RST_28H  = jp A809
+V_RST_30H  = jp BC37
+V_RST_38H  = None
+V_NMI      = None
+
+mking.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 717D
+CtlState   = 7032
+Cart_Start = 806F
+V_RST_08H  = jp 8024
+V_RST_10H  = jp 8028
+V_RST_18H  = jp 802C
+V_RST_20H  = jp 8030
+V_RST_28H  = jp 8036
+V_RST_30H  = jp 8037
+V_RST_38H  = jp 8038
+V_NMI      = jp 8039
+
+montezum.1
+Cart_Sig   = 55AA
+RamSprtTab = 7300
+RAMSprtIdx = 72E0
+VDP_Temp   = 7210
+CtlState   = 7005
+Cart_Start = 8025
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp A9B3
+
+moonswpr.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7002
+Cart_Start = 8044
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 87DB
+
+mtcracer.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 8072
+V_RST_08H  = jp 8047
+V_RST_10H  = jp 8048
+V_RST_18H  = jp 8049
+V_RST_20H  = jp 804A
+V_RST_28H  = jp 804B
+V_RST_30H  = jp 804C
+V_RST_38H  = jp 804D
+V_NMI      = jp 804E
+
+mtrap.1
+Cart_Sig   = AA55
+RamSprtTab = 71D7
+RAMSprtIdx = 71FB
+VDP_Temp   = 702B
+CtlState   = 7054
+Cart_Start = 81FE
+V_RST_08H  = jp 1FD0
+V_RST_10H  = jp 805C
+V_RST_18H  = jp 8109
+V_RST_20H  = jp 1FDF
+V_RST_28H  = jp 8070
+V_RST_30H  = jp 8045
+V_RST_38H  = None
+V_NMI      = jp 8098
+
+novablst.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 72DD
+Cart_Start = 8043
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 8260
+
+oilswell.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 70AF
+Cart_Start = 8060
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = None
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 852A
+
+omegrace.1
+Cart_Sig   = AA55
+RamSprtTab = 7032
+RAMSprtIdx = 7072
+VDP_Temp   = 700C
+CtlState   = 7000
+Cart_Start = 83F0
+V_RST_08H  = jp BF84
+V_RST_10H  = jp 805B
+V_RST_18H  = jp 8062
+V_RST_20H  = jp BF92
+V_RST_28H  = jp 9245
+V_RST_30H  = jp 8069
+V_RST_38H  = ret
+V_NMI      = jp BFB0
+
+onlyrock.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 72D7
+Cart_Start = 80A6
+V_RST_08H  = jp 8024
+V_RST_10H  = jp 802A
+V_RST_18H  = jp 8030
+V_RST_20H  = jp 8036
+V_RST_28H  = jp 803C
+V_RST_30H  = jp 8042
+V_RST_38H  = jp 8048
+V_NMI      = jp 8069
+
+pacman.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 8024
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = jp 0000
+V_NMI      = jp A95A
+
+panic.1
+Cart_Sig   = AA55
+RamSprtTab = 7037
+RAMSprtIdx = 7000
+VDP_Temp   = 70B7
+CtlState   = 702B
+Cart_Start = 804B
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 8FFD
+
+pepper2.1
+Cart_Sig   = AA55
+RamSprtTab = 70DF
+RAMSprtIdx = 4000
+VDP_Temp   = 708F
+CtlState   = 7013
+Cart_Start = 8045
+V_RST_08H  = jp 93DB
+V_RST_10H  = jp AB1A
+V_RST_18H  = jp AB1A
+V_RST_20H  = jp 1FF1
+V_RST_28H  = jp 1FD9
+V_RST_30H  = jp 85EC
+V_RST_38H  = None
+V_NMI      = jp 93F8
+
+pitfall.1
+Cart_Sig   = 55AA
+RamSprtTab = 71CB
+RAMSprtIdx = 72BE
+VDP_Temp   = 702C
+CtlState   = 7002
+Cart_Start = 80A6
+V_RST_08H  = jp 8024
+V_RST_10H  = jp 802E
+V_RST_18H  = jp 8039
+V_RST_20H  = jp 8051
+V_RST_28H  = jp 8065
+V_RST_30H  = jp 8067
+V_RST_38H  = jp 8066
+V_NMI      = jp 8068
+
+pitfall2.1
+Cart_Sig   = 55AA
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = FFFF
+Cart_Start = 8024
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 814D
+
+pitstop.1
+Cart_Sig   = 55AA
+RamSprtTab = 707C
+RAMSprtIdx = 70FC
+VDP_Temp   = 702C
+CtlState   = 7002
+Cart_Start = 8063
+V_RST_08H  = jp 8024
+V_RST_10H  = jp 8024
+V_RST_18H  = jp BC2F
+V_RST_20H  = jp BF95
+V_RST_28H  = jp BF92
+V_RST_30H  = jp 1FF1
+V_RST_38H  = jp 82ED
+V_NMI      = jp 8025
+
+popeye.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = F008
+CtlState   = 0004
+Cart_Start = 8024
+V_RST_08H  = jp 89E6
+V_RST_10H  = jp 8DED
+V_RST_18H  = jp A4A5
+V_RST_20H  = jp 1FDF
+V_RST_28H  = jp A938
+V_RST_30H  = jp 9B1D
+V_RST_38H  = jp 9844
+V_NMI      = jp 8156
+
+porkys.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7000
+CtlState   = 7279
+Cart_Start = 802E
+V_RST_08H  = jp 8A52
+V_RST_10H  = jp 9F95
+V_RST_18H  = jp A01B
+V_RST_20H  = jp 9EAF
+V_RST_28H  = jp 824F
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = jp 81A0
+
+qbertqub.1
+Cart_Sig   = 55AA
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = FFFF
+Cart_Start = 9622
+V_RST_08H  = jp 8E78
+V_RST_10H  = jp 8E7E
+V_RST_18H  = jp ABF9
+V_RST_20H  = jp 8E2F
+V_RST_28H  = jp AB5B
+V_RST_30H  = jp AAFE
+V_RST_38H  = jp 8D91
+V_NMI      = None
+
+quintana.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 8070
+V_RST_08H  = jp 8041
+V_RST_10H  = jp 8045
+V_RST_18H  = jp 8049
+V_RST_20H  = jp 804D
+V_RST_28H  = jp 8051
+V_RST_30H  = jp 8052
+V_RST_38H  = jp 8053
+V_NMI      = jp 8054
+
+riveraid.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7037
+CtlState   = 702B
+Cart_Start = 8024
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 84AB
+
+robinh.1
+Cart_Sig   = 55AA
+RamSprtTab = 7068
+RAMSprtIdx = 7109
+VDP_Temp   = 70D1
+CtlState   = 0000
+Cart_Start = 819F
+V_RST_08H  = jp 800C
+V_RST_10H  = jp A467
+V_RST_18H  = jp 1FFD
+V_RST_20H  = jp 1F82
+V_RST_28H  = jp 1FDF
+V_RST_30H  = jp 1F79
+V_RST_38H  = jp 801E
+V_NMI      = None
+
+rockbolt.1
+Cart_Sig   = 55AA
+RamSprtTab = 7287
+RAMSprtIdx = 702C
+VDP_Temp   = 7277
+CtlState   = 7002
+Cart_Start = 8060
+V_RST_08H  = jp 8107
+V_RST_10H  = jp 1FF1
+V_RST_18H  = jp 87BD
+V_RST_20H  = jp 87C9
+V_RST_28H  = jp A64E
+V_RST_30H  = jp 8119
+V_RST_38H  = jp 8106
+V_NMI      = jp 8024
+
+rollover.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7030
+CtlState   = 7032
+Cart_Start = 8024
+V_RST_08H  = jp 8104
+V_RST_10H  = jp 8105
+V_RST_18H  = jp 8106
+V_RST_20H  = jp 8107
+V_RST_28H  = jp 8108
+V_RST_30H  = jp 8109
+V_RST_38H  = jp 810A
+V_NMI      = jp 8119
+
+sammylf.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 71FA
+CtlState   = 702B
+Cart_Start = 8029
+V_RST_08H  = jp 8327
+V_RST_10H  = jp 1FFA
+V_RST_18H  = jp AF48
+V_RST_20H  = jp 854E
+V_RST_28H  = jp 932D
+V_RST_30H  = jp 9575
+V_RST_38H  = jp 801E
+V_NMI      = jp AD93
+
+skiing.1
+Cart_Sig   = 55AA
+RamSprtTab = 702C
+RAMSprtIdx = 702E
+VDP_Temp   = 7220
+CtlState   = 7032
+Cart_Start = 8043
+V_RST_08H  = jp 8024
+V_RST_10H  = jp 8028
+V_RST_18H  = jp 802C
+V_RST_20H  = jp 8030
+V_RST_28H  = jp 8037
+V_RST_30H  = jp 803B
+V_RST_38H  = jp 803F
+V_NMI      = jp 80D4
+
+slither.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7243
+CtlState   = 7000
+Cart_Start = 804A
+V_RST_08H  = jp 9683
+V_RST_10H  = jp 96D6
+V_RST_18H  = jp 96A7
+V_RST_20H  = jp 0000
+V_RST_28H  = jp 0000
+V_RST_30H  = jp 0000
+V_RST_38H  = jp 9E24
+V_NMI      = jp 8828
+
+slurpy.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7006
+Cart_Start = 8177
+V_RST_08H  = jp 8024
+V_RST_10H  = jp 802A
+V_RST_18H  = jp 8030
+V_RST_20H  = jp 8036
+V_RST_28H  = jp 803C
+V_RST_30H  = jp 8042
+V_RST_38H  = jp 8048
+V_NMI      = jp 8065
+
+smurfply.1
+Cart_Sig   = 55AA
+RamSprtTab = 704B
+RAMSprtIdx = 702B
+VDP_Temp   = 70CB
+CtlState   = 7000
+Cart_Start = 803D
+V_RST_08H  = jp 8058
+V_RST_10H  = jp 805E
+V_RST_18H  = jp 8064
+V_RST_20H  = jp 806A
+V_RST_28H  = jp 8070
+V_RST_30H  = jp 1FF1
+V_RST_38H  = None
+V_NMI      = jp 8091
+
+smurfrgc.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 702B
+CtlState   = 712D
+Cart_Start = 8043
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = None
+
+spacfury.1
+Cart_Sig   = AA55
+RamSprtTab = 7037
+RAMSprtIdx = 7000
+VDP_Temp   = 70B7
+CtlState   = 702B
+Cart_Start = 804B
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 837B
+
+spectron.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 8065
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 85F4
+
+sprcross.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 8050
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 8281
+
+squishem.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 9C26
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = -
+V_NMI      = jp 9E4D
+
+starwars.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 72EA
+CtlState   = 7002
+Cart_Start = 8024
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 8071
+
+steam.1
+Cart_Sig   = 55AA
+RamSprtTab = E002
+RAMSprtIdx = FF0E
+VDP_Temp   = 7603
+CtlState   = 0103
+Cart_Start = 8024
+V_RST_08H  = jp 80A6
+V_RST_10H  = jp 80A6
+V_RST_18H  = jp 80A6
+V_RST_20H  = jp 80A6
+V_RST_28H  = jp 80A6
+V_RST_30H  = jp 80A6
+V_RST_38H  = jp 80A6
+V_NMI      = jp 80B1
+
+strikeit.1
+Cart_Sig   = AA55
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = FFFF
+Cart_Start = 8080
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 804A
+
+tankwars.1
+Cart_Sig   = AA55
+RamSprtTab = FFFF
+RAMSprtIdx = FFFF
+VDP_Temp   = FFFF
+CtlState   = FFFF
+Cart_Start = 8063
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 8049
+
+telly.1
+Cart_Sig   = AA55
+RamSprtTab = 0D00
+RAMSprtIdx = 0D00
+VDP_Temp   = 0D00
+CtlState   = 0D00
+Cart_Start = 8052
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = ret
+
+threshld.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7357
+CtlState   = 702B
+Cart_Start = 8063
+V_RST_08H  = jp 1FFA
+V_RST_10H  = jp 1FD0
+V_RST_18H  = jp 95C1
+V_RST_20H  = jp A116
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = jp A000
+
+timeplt.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7287
+CtlState   = 7000
+Cart_Start = 8048
+V_RST_08H  = jp 9072
+V_RST_10H  = jp 8673
+V_RST_18H  = jp 8F09
+V_RST_20H  = jp 91AC
+V_RST_28H  = jp 91C1
+V_RST_30H  = jp 0000
+V_RST_38H  = None
+V_NMI      = jp 8F1E
+
+tomarc.1
+Cart_Sig   = 55AA
+RamSprtTab = 71A0
+RAMSprtIdx = 7030
+VDP_Temp   = 7272
+CtlState   = 7263
+Cart_Start = 82DB
+V_RST_08H  = jp 804B
+V_RST_10H  = jp 8051
+V_RST_18H  = jp 8057
+V_RST_20H  = jp 805D
+V_RST_28H  = jp 8063
+V_RST_30H  = jp 8069
+V_RST_38H  = jp 806F
+V_NMI      = jp 8090
+
+turbo.1
+Cart_Sig   = AA55
+RamSprtTab = 7000
+RAMSprtIdx = 7000
+VDP_Temp   = 71CC
+CtlState   = 7010
+Cart_Start = 8040
+V_RST_08H  = ret
+V_RST_10H  = jp 988D
+V_RST_18H  = jp 9891
+V_RST_20H  = ret
+V_RST_28H  = jp 1FDF
+V_RST_30H  = ret
+V_RST_38H  = jp 813F
+V_NMI      = jp 810A
+
+tutankhm.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 8052
+V_RST_08H  = -
+V_RST_10H  = -
+V_RST_18H  = -
+V_RST_20H  = -
+V_RST_28H  = -
+V_RST_30H  = -
+V_RST_38H  = -
+V_NMI      = jp 8B54
+
+upndown.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 0000
+Cart_Start = 8024
+V_RST_08H  = jp 9E71
+V_RST_10H  = jp 9E81
+V_RST_18H  = jp 1FD9
+V_RST_20H  = jp 9EF8
+V_RST_28H  = jp 0000
+V_RST_30H  = jp BCC1
+V_RST_38H  = jp 8613
+V_NMI      = jp 85E0
+
+venture.1
+Cart_Sig   = AA55
+RamSprtTab = 72C9
+RAMSprtIdx = 72F1
+VDP_Temp   = 72FB
+CtlState   = 725A
+Cart_Start = 8066
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 9866
+
+wingwar.1
+Cart_Sig   = AA55
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7002
+Cart_Start = 80F3
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 814D
+
+wizmath.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 702B
+Cart_Start = 8024
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = None
+V_NMI      = jp 806B
+
+wordfeud.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 0000
+CtlState   = 7209
+Cart_Start = 813F
+V_RST_08H  = jp 804B
+V_RST_10H  = jp 8051
+V_RST_18H  = jp 8057
+V_RST_20H  = jp 805D
+V_RST_28H  = jp 8063
+V_RST_30H  = jp 8069
+V_RST_38H  = jp 806F
+V_NMI      = jp 8090
+
+yolk.1
+Cart_Sig   = 55AA
+RamSprtTab = 0000
+RAMSprtIdx = 0000
+VDP_Temp   = 7000
+CtlState   = 713C
+Cart_Start = 80FE
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = jp 80BC
+
+zenji.1
+Cart_Sig   = 55AA
+RamSprtTab = 7054
+RAMSprtIdx = 7078
+VDP_Temp   = 7030
+CtlState   = 700C
+Cart_Start = 8338
+V_RST_08H  = ret
+V_RST_10H  = ret
+V_RST_18H  = ret
+V_RST_20H  = ret
+V_RST_28H  = ret
+V_RST_30H  = ret
+V_RST_38H  = ret
+V_NMI      = jp 8412
+

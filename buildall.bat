@@ -30,11 +30,17 @@ call :renrom frogger Frogger
 call :build gorf
 call :renrom gorf Gorf
 
+call :build montezum
+call :renrom montezum "Montezuma's revenge"
+
 call :build qbert
 call :renrom qbert Q##Bert
 
 call :build video
 call :renrom video "Video Hustler"
+
+call :build zenji
+call :renrom zenji Zenji
 
 goto :eof
 

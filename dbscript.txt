@@ -1,10 +1,13 @@
 load ..\m5conversion\colecobios.bin,e000
 
-wpset 6000,1000,rw,{pc>2000},{ printf "Write to memory page 6 @%04x",pc }
+wpset 6000,1000,rw,{pc>8000},{ printf "Write to memory page 6 @%04x",pc }
 
-wpset 0,1000,r,{pc>2000},{ printf "Read from page 0 @%04x",pc }
+wpset 0,1000,r,{pc>8000},{ printf "Read from page 0 @%04x",pc }
 
-bpset 852e
+rem wpset 8000,6000,w,{pc>8000},{ printf "overwrite game @%04x",pc }
+rem wpset e000,2000,w,{pc>8000},{ printf "overwrite bios @%04x",pc }
+
+bpset 9650,,{ printf "hl: %04x",hl ; g }
 
 g
 

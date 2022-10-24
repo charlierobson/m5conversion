@@ -358,6 +358,7 @@ ADDRFIX($006C)
 ; First part of cold start code
 ;
 ;***************************************
+ADDRFIX($006E)
 ColdStart
 	LD		HL,(Cart_Sig)	; Check first word of cart for 55AAH
 	LD		A,L				;   8000=55H and 8001=AAH
