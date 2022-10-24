@@ -14,7 +14,7 @@
 	jp		jsp1		; $2010
 	jp		kpp1		; $2013
 	jp		bugfix1		; $2016
-	jp		0			; $2019
+	jp		getReg0		; $2019
 	jp		0			; $201c
 
 
@@ -85,6 +85,17 @@ bugfix1:
 	ret		m
 	LD		(HL),C
 	ret
+
+getReg0:
+	xor		a
+	cp		b					; reg #
+	jp		nz,$8148
+
+	ld		a,($1518)			; sord BIOS
+	and		1
+	or		c
+	ld		c,a
+	jp		$8148
 
 
 decrunch:

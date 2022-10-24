@@ -22,6 +22,15 @@ PATCH($964e,3)
     call	$2016
 ENDPATCH($964e,3)
 
+PATCH($853f,3)
+	call	$2019
+ENDPATCH($853f,3)
+
+PATCH($804e,3)
+	LD BC,$711
+ENDPATCH($804e,3)
+
+
 ; mame
 
 PATCH($8058,3)
