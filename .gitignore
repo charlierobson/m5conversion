@@ -6,3 +6,5 @@
 *.html
 *.rom
 delme.*
+
+.DS_Store

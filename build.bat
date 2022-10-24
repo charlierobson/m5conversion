@@ -40,17 +40,13 @@ if errorlevel 1 exit /b
 
 brass -s %target%-m5.asm  %target%-m5.rom -l %target%-m5.html
 
-rem del /q *.bin 2>nul
-del /q *.zx0 2>nul
-
-copy /y %target%-m5.rom ..\..\m5multi\cart-binaries\sirmorris\ >nul
-if errorlevel 1 exit /b
+call install.bat
 
 copy /y %target%-m5.rom ..\..\mamebuild\roms\m5_cart\cheg\m5cheg.bin >nul
 if errorlevel 1 exit /b
 
-copy /y %target%-m5.rom ..\..\mamebuild\roms\m5_cart\cheg24\m5cheg24.bin >nul
-if errorlevel 1 exit /b
+del /q *.bin 2>nul
+del /q *.zx0 2>nul
 
 popd
 goto :eof
