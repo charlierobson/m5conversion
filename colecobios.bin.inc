@@ -1,4 +1,4 @@
-; Output by Brass 1.0.5.3 at 24/10/2022 14:01:19
+; Output by Brass 1.0.5.3 at 24/10/2022 21:13:29
 ; Source file: colecobios.asm
 
 BLANK_SCREEN	.equ	$0180	; [colecobios-m5.asm:12]
