@@ -1,3 +1,5 @@
+rem used by install scripts
+
 setlocal
 set m5m=..\..\m5multi\cart-binaries\sirmorris
 set "src=%~1"
