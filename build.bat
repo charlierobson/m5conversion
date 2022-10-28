@@ -24,14 +24,14 @@ pushd %target%
 del /q *.bin 2>nul
 del /q *.zx0 2>nul
 
-copy /y ..\xbins\%target%.bin .
+copy /y ..\_bins\%target%.bin .
 
 brass -s %target%.patch.asm
 
 patcher %target%.bin %target%.patch.bin %target%.patched.bin
 if errorlevel 1 exit /b
 
-zx0 -f %target%.patched.bin
+zx0 -f -q %target%.patched.bin
 if errorlevel 1 exit /b
 
 brass -s %target%-m5.asm  %target%-m5.rom -l %target%-m5.html

@@ -2,7 +2,7 @@
 
 set tgt=centiped
 
-copy ..\xbins\%tgt%.bin
+copy ..\_bins\%tgt%.bin
 
 FOR /F "usebackq" %%A IN ('%tgt%.bin') DO set size=%%~zA
 

@@ -2,7 +2,15 @@
 
 PATCHINIT($8000)
 
+; trainer
+PATCH($8bcf,2)
+ENDPATCH($8bcf,2)
+
 ; mame
+
+PATCH($8ba6,3)
+    call $ffd6
+ENDPATCH($8ba6,3)
 
 PATCH($8038,3)
     call $ffd9

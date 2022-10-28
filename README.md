@@ -7,6 +7,12 @@ Corrupt gfx?
 Patched code not being hit?
 * did it contain call to bios or other address that might be over-patched?
 
+* watch out for mame OUT/IN detection and OTIR/INIR
+
+Irqs not firing despite EI?
+* int bit in vdp register 1
+* reti needs to have been called
+* retn anywhere?
 
 regex
 
