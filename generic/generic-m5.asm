@@ -29,6 +29,9 @@ ipl:
 	ld		a,$74				; relocate IM2 vector base
 	ld		i,a
 
+	ld		bc,$0180			; disable display, vbl
+	call	WRITE_REGISTER
+
 	ld		hl,cart				; unpack game and get ready to go
 	ld		de,$8000
 	call	decrunch
@@ -41,15 +44,12 @@ ipl:
 
 	ld		sp,$73b9			; coleco bios sez so
 
+	in		a,(IO_VDP_Status)	; clear any existing vsync int req
+
 	ld		hl,vbl				; vbl isr
 	ld		(VBLVEC),hl
 
-	ld		bc,$0180			; disable display, vbl
-	call	WRITE_REGISTER
-
-	in		a,(IO_VDP_Status)	; clear any existing vsync int req
 	ei							; and let rip
-
 	jp		COLECO_IDENT
 
 
@@ -60,9 +60,16 @@ vbl:
 	inc		a
 	ld		(VBLCOUNT),a
 
+	or		$ff					; see if we left vbl improperly
+	ld		(VBLFLAG),a
+
 	call	V_NMI
 
 	in		a,(IO_VDP_Status)
+
+	xor		a
+	ld		(VBLFLAG),a
+
 	pop		af
 	ei
 	reti

@@ -77,11 +77,12 @@ vbl:
 
 
 
+
 decrunch:
 	.include "..\dzx0_standard.asm"
 
 cart
-	.incbin	"bdash.patched.bin.zx0"
+	.incbin	"ladybug.patched.bin.zx0"
 
 
 	.ds 16384 - ($-$2000)

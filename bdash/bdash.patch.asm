@@ -8,10 +8,6 @@ PATCH($aa46,2)
     ret
 ENDPATCH($aa46,2)
 
-PATCH($90f1,3)
-    jp	$2010
-ENDPATCH($90f1,3)
-
 PATCH($90b0,3)
     ld sp,$74ff
 ENDPATCH($90b0,3)

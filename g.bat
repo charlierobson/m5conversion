@@ -1,7 +1,7 @@
 set target=%1
 
 rem tracereg,tracemode,remap67,remapIn,remapOut,remapAll
-set m5opts="tracereg,tracemode,remapAll"
+set m5opts="remapAll"
 
 copy /y %target%\%target%-m5.rom ..\mamebuild\roms\m5_cart\cheg\m5cheg.bin
 

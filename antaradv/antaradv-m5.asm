@@ -20,32 +20,39 @@
 
 	.org $2020
 
-ipl:							; initial program loader
+ipl:
 	di
 
 	ld		a,$01               ; disable timer interrupts
 	out		($01),a
 
-	ld		hl,$7000			; copy interrupt vectors
-	ld		de,$7400
-	ld		bc,$10
-	ldir
-
 	ld		a,$74				; relocate IM2 vector base
 	ld		i,a
 
-	ld		hl,cart				; unpack game
+	ld		bc,$0180			; disable display, vbl
+	call	WRITE_REGISTER
+
+	ld		hl,cart				; unpack game and get ready to go
 	ld		de,$8000
-	call	decruncher
+	call	decrunch
 
-	ld		sp,$73b9			; BIOS stack
+	ld		hl,$7000			; clear us some ram
+	ld		(hl),0
+	ld		de,$7001
+	ld		bc,$7ff
+	ldir
 
-	ld		hl,$805c
-	ld		(VBLVEC),hl
+	ld		sp,$73b9			; coleco bios sez so
 
 	in		a,(IO_VDP_Status)	; clear any existing vsync int req
 
-	jp		COLECO_IDENT		; BIOS startup / colecovision screen
+	ld		hl,vbl				; vbl isr
+	ld		(VBLVEC),hl
+
+	ei							; and let rip
+	jp		COLECO_IDENT
+
+
 
 
 
@@ -55,13 +62,33 @@ vbl:
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
-	in		a,(IO_VDP_Status)	; clear any existing vsync int req
+
+	ld		a,(VBLFLAG)			; see if we're re-entering vbl
+	and		a
+	jr		z,{+}
+
+	ld		a,$ee				; flag error and bail
+	ld		(VBLERR),a
+	jr		bail
+
++:	or		$ff					; see if we left vbl improperly
+	ld		(VBLFLAG),a
+
+	call	V_NMI
+
+bail:
+	in		a,(IO_VDP_Status)
+
+	xor		a
+	ld		(VBLFLAG),a
+
 	pop		af
-	jp		$8021				; game interrupt vector
+	ei
+	reti
 
 
 
-decruncher:
+decrunch:
 	.include "..\dzx0_standard.asm"
 
 

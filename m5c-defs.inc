@@ -24,7 +24,9 @@ CRV_BT1			= $f0fc
 CRV_BT2			= $f0ff
 
 VBLVEC			= $7406
-VBLCOUNT		= $740A
+VBLCOUNT		= $740a
+VBLFLAG			= $740b			; ff while in VBLISR
+VBLERR			= $740c			; $ee if VBLISR re-entered
 
 WRITE_REGISTER	= $ffd9
 

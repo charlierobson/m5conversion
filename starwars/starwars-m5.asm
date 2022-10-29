@@ -20,6 +20,7 @@
 
 	.org $2020
 	; here we go
+
 ipl:
 	di
 
@@ -44,16 +45,16 @@ ipl:
 
 	ld		sp,$73b9			; coleco bios sez so
 
+	in		a,(IO_VDP_Status)	; clear any existing vsync int req
+
 	ld		hl,vbl				; vbl isr
 	ld		(VBLVEC),hl
 
-	ld		bc,$0180			; disable display, vbl
-	call	WRITE_REGISTER
-
-	in		a,(IO_VDP_Status)	; clear any existing vsync int req
 	ei							; and let rip
-
 	jp		COLECO_IDENT
+
+
+
 
 
 
@@ -63,9 +64,25 @@ vbl:
 	inc		a
 	ld		(VBLCOUNT),a
 
+	ld		a,(VBLFLAG)			; see if we're re-entering vbl
+	and		a
+	jr		z,{+}
+
+	ld		a,$ee				; flag error and bail
+	ld		(VBLERR),a
+	jr		bail
+
++:	or		$ff					; see if we left vbl improperly
+	ld		(VBLFLAG),a
+
 	call	V_NMI
 
+bail:
 	in		a,(IO_VDP_Status)
+
+	xor		a
+	ld		(VBLFLAG),a
+
 	pop		af
 	ei
 	reti

@@ -255,5 +255,63 @@ PATCH($9276,3)
     call $ffb8
 ENDPATCH($9276,3)
 
+PATCH($ad93,3)
+    call $ffdc
+ENDPATCH($ad93,3)
+
+PATCH($abf5,3)
+    call $fff1
+ENDPATCH($abf5,3)
+
+PATCH($8066,3)
+    call $ffdc
+ENDPATCH($8066,3)
+
+PATCH($a47e,3)
+    call $ffdc
+ENDPATCH($a47e,3)
+
+PATCH($81f3,3)
+    call $fffd
+ENDPATCH($81f3,3)
+
+PATCH($8da3,3)
+    call $fffd
+ENDPATCH($8da3,3)
+
+PATCH($a76a,3)
+    call $ff82
+ENDPATCH($a76a,3)
+
+PATCH($91cb,3)
+    call $ffdf
+ENDPATCH($91cb,3)
+
+PATCH($91db,3)
+    jp $ffdc
+ENDPATCH($91db,3)
+
+PATCH($9209,3)
+    call $ffdc
+ENDPATCH($9209,3)
+
+PATCH($9248,3)
+    call $ffdf
+ENDPATCH($9248,3)
+
+PATCH($a114,3)
+    call $ffb8
+ENDPATCH($a114,3)
+
+PATCH($aaf2,3)
+    call $ffb8
+ENDPATCH($aaf2,3)
+
+PATCH($ab09,3)
+    call $ffd6
+ENDPATCH($ab09,3)
+
+
+
 
 
