@@ -2,6 +2,10 @@
 
 PATCHINIT($8000)
 
+; trainer
+PATCH($8125,3)
+ENDPATCH($8125,3)
+
 ; nop out IM 0
 PATCH($8044,3)
 ENDPATCH($8044,3)
@@ -139,3 +143,60 @@ ENDPATCH($8116,3)
 PATCH($8196,3)
     call $ffd9
 ENDPATCH($8196,3)
+
+PATCH($822f,3)
+    call $ffd9
+ENDPATCH($822f,3)
+
+PATCH($8287,3)
+    call $ffeb
+ENDPATCH($8287,3)
+
+PATCH($81a8,3)
+    call $ffd9
+ENDPATCH($81a8,3)
+
+PATCH($815e,3)
+    call $ffd9
+ENDPATCH($815e,3)
+
+PATCH($8167,3)
+    call $ffd9
+ENDPATCH($8167,3)
+
+PATCH($82c9,3)
+    call $ffd9
+ENDPATCH($82c9,3)
+
+PATCH($9ed3,3)
+    call $ffd9
+ENDPATCH($9ed3,3)
+
+PATCH($9f0d,3)
+    call $ffd9
+ENDPATCH($9f0d,3)
+
+PATCH($8bf8,3)
+    call $ffd9
+ENDPATCH($8bf8,3)
+
+PATCH($8c5b,3)
+    call $ffd9
+ENDPATCH($8c5b,3)
+
+PATCH($8c6e,3)
+    call $ffd9
+ENDPATCH($8c6e,3)
+
+PATCH($8d27,3)
+    call $fffd
+ENDPATCH($8d27,3)
+
+PATCH($8d3b,3)
+    call $fffd
+ENDPATCH($8d3b,3)
+
+PATCH($8ca9,3)
+    call $ffd9
+ENDPATCH($8ca9,3)
+
