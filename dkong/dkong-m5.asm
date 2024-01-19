@@ -60,18 +60,25 @@ vbl:
 	ld		a,(VBLCOUNT)
 	inc		a
 	ld		(VBLCOUNT),a
+
+	or		$ff					; see if we left vbl improperly
+	ld		(VBLFLAG),a
+
+	call	V_NMI
+
 	in		a,(IO_VDP_Status)
+
+	xor		a
+	ld		(VBLFLAG),a
+
 	pop		af
-	call	$852e
 	ei
 	reti
 
 
-
 starter:
-	call	$ff7c
-;	in		a,(IO_VDP_Status)
-;	ei
+	in		a,(IO_VDP_Status)
+	ei
 	ret
 
 

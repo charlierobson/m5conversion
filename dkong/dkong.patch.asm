@@ -14,6 +14,9 @@ PATCH($82a5,3)
 	LD	BC,$711
 ENDPATCH($82a5,3)
 
+PATCH($805a,3)
+	call	$2010
+ENDPATCH($805a,3)
 
 
 ; mame
