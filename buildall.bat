@@ -3,6 +3,7 @@ setlocal
 
 del /q *.bin 2>nul
 brass -s colecobios.asm -l colecobios.html
+copy /y colecobios.bin ..\m5multi\cart-binaries\bios\
 
 call build.bat antaradv
 call build.bat bdash
@@ -12,6 +13,7 @@ call build.bat centiped
 call build.bat dkong
 call build.bat frogger
 call build.bat gorf
+call build.bat ladybug
 call build.bat montezum
 call build.bat qbert
 call build.bat starwars

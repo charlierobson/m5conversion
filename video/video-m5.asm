@@ -110,15 +110,16 @@ ctrlrd2:
 writereg:
 	ld		a,$80
 	cp		d
+	ld		a,e
 	jr		nz,{+}
 
+	and		$fe
+	ld		e,a
 	ld		a,($1518)
 	and		1
 	or		e
-	ld		e,a
 
-+:	LD		A,E
-	OUT		(VDP_Reg),A
++:	OUT		(VDP_Reg),A
 	LD		A,D
 	OUT		(VDP_Reg),A
 	RET

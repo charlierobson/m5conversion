@@ -55,10 +55,6 @@ ipl:							; initial program loader
 	ld		de,$8000
 	call	dzx0_standard
 
-	ld		hl,bios				; unpack beeach
-	ld		de,$e000
-	call	dzx0_standard
-
 	in		a,(IO_VDP_Status)		; clear any existing vsync int req
 	ei
 	ret
@@ -106,9 +102,5 @@ starter:
 
 cart
 	.incbin	"btime.patched.bin.zx0"
-
-bios
-	.incbin	"..\colecobios.bin.zx0"
-
 
 	.ds 16384 - ($-$2000)

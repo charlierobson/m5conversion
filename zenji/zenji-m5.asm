@@ -89,8 +89,11 @@ bugfix1:
 getReg0:
 	xor		a
 	cp		b					; reg #
-	jp		nz,$8148
+	jp		nz,$8148 	; magic number?
 
+	ld		a,c
+	and		$fe
+	ld		c,a
 	ld		a,($1518)			; sord BIOS
 	and		1
 	or		c

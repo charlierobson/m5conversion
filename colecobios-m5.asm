@@ -2615,15 +2615,16 @@ L0F1C		LD	L,(IY+00H)
 WRITE_REG_FIX:
 	xor		a
 	cp		b					; reg #
+	ld		a,c					; doesn't affect flags
 	jr		nz,{+}
 
+	and     $fe
+	ld		c,a
 	ld		a,($1518)			; sord BIOS
 	and		1
 	or		c
-	ld		c,a
 
-+:	LD		A,C
-	OUT		(IO_VDP_Addr),A
++:	OUT		(IO_VDP_Addr),A
 	ret
 
 
