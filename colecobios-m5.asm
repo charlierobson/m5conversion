@@ -2843,25 +2843,6 @@ f2vec:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ;***************************************
 ;
 ; CONTROLLER HANDLING ROUTINES BEGIN HERE

@@ -3,7 +3,7 @@ setlocal
 
 del /q *.bin 2>nul
 brass -s colecobios.asm -l colecobios.html
-copy /y colecobios.bin ..\m5multi\cart-binaries\bios\
+copy /y colecobios.bin ..\m5multi\_roms_\bios\
 
 call build.bat antaradv
 call build.bat bdash
