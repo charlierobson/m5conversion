@@ -11,7 +11,7 @@
 
 	.org $2010
 	; functional vectors
-	jp		0			; $2010
+	jp		_palFix			; $2010
 	jp		0			; $2013
 	jp		0			; $2016
 	jp		0			; $2019
@@ -75,8 +75,16 @@ vbl:
 	reti
 
 
+_palFix:
+	ld		ix,$a5d4
+	ld		a,($1518)
+	and		1
+	ret		z
+	ld		ix,_newPal
+	ret
 
-
+_newPal
+	.db		$03,$C2,$06,$FF,$03,$38,$07,$01
 
 decrunch:
 	.include "..\dzx0_standard.asm"
