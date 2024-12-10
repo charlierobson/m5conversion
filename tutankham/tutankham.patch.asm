@@ -1,0 +1,229 @@
+.include "..\m5c-defs.inc"
+
+PATCHINIT($8000)
+
+PATCH($8052,3)
+    call V_TURN_OFF_SOUND
+ENDPATCH($8052,3)
+
+PATCH($87c9,3)
+    call V_WRITE_REGISTER
+ENDPATCH($87c9,3)
+
+PATCH($87d0,3)
+    call V_WRITE_REGISTER
+ENDPATCH($87d0,3)
+
+PATCH($805f,3)
+    call V_FILL_VRAM
+ENDPATCH($805f,3)
+
+PATCH($86dc,3)
+    call V_WRITE_VRAM
+ENDPATCH($86dc,3)
+
+PATCH($8083,3)
+    call V_WRITE_VRAM
+ENDPATCH($8083,3)
+
+PATCH($808f,3)
+    call V_WRITE_VRAM
+ENDPATCH($808f,3)
+
+PATCH($809b,3)
+    call V_WRITE_VRAM
+ENDPATCH($809b,3)
+
+PATCH($8760,3)
+    call V_WRITE_VRAM
+ENDPATCH($8760,3)
+
+PATCH($87f0,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($87f0,2)
+
+PATCH($87f6,3)
+    call V_WRITE_REGISTER
+ENDPATCH($87f6,3)
+
+PATCH($8b58,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8b58,2)
+
+PATCH($8e3f,3)
+    call V_WRITE_VRAM
+ENDPATCH($8e3f,3)
+
+PATCH($8e4b,3)
+    call V_WRITE_VRAM
+ENDPATCH($8e4b,3)
+
+PATCH($8801,3)
+    call V_CONTROLLER_SCAN
+ENDPATCH($8801,3)
+
+PATCH($8897,3)
+    call V_WRITE_REGISTER
+ENDPATCH($8897,3)
+
+PATCH($8541,3)
+    call V_WRITE_VRAM
+ENDPATCH($8541,3)
+
+PATCH($855a,3)
+    call V_WRITE_VRAM
+ENDPATCH($855a,3)
+
+PATCH($856e,3)
+    call V_WRITE_VRAM
+ENDPATCH($856e,3)
+
+PATCH($8612,3)
+    call V_WRITE_VRAM
+ENDPATCH($8612,3)
+
+PATCH($862b,3)
+    call V_WRITE_VRAM
+ENDPATCH($862b,3)
+
+PATCH($8722,3)
+    call V_WRITE_VRAM
+ENDPATCH($8722,3)
+
+PATCH($868a,3)
+    call V_READ_VRAM
+ENDPATCH($868a,3)
+
+PATCH($8695,3)
+    call V_WRITE_VRAM
+ENDPATCH($8695,3)
+
+PATCH($865e,3)
+    call V_WRITE_REGISTER
+ENDPATCH($865e,3)
+
+PATCH($82bb,3)
+    call V_WRITE_VRAM
+ENDPATCH($82bb,3)
+
+; $82c8 OUT (n),a (port = IO_CTLSEL_JS, val = $00)
+PATCH($82c8,2)
+    nop
+    nop
+ENDPATCH($82c8,2)
+
+PATCH($8324,3)
+    call V_WRITE_VRAM
+ENDPATCH($8324,3)
+
+PATCH($8330,2)
+    in a,(IO_VDP_Addr)
+ENDPATCH($8330,2)
+
+PATCH($8336,3)
+    call V_WRITE_REGISTER
+ENDPATCH($8336,3)
+
+PATCH($8ffd,2)
+    out (IO_PSG),a
+ENDPATCH($8ffd,2)
+
+PATCH($9008,2)
+    out (IO_PSG),a
+ENDPATCH($9008,2)
+
+PATCH($9010,2)
+    out (IO_PSG),a
+ENDPATCH($9010,2)
+
+PATCH($901b,2)
+    out (IO_PSG),a
+ENDPATCH($901b,2)
+
+PATCH($9027,2)
+    out (IO_PSG),a
+ENDPATCH($9027,2)
+
+PATCH($905a,2)
+    out (IO_PSG),a
+ENDPATCH($905a,2)
+
+PATCH($905f,2)
+    out (IO_PSG),a
+ENDPATCH($905f,2)
+
+PATCH($8e8e,3)
+    call V_WRITE_VRAM
+ENDPATCH($8e8e,3)
+
+; $9e39 OUT (c),l (port = IO_VDP_Addr, val = $a3)
+; $9e3b OUT (c),h (port = IO_VDP_Addr, val = $08)
+; $9e48 OUT (c),l (port = IO_VDP_Addr, val = $c3)
+; $9e4a OUT (c),h (port = IO_VDP_Addr, val = $08)
+PATCH($9e37,2)
+    ld c,IO_VDP_Addr
+ENDPATCH($9e37,2)
+
+PATCH($9e41,2)
+    in a,(IO_VDP_Data)
+ENDPATCH($9e41,2)
+
+PATCH($9e50,2)
+    in a,(IO_VDP_Data)
+ENDPATCH($9e50,2)
+
+PATCH($8ea0,3)
+    call V_WRITE_VRAM
+ENDPATCH($8ea0,3)
+
+PATCH($906e,3)
+    call V_TURN_OFF_SOUND
+ENDPATCH($906e,3)
+
+PATCH($8f38,3)
+    call V_CONTROLLER_SCAN
+ENDPATCH($8f38,3)
+
+PATCH($9964,3)
+    call V_WRITE_REGISTER
+ENDPATCH($9964,3)
+
+PATCH($943a,3)
+    call V_WRITE_VRAM
+ENDPATCH($943a,3)
+
+PATCH($944e,3)
+    call V_WRITE_VRAM
+ENDPATCH($944e,3)
+
+PATCH($9af2,3)
+    call V_WRITE_REGISTER
+ENDPATCH($9af2,3)
+
+PATCH($8e5c,3)
+    call V_WRITE_VRAM
+ENDPATCH($8e5c,3)
+
+PATCH($93dd,3)
+    call V_WRITE_VRAM
+ENDPATCH($93dd,3)
+
+PATCH($93f1,3)
+    call V_WRITE_VRAM
+ENDPATCH($93f1,3)
+
+PATCH($94b1,3)
+    call V_WRITE_VRAM
+ENDPATCH($94b1,3)
+
+PATCH($94c5,3)
+    call V_WRITE_VRAM
+ENDPATCH($94c5,3)
+
+PATCH($8c3a,3)
+    call V_WRITE_REGISTER
+ENDPATCH($8c3a,3)
+
+PATCH($963b,3)
+    call V_WRITE_REGISTER
+ENDPATCH($963b,3)

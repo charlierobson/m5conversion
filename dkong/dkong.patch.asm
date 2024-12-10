@@ -21,261 +21,240 @@ ENDPATCH($805a,3)
 
 ; mame
 
-PATCH($805a,3)
-    call $ff7c
-ENDPATCH($805a,3)
-
-PATCH($809e,3)
-    call $ffeb
-ENDPATCH($809e,3)
-
-PATCH($80a1,3)
-    call $ffd3
-ENDPATCH($80a1,3)
-
 PATCH($853c,3)
-    call $ffd3
+    call V_TIME_MGR
 ENDPATCH($853c,3)
 
 PATCH($853f,3)
-    call $fff4
+    call V_SOUND_MAN
 ENDPATCH($853f,3)
 
 PATCH($8542,3)
-    call $ff61
+    call V_PLAY_SONGS
 ENDPATCH($8542,3)
 
 PATCH($854a,3)
-    call $ffc4
+    call V_WR_SPR_NM_TBL
 ENDPATCH($854a,3)
 
 PATCH($854d,3)
-    call $ffe8
+    call V_WRITER
 ENDPATCH($854d,3)
 
 PATCH($8550,3)
-    call $ffeb
+    call V_POLLER
 ENDPATCH($8550,3)
 
 PATCH($8556,3)
-    call $ffdc
+    call V_READ_REGISTER
 ENDPATCH($8556,3)
 
 PATCH($84f1,3)
-    call $ffeb
+    call V_POLLER
 ENDPATCH($84f1,3)
 
 PATCH($9a63,3)
-    jp $ffee
+    jp V_SOUND_INIT
 ENDPATCH($9a63,3)
 
 PATCH($8294,3)
-    call $ffbe
+    call V_PUT_VRAM
 ENDPATCH($8294,3)
 
 PATCH($8299,3)
-    call $ffc1
+    call V_INIT_SPR_ORDER
 ENDPATCH($8299,3)
 
 PATCH($82a2,3)
-    call $ffd9
+    call V_WRITE_REGISTER
 ENDPATCH($82a2,3)
 
 PATCH($82a8,3)
-    call $ffd9
+    call V_WRITE_REGISTER
 ENDPATCH($82a8,3)
 
 PATCH($82b0,3)
-    call $ffb8
+    call V_INIT_TABLE
 ENDPATCH($82b0,3)
 
 PATCH($82b8,3)
-    call $ffb8
+    call V_INIT_TABLE
 ENDPATCH($82b8,3)
 
 PATCH($82c0,3)
-    call $ffb8
+    call V_INIT_TABLE
 ENDPATCH($82c0,3)
 
 PATCH($82c8,3)
-    call $ffb8
+    call V_INIT_TABLE
 ENDPATCH($82c8,3)
 
 PATCH($82d0,3)
-    call $ffb8
+    call V_INIT_TABLE
 ENDPATCH($82d0,3)
 
 PATCH($9738,3)
-    jp $ffd9
+    jp V_WRITE_REGISTER
 ENDPATCH($9738,3)
 
 PATCH($84a6,3)
-    call $ffd9
+    call V_WRITE_REGISTER
 ENDPATCH($84a6,3)
 
 PATCH($992a,3)
-    call $ffbe
+    call V_PUT_VRAM
 ENDPATCH($992a,3)
 
 PATCH($84a0,3)
-    jp $ff82
+    jp V_FILL_VRAM
 ENDPATCH($84a0,3)
 
 PATCH($84d2,3)
-    call $ff6a
+    call V_REFLECT_VERTICAL
 ENDPATCH($84d2,3)
 
 PATCH($8249,3)
-    call $ffe5
+    call V_INIT_WRITER
 ENDPATCH($8249,3)
 
 PATCH($843b,3)
-    call $ffd9
+    call V_WRITE_REGISTER
 ENDPATCH($843b,3)
 
 PATCH($8419,3)
-    call $ffbe
+    call V_PUT_VRAM
 ENDPATCH($8419,3)
 
 PATCH($83d1,3)
-    call $ffbe
+    call V_PUT_VRAM
 ENDPATCH($83d1,3)
 
 PATCH($8365,3)
-    call $fff7
+    call V_ACTIVATE
 ENDPATCH($8365,3)
 
 PATCH($8384,3)
-    call $fffa
+    call V_PUTOBJ
 ENDPATCH($8384,3)
 
 PATCH($8308,3)
-    call $fff7
+    call V_ACTIVATE
 ENDPATCH($8308,3)
 
 PATCH($8321,3)
-    jp $fffa
+    jp V_PUTOBJ
 ENDPATCH($8321,3)
 
 PATCH($847b,3)
-    call $ffbe
+    call V_PUT_VRAM
 ENDPATCH($847b,3)
 
 PATCH($848a,3)
-    call $ffbe
+    call V_PUT_VRAM
 ENDPATCH($848a,3)
 
 PATCH($8496,3)
-    jp $ff82
+    jp V_FILL_VRAM
 ENDPATCH($8496,3)
 
 PATCH($8255,3)
-    call $ffc7
+    call V_INIT_TIMER
 ENDPATCH($8255,3)
 
 PATCH($8dfa,3)
-    call $fff7
+    call V_ACTIVATE
 ENDPATCH($8dfa,3)
 
 PATCH($99aa,3)
-    call $ffcd
+    call V_REQUEST_SIGNAL
 ENDPATCH($99aa,3)
 
 PATCH($994e,3)
-    call $fffa
+    call V_PUTOBJ
 ENDPATCH($994e,3)
 
 PATCH($8a03,3)
-    call $fff7
+    call V_ACTIVATE
 ENDPATCH($8a03,3)
 
 PATCH($8a0c,3)
-    call $fffa
+    call V_PUTOBJ
 ENDPATCH($8a0c,3)
 
 PATCH($9625,3)
-    jp $fff7
+    jp V_ACTIVATE
 ENDPATCH($9625,3)
 
 PATCH($8636,3)
-    jp $ffbe
+    jp V_PUT_VRAM
 ENDPATCH($8636,3)
 
 PATCH($974e,3)
-    jp $ffd9
+    jp V_WRITE_REGISTER
 ENDPATCH($974e,3)
 
 PATCH($9934,3)
-    call $fff1
+    call V_PLAY_IT
 ENDPATCH($9934,3)
 
 PATCH($9a6b,3)
-    call $ffd0
+    call V_TEST_SIGNAL
 ENDPATCH($9a6b,3)
 
 PATCH($995b,3)
-    call $fffd
+    call V_RAND_GEN
 ENDPATCH($995b,3)
 
 PATCH($8c3d,3)
-    jp $fffa
+    jp V_PUTOBJ
 ENDPATCH($8c3d,3)
 
-PATCH($8dd8,3)
-    call $fffa
-ENDPATCH($8dd8,3)
+PATCH($809e,3)
+    call V_POLLER
+ENDPATCH($809e,3)
+
+PATCH($80a1,3)
+    call V_TIME_MGR
+ENDPATCH($80a1,3)
 
 PATCH($8ca6,3)
-    jp $fffa
+    jp V_PUTOBJ
 ENDPATCH($8ca6,3)
 
+PATCH($8dd8,3)
+    call V_PUTOBJ
+ENDPATCH($8dd8,3)
+
 PATCH($8a7c,3)
-    call $fff7
+    call V_ACTIVATE
 ENDPATCH($8a7c,3)
 
 PATCH($8a83,3)
-    call $fff7
+    call V_ACTIVATE
 ENDPATCH($8a83,3)
 
 PATCH($8a8a,3)
-    call $fff7
+    call V_ACTIVATE
 ENDPATCH($8a8a,3)
 
 PATCH($8a91,3)
-    call $fff7
+    call V_ACTIVATE
 ENDPATCH($8a91,3)
 
 PATCH($894f,3)
-    call $fffa
+    call V_PUTOBJ
 ENDPATCH($894f,3)
 
 PATCH($8956,3)
-    call $fffa
+    call V_PUTOBJ
 ENDPATCH($8956,3)
 
 PATCH($895d,3)
-    call $fffa
+    call V_PUTOBJ
 ENDPATCH($895d,3)
 
 PATCH($8964,3)
-    jp $fffa
+    jp V_PUTOBJ
 ENDPATCH($8964,3)
-
-PATCH($8d91,3)
-    jp $fffa
-ENDPATCH($8d91,3)
-
-PATCH($9578,3)
-    call $fffa
-ENDPATCH($9578,3)
-
-PATCH($957e,3)
-    call $ffca
-ENDPATCH($957e,3)
-
-PATCH($9584,3)
-    call $ffca
-ENDPATCH($9584,3)
-
 
 

@@ -10,6 +10,7 @@ _kpRead	.equ	$EDB8
 _kp1	.equ	$EDBC
 _kp2	.equ	$EDCD
 
+
 ;879d d3  80           OUT        (IO_KP_SELECT ),A
 ;879f 00              NOP
 ;87a0 00              NOP
@@ -50,7 +51,7 @@ ENDPATCH($879D,20)
 
 PATCH($9589,24)
     ld      a,$7009 ; is 2 when player 1
-    xor     2       ; jsread reads player 2 when bit 1 is set so flip it
+;    xor     2       ; jsread reads player 2 when bit 1 is set so flip it
     call    _jsRead
     and     $0f
     cp      $0e
@@ -79,7 +80,7 @@ ENDPATCH($9589,24)
 
 PATCH($977b,30)
     ld      a,$7009 ; is 2 when player 1
-    xor     2       ; jsread reads player 2 when bit 1 is set so flip it
+   ; xor     2       ; jsread reads player 2 when bit 1 is set so flip it
     ld      c,a
     call    _kpRead
     bit     6,a
@@ -164,6 +165,30 @@ ENDPATCH($b367,2)
 
 
 ;
+
+PATCH($9de4,2)
+    out (IO_VDP_Addr),a
+ENDPATCH($9de4,2)
+
+PATCH($9de9,2)
+    out (IO_VDP_Addr),a
+ENDPATCH($9de9,2)
+
+PATCH($9df6,2)
+    out (IO_VDP_Data),a
+ENDPATCH($9df6,2)
+
+PATCH($9dd6,2)
+    out (IO_VDP_Addr),a
+ENDPATCH($9dd6,2)
+
+PATCH($9dd9,2)
+    out (IO_VDP_Addr),a
+ENDPATCH($9dd9,2)
+
+PATCH($9dde,2)
+    in a,(IO_VDP_Data)
+ENDPATCH($9dde,2)
 
 PATCH($8220,2)
     out (IO_VDP_Addr),a

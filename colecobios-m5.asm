@@ -1,6 +1,3 @@
-.exportmode assembly
-.export
-
 .define DB .byte
 .define DW .word
 .define DS .ds
@@ -227,8 +224,9 @@ IO_VDP_Status	EQU	$11			; VDP status input port
 ; Everything starts here
 ;***************************************
 
-	LD	SP,Stack	; Initialize stack pointer
-	JR	ColdStart		; Go to rest of cold-start code
+	JP ColdStartFreqOut 	; fix frequency byte at $0069. nice.
+	nop
+	nop
 
 ;***************************************
 ; These are the RST vectors, mixed with some (formerly) wasted bytes
@@ -3602,6 +3600,16 @@ L09D8		LD	L,(IX+00H)
 	RET
 
 D1A92		DB	'PRESS BUTTON ON KEYPAD.'
+
+
+ColdStartFreqOut
+	LD		SP,Stack
+	ld		a,($1518)
+	and		1
+	jp		z,ColdStart
+	ld		a,50
+	ld		($e069),a
+	jp		ColdStart
 
 
 ;		Default color table

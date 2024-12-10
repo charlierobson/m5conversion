@@ -34,7 +34,7 @@ if errorlevel 1 exit /b
 zx0 -f -q %target%.patched.bin
 if errorlevel 1 exit /b
 
-brass -s %target%-m5.asm  %target%-m5.rom -l %target%-m5.html
+brass -s %target%.asm  %target%-m5.rom -l %target%.html
 
 call install.bat
 
