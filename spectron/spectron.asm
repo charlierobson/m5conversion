@@ -1,4 +1,4 @@
-	.include "..\m5c-defs.inc"
+	.include "../m5c-defs.inc"
 
 	.org $2000
 	; cart header
@@ -87,7 +87,7 @@ _newPal
 	.db		$03,$C2,$06,$FF,$03,$38,$07,$01
 
 decrunch:
-	.include "..\dzx0_standard.asm"
+	.include "../dzx0_standard.asm"
 
 cart
 	.incbin	"spectron.patched.bin.zx0"

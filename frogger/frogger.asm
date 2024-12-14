@@ -1,4 +1,4 @@
-.include "..\m5c-defs.inc"
+.include "../m5c-defs.inc"
 
 	.org $2000
 
@@ -233,7 +233,7 @@ endChex:
 	jp		$9a9c
 
 
-	.include "..\dzx0_standard.asm"
+	.include "../dzx0_standard.asm"
 
 cart
 	.incbin	"frogger.patched.bin.zx0"

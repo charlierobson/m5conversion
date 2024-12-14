@@ -136,7 +136,7 @@ irqFixup:
 
 
 
-	.include "..\dzx0_standard.asm"
+	.include "../dzx0_standard.asm"
 
 
 rst1 = $9178

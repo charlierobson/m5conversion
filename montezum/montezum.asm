@@ -1,4 +1,4 @@
-	.include "..\m5c-defs.inc"
+	.include "../m5c-defs.inc"
 
 	.org $2000
 	; cart header
@@ -70,7 +70,7 @@ vbl:
 
 
 decrunch:
-	.include "..\dzx0_standard.asm"
+	.include "../dzx0_standard.asm"
 
 cart
 	.incbin	"montezum.patched.bin.zx0"

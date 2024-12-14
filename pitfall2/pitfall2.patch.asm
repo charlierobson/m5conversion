@@ -1,4 +1,4 @@
-.include "..\m5c-defs.inc"
+.include "../m5c-defs.inc"
 
 PATCHINIT($8000)
 PATCH($bd9b,3)

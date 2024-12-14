@@ -1,4 +1,4 @@
-.include "..\m5c-defs.inc"
+.include "../m5c-defs.inc"
 
 	.org $2000
 
@@ -98,7 +98,7 @@ starter:
 
 
 
-	.include "..\dzx0_standard.asm"
+	.include "../dzx0_standard.asm"
 
 cart
 	.incbin	"btime.patched.bin.zx0"

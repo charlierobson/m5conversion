@@ -1,4 +1,4 @@
-	.include "..\m5c-defs.inc"
+	.include "../m5c-defs.inc"
 
 	.org $2000
 	; cart header
@@ -92,7 +92,7 @@ bail:
 
 
 decrunch:
-	.include "..\dzx0_standard.asm"
+	.include "../dzx0_standard.asm"
 
 cart
 	.incbin	"starwars.patched.bin.zx0"

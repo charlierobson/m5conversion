@@ -196,7 +196,7 @@ starter:
 
 
 
-	.include "..\dzx0_standard.asm"
+	.include "../dzx0_standard.asm"
 
 cart
 	.incbin	"video.patched.bin.zx0"

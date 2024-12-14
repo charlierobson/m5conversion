@@ -1,0 +1,35 @@
+set -e
+target=$1
+
+if [[ ! -e "$target" ]]; then
+  echo "target $target does not exist"
+  exit 0
+fi
+
+rm -f *.bin
+brass -s colecobios.asm -l colecobios.html
+
+pushd "$target"
+
+rm -f *.bin 2>/dev/null
+rm -f *.zx0 2>/dev/null
+
+cp -f "../_bins/$target.bin" .
+
+brass -s "$target.patch.asm"
+
+python ~/gh/m5multi/tools/patcher.py "$target.bin" "$target.patch.bin" "$target.patched.bin"
+
+zx0 -f -q "$target.patched.bin"
+
+brass -s "$target.asm" "$target-m5.rom" -l "$target.html"
+
+#./install.bat
+
+echo ========= ---------- step 7
+cp -f "$target-m5.rom" "../../mamebuild/roms/m5_cart/cheg/m5cheg.bin" >/dev/null
+
+rm -f *.bin 2>/dev/null
+rm -f *.zx0 2>/dev/null
+
+popd

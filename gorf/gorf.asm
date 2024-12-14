@@ -269,7 +269,7 @@ _8:
 
 
 decruncher
-	.include "..\dzx0_standard.asm"
+	.include "../dzx0_standard.asm"
 
 
 cart
